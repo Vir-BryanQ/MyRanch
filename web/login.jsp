@@ -20,7 +20,7 @@
 
       font-size: 16px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     }
 
     body {
@@ -60,7 +60,7 @@
       background-color: var(--white);
       border-radius: var(--button-radius);
       box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25),
-        0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
+      0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
       height: var(--max-height);
       max-width: var(--max-width);
       overflow: hidden;
@@ -229,73 +229,92 @@
 </head>
 
 <body>
-  <div class="container right-panel-active">
-    <div class="container__form container--signup">
-      <form action="/MyRanch/user/passwdlogin" method="post" class="form" id="form1">
-        <h2 class="form__title">账号登录</h2>
-        <input type="text" placeholder="账号" class="input" name="id"/>
-        <input type="password" placeholder="密码" class="input" name="password"/>
-        <a href="#" class="link">忘记密码？</a>
-        <input type="submit" class="btn" value="登录" />
-      </form>
-    </div>
+<div class="container right-panel-active">
+  <div class="container__form container--signup">
+    <form action="/MyRanch/user/passwdlogin" method="post" class="form" id="form1">
+      <h2 class="form__title">账号登录</h2>
+      <input type="text" placeholder="账号" class="input" name="id"/>
+      <input type="password" placeholder="密码" class="input" name="password"/>
+      <a href="/MyRanch/retrievepwd.jsp" class="link">忘记密码？</a>
+      <input type="submit" class="btn" value="登录"/>
+    </form>
+  </div>
 
-    <div class="container__form container--signin">
-      <form action="/MyRanch/user/emaillogin" method="post" class="form" id="form2">
-        <h2 class="form__title">邮箱登录</h2>
-        <input type="email" placeholder="邮箱" class="input" name="email"/>
-        <input type="text" placeholder="验证码" class="input" name="vericode"/>
-        <input type="submit" class="link1" value="发送验证码" name="sendemail"/>
-        <a href="/MyRanch/register.jsp" class="link">注册账号</a>
-        <input type="submit" class="btn" value="登录"/>
-      </form>
-    </div>
+  <div class="container__form container--signin">
+    <form action="/MyRanch/user/emaillogin" method="post" class="form" id="form2">
+      <h2 class="form__title">邮箱登录</h2>
+      <input type="email" placeholder="邮箱" class="input" name="email"/>
+      <input type="text" placeholder="验证码" class="input" name="vericode"/>
+      <input type="submit" class="link1" value="发送验证码" name="sendemail" id="link1" formtarget="iframe"/>
+      <a href="/MyRanch/register.jsp" class="link">注册账号</a>
+      <input type="submit" class="btn" value="登录"/>
+    </form>
+  </div>
+  <iframe name="iframe"></iframe>
 
-    <div class="container__overlay">
-      <div class="overlay">
-        <div class="overlay__panel overlay--left">
-          <button class="btn" id="signIn">邮箱登录</button>
-        </div>
-        <div class="overlay__panel overlay--right">
-          <button class="btn" id="signIn1">密码登录</button>
-        </div>
+  <div class="container__overlay">
+    <div class="overlay">
+      <div class="overlay__panel overlay--left">
+        <button class="btn" id="signIn">邮箱登录</button>
+      </div>
+      <div class="overlay__panel overlay--right">
+        <button class="btn" id="signIn1">密码登录</button>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    const signInBtn = document.getElementById("signIn");
-    const signUpBtn = document.getElementById("signIn1");
-    <%--const fistForm = document.getElementById("form1");
-    const secondForm = document.getElementById("form2"); --%>
-    const container = document.querySelector(".container");
+<script>
+  const signInBtn = document.getElementById("signIn");
+  const signUpBtn = document.getElementById("signIn1");
+  <%--const fistForm = document.getElementById("form1");
+  const secondForm = document.getElementById("form2"); --%>
+  const container = document.querySelector(".container");
 
-    signInBtn.addEventListener("click", () => {
-      container.classList.remove("right-panel-active");
-    });
+  signInBtn.addEventListener("click", () => {
+    container.classList.remove("right-panel-active");
+  });
 
-    signUpBtn.addEventListener("click", () => {
-      container.classList.add("right-panel-active");
-    });
+  signUpBtn.addEventListener("click", () => {
+    container.classList.add("right-panel-active");
+  });
 
-    <%-- fistForm.addEventListener("submit", (e) => e.preventDefault());
-     secondForm.addEventListener("submit", (e) => e.preventDefault()); --%>
 
-    <%
-      Boolean emailExist = (Boolean) request.getAttribute("emailExist");
-      if (emailExist != null) {
-        if (emailExist) {
-          out.print("alert('验证码已发送', 'success', 10000)");
-        } else {
-          out.print("alert('无效邮箱', 'error', 10000)");
+
+  <%-- fistForm.addEventListener("submit", (e) => e.preventDefault());
+   secondForm.addEventListener("submit", (e) => e.preventDefault()); --%>
+  <%
+        Boolean emailExist = (Boolean) request.getAttribute("emailExist");
+        if (emailExist != null) {
+          if (emailExist) {
+            out.print("alert('验证码已发送', 'success', 10000)");
+
+          } else {
+            out.print("alert('无效邮箱', 'error', 10000)");
+          }
         }
-      }
 
-    %>
+        Boolean vericodeIsRight = (Boolean) request.getAttribute("vericodeIsRight");
+        if (vericodeIsRight != null && vericodeIsRight) {
+            String id = (String) request.getAttribute("id");
+            out.print("alert('注册成功，请记录您的账号：' + " + "'" + id + "'" + ")");
+        }
+
+        Boolean success = (Boolean) request.getAttribute("success");
+        if (success != null && !success) {
+            out.print("alert('登录失败')");
+        }
+
+        Boolean retrieveSuccess = (Boolean) request.getAttribute("retrieveSuccess");
+        if (retrieveSuccess != null && retrieveSuccess) {
+            out.print("alert('修改密码成功')");
+        }
+  %>
 
 
 
-  </script>
+
+</script>
 </body>
 
 </html>
