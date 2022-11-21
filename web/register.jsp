@@ -129,9 +129,6 @@
             margin: 0.5rem 0;
             width: 200%;
         }
-        .iframe {
-            display: none;
-        }
     </style>
 
 </head>
@@ -139,100 +136,90 @@
 <body>
 <div class="container right-panel-active">
     <div class="container__form container--signup">
-        <form action="/MyRanch/user/register" method="post" class="form" id="form1">
+        <div class="form">
             <h2 class="form__title">账号注册</h2>
             <input type="text" placeholder="用户名" class="input" name="username" id="username"/>
             <input type="password" placeholder="密码" class="input" name="password" id="password"/>
             <input type="password" placeholder="确认密码" class="input" name="confirm_password" id="confirm_password"/>
             <input type="email" placeholder="邮箱" class="input" name="email" id="email"/>
-            <input type="submit" class="link1" value="发送验证码" name="sendemail" formtarget="iframe" onclick="return ClickHandler();"/>
+            <button class="link1" id="sendemail">发送验证码</button>
             <input type="text" placeholder="验证码" class="input" name="vericode" id="vericode"/>
             <a href="\MyRanch\login.jsp" class="link">已有账号 去登陆</a>
-            <input type="submit" class="btn" value="注册" onclick="return ClickHandler1();" formtarget="iframe"/>
-        </form>
+            <input type="button" class="btn" id="register" value="注册">
+        </div>
     </div>
-    <iframe name="iframe" class="iframe"></iframe>
 </div>
 
 <script>
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    const confirm_password = document.getElementById("confirm_password");
-    const email = document.getElementById("email");
-    const vericode = document.getElementById("vericode");
+    window.onload = function () {
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const confirm_password = document.getElementById("confirm_password");
+        const email = document.getElementById("email");
+        const vericode = document.getElementById("vericode");
 
-    function ClickHandler() {
-        if (username.value == '') {
-            alert('用户名不能为空');
-            return false;
-        } else if (password.value == '') {
-            alert('密码不能为空');
-            return false;
-        } else if (confirm_password.value == '') {
-            alert('请确认您的密码');
-            return false;
-        } else if (password.value != confirm_password.value) {
-            alert('两次密码输入不一致');
-            return false;
-        } else if (password.value.length < 6) {
-            alert('输入的密码太短，长度应在6-16位之间');
-            return false;
-        } else if (password.value.length > 16) {
-            alert('输入的密码太长，长度应在6-16位之间');
-            return false;
-        } else if (email.value == ''){
-            alert('邮箱不能为空');
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function ClickHandler1() {
-        if (username.value == '') {
-            alert('用户名不能为空');
-            return false;
-        } else if (password.value == '') {
-            alert('密码不能为空');
-            return false;
-        } else if (confirm_password.value == '') {
-            alert('请确认您的密码');
-            return false;
-        } else if (password.value != confirm_password.value) {
-            alert('两次密码输入不一致');
-            return false;
-        } else if (password.value.length < 6) {
-            alert('输入的密码太短，长度应在6-16位之间');
-            return false;
-        } else if (password.value.length > 16) {
-            alert('输入的密码太长，长度应在6-16位之间');
-            return false;
-        } else if (email.value == ''){
-            alert('邮箱不能为空');
-            return false;
-        } else if (vericode.value == '') {
-            alert('请输入验证码');
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    <%
-              Boolean emailExist = (Boolean) request.getAttribute("emailExist");
-              if (emailExist != null) {
-                if (emailExist) {
-                  out.print("alert('该邮箱已被注册')");
-                } else {
-                  out.print("alert('验证码已发送')");
+        document.getElementById("sendemail").onclick = function () {
+            if (username.value == '') {
+                alert('用户名不能为空');
+            } else if (password.value == '') {
+                alert('密码不能为空');
+            } else if (confirm_password.value == '') {
+                alert('请确认您的密码');
+            } else if (password.value != confirm_password.value) {
+                alert('两次密码输入不一致');
+            } else if (password.value.length < 6) {
+                alert('输入的密码太短，长度应在6-16位之间');
+            } else if (password.value.length > 16) {
+                alert('输入的密码太长，长度应在6-16位之间');
+            } else if (email.value == ''){
+                alert('邮箱不能为空');
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText);
+                    }
                 }
-              }
+                xhr.open("POST", "/MyRanch/user/sendemail2", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("email=" + document.getElementById("email").value);
+            }
+        }
 
-              Boolean vericodeIsRight = (Boolean) request.getAttribute("vericodeIsRight");
-              if (vericodeIsRight != null && !vericodeIsRight) {
-                  out.print("alert('验证码错误')");
-              }
-    %>
+        document.getElementById("register").onclick = function () {
+            if (username.value == '') {
+                alert('用户名不能为空');
+            } else if (password.value == '') {
+                alert('密码不能为空');
+            } else if (confirm_password.value == '') {
+                alert('请确认您的密码');
+            } else if (password.value != confirm_password.value) {
+                alert('两次密码输入不一致');
+            } else if (password.value.length < 6) {
+                alert('输入的密码太短，长度应在6-16位之间');
+            } else if (password.value.length > 16) {
+                alert('输入的密码太长，长度应在6-16位之间');
+            } else if (email.value == ''){
+                alert('邮箱不能为空');
+            } else if (vericode.value == '') {
+                alert('请输入验证码');
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText);
+                    }
+                }
+                xhr.open("POST", "/MyRanch/user/register", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("username=" + document.getElementById("username").value + "&" +
+                        "password=" + document.getElementById("password").value + "&" +
+                        "email=" + document.getElementById("email").value + "&" +
+                        "vericode=" + document.getElementById("vericode").value);
+            }
+        }
+    }
+
 </script>
 </body>
 

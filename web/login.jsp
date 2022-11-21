@@ -231,26 +231,25 @@
 <body>
 <div class="container right-panel-active">
   <div class="container__form container--signup">
-    <form action="/MyRanch/user/passwdlogin" method="post" class="form" id="form1">
+    <div class="form">
       <h2 class="form__title">账号登录</h2>
-      <input type="text" placeholder="账号" class="input" name="id"/>
-      <input type="password" placeholder="密码" class="input" name="password"/>
+      <input type="text" placeholder="账号" class="input" name="id" id="id"/>
+      <input type="password" placeholder="密码" class="input" name="password" id="password"/>
       <a href="/MyRanch/retrievepwd.jsp" class="link">忘记密码？</a>
-      <input type="submit" class="btn" value="登录"/>
-    </form>
+      <button class="btn" id="passwdlogin">登录</button>
+    </div>
   </div>
 
   <div class="container__form container--signin">
-    <form action="/MyRanch/user/emaillogin" method="post" class="form" id="form2">
+    <div class="form">
       <h2 class="form__title">邮箱登录</h2>
-      <input type="email" placeholder="邮箱" class="input" name="email"/>
-      <input type="text" placeholder="验证码" class="input" name="vericode"/>
-      <input type="submit" class="link1" value="发送验证码" name="sendemail" id="link1" formtarget="iframe"/>
+      <input type="email" placeholder="邮箱" class="input" name="email" id="email"/>
+      <input type="text" placeholder="验证码" class="input" name="vericode" id="vericode"/>
+      <button class="link1" name="sendemail" id="sendemail">发送验证码</button>
       <a href="/MyRanch/register.jsp" class="link">注册账号</a>
-      <input type="submit" class="btn" value="登录"/>
-    </form>
+      <button class="btn" id="emaillogin">登录</button>
+    </div>
   </div>
-  <iframe name="iframe"></iframe>
 
   <div class="container__overlay">
     <div class="overlay">
@@ -265,10 +264,58 @@
 </div>
 
 <script>
+  window.onload = function () {
+    document.getElementById("sendemail").onclick = function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          alert(xhr.responseText);
+        }
+      }
+      xhr.open("POST", "/MyRanch/user/sendemail", true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send("email=" + document.getElementById("email").value);
+    }
+
+    document.getElementById("emaillogin").onclick = function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText != "")
+          {
+            alert(xhr.responseText);
+          } else {
+            alert('登录成功');
+          }
+        }
+      }
+      xhr.open("POST", "/MyRanch/user/emaillogin", true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send("email=" + document.getElementById("email").value + "&" +
+              "vericode=" + document.getElementById("vericode").value);
+    }
+
+    document.getElementById("passwdlogin").onclick = function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText != "")
+          {
+            alert(xhr.responseText);
+          } else {
+            alert('登录成功');
+          }
+        }
+      }
+      xhr.open("POST", "/MyRanch/user/passwdlogin", true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send("id=" + document.getElementById("id").value + "&" +
+              "password=" + document.getElementById("password").value);
+    }
+  }
+
   const signInBtn = document.getElementById("signIn");
   const signUpBtn = document.getElementById("signIn1");
-  <%--const fistForm = document.getElementById("form1");
-  const secondForm = document.getElementById("form2"); --%>
   const container = document.querySelector(".container");
 
   signInBtn.addEventListener("click", () => {
@@ -278,41 +325,6 @@
   signUpBtn.addEventListener("click", () => {
     container.classList.add("right-panel-active");
   });
-
-
-
-  <%-- fistForm.addEventListener("submit", (e) => e.preventDefault());
-   secondForm.addEventListener("submit", (e) => e.preventDefault()); --%>
-  <%
-        Boolean emailExist = (Boolean) request.getAttribute("emailExist");
-        if (emailExist != null) {
-          if (emailExist) {
-            out.print("alert('验证码已发送', 'success', 10000)");
-
-          } else {
-            out.print("alert('无效邮箱', 'error', 10000)");
-          }
-        }
-
-        Boolean vericodeIsRight = (Boolean) request.getAttribute("vericodeIsRight");
-        if (vericodeIsRight != null && vericodeIsRight) {
-            String id = (String) request.getAttribute("id");
-            out.print("alert('注册成功，请记录您的账号：' + " + "'" + id + "'" + ")");
-        }
-
-        Boolean success = (Boolean) request.getAttribute("success");
-        if (success != null && !success) {
-            out.print("alert('登录失败')");
-        }
-
-        Boolean retrieveSuccess = (Boolean) request.getAttribute("retrieveSuccess");
-        if (retrieveSuccess != null && retrieveSuccess) {
-            out.print("alert('修改密码成功')");
-        }
-  %>
-
-
-
 
 </script>
 </body>

@@ -20,35 +20,32 @@ import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-@WebServlet({"/user/passwdlogin", "/user/emaillogin","/user/register"})
+@WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin", "/user/sendemail2", "/user/register"})
 public class UserServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();
-
         if ("/user/passwdlogin".equals(servletPath)) {
             doPassWordLogin(request, response);
+        } else if ("/user/sendemail".equals(servletPath)) {
+            doSendEmail(request, response);
         } else if ("/user/emaillogin".equals(servletPath)) {
-            if (request.getParameter("sendemail") != null) {
-                doSendEmail(request, response);
-            } else {
-                doEmailLogin(request, response);
-            }
+            doEmailLogin(request, response);
+        } else if ("/user/sendemail2".equals(servletPath)) {
+            doSendEmail2(request, response);
         } else if ("/user/register".equals(servletPath)) {
-            if (request.getParameter("sendemail") != null){
-                doSendEmail2(request, response);
-            } else {
-                doRegister(request,response);
-            }
+            doRegister(request,response);
         }
     }
 
 
     protected void doPassWordLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
         String id = request.getParameter("id");
         String password = request.getParameter("password");
 
-        boolean success = false;
         if (id != null && password != null) {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = null;
@@ -59,7 +56,12 @@ public class UserServlet extends HttpServlet {
                 ps.setString(1, id);
                 ps.setString(2, Sha256.getSHA256(password));
                 rs = ps.executeQuery();
-                success = rs.next();
+                if (rs.next()) {
+                    out.print("");
+                } else {
+                    out.print("账号或密码错误");
+                }
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchAlgorithmException e) {
@@ -68,18 +70,12 @@ public class UserServlet extends HttpServlet {
                 DBUtils.close(conn, ps, rs);
             }
         }
-
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        if (success) {
-            out.print("<h1>Success Page</h1>");
-        } else {
-            request.setAttribute("success", false);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
     }
 
     protected void doSendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
         ResourceBundle bundle = ResourceBundle.getBundle("Resources.email");
         String host = bundle.getString("host");
         String from = bundle.getString("from");
@@ -121,30 +117,35 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("vericode", vericode);
             session.setAttribute("email", email);
+
+            out.print("验证码已发送");
+        } else {
+            out.print("该邮箱未注册或者是一个无效邮箱");
         }
 
-        request.setAttribute("emailExist", emailExist);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     protected void doEmailLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession(false);
         String vericode = (session == null ? null : (String) session.getAttribute("vericode"));
         String email = (session == null ? null : (String) session.getAttribute("email"));
         String vericodeProvided = request.getParameter("vericode");
         String emailProvided = request.getParameter("email");
 
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
         if (vericode != null && email != null && vericode.equals(vericodeProvided) && email.equals(emailProvided)) {
-            out.print("<h1>Success Page</h1>");
+            out.print("");
         } else {
-            request.setAttribute("success", false);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            out.print("邮箱或验证码错误");
         }
     }
 
     protected  void doSendEmail2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
         ResourceBundle bundle = ResourceBundle.getBundle("Resources.email");
         String host = bundle.getString("host");
         String from = bundle.getString("from");
@@ -182,15 +183,16 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("vericode", vericode);
             session.setAttribute("email", email);
+
+            out.print("验证码已发送");
+        } else {
+            out.print("该邮箱已被注册");
         }
-        request.setAttribute("emailExist", emailExist);
-        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
     protected  void doRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html; charset=utf-8");
-        request.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -198,37 +200,17 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String vericode = (session == null ? null : (String) session.getAttribute("vericode"));
         String vericodeProvided = request.getParameter("vericode");
+        String emailProvided = request.getParameter("email");
 
-        PrintWriter out = response.getWriter();
-        boolean vericodeIsRight = false;
         String userId = null;
-        if(vericode!=null && vericodeProvided!=null && vericode.equals(vericodeProvided)){
+        if (vericode!=null && vericodeProvided!=null && email.equals(emailProvided) && vericode.equals(vericodeProvided)) {
             try {
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    PreparedStatement ps = null;
-                    String sql = "select * from UserInfo where email = ?";
-                    ResultSet rs = null;
-                    boolean emailExist = false;
-                    try {
-                        ps = conn.prepareStatement(sql);
-                        ps.setString(1, email);
-                        rs = ps.executeQuery();
-                        emailExist = rs.next();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } finally {
-                        DBUtils.close(conn, ps, rs);
-                    }
-
-                    if (emailExist) {
-                        return;
-                    }
-
-                    if (!emailExist) {
-                        userId = Acounts.register(username,password,email,0);
-                        vericodeIsRight = true;
-                        request.setAttribute("id", userId);
+                    userId = Acounts.register(username,password,email,0);
+                    if (userId == null) {
+                        out.print("注册失败，该邮箱已被注册");
+                    } else {
+                        out.print("注册成功，您的用户id为：" + userId);
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -238,12 +220,8 @@ public class UserServlet extends HttpServlet {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        request.setAttribute("vericodeIsRight", vericodeIsRight);
-        try {
-            request.getRequestDispatcher(vericodeIsRight ? "/login.jsp" : "/register.jsp").forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
+        } else {
+            out.print("邮箱或验证码错误");
         }
     }
 }

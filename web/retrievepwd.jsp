@@ -129,9 +129,6 @@
             margin: 0.5rem 0;
             width: 200%;
         }
-        .iframe {
-            display: none;
-        }
     </style>
 
 </head>
@@ -139,86 +136,72 @@
 <body>
 <div class="container right-panel-active">
     <div class="container__form container--signup">
-        <form action="/MyRanch/user/retrievepasswd" method="post" class="form" id="form1">
+        <div class="form">
             <h2 class="form__title">找回密码</h2>
             <input type="email" placeholder="邮箱" class="input" name="email" id="email"/>
-            <input type="submit" class="link1" value="发送验证码" name="sendemail" formtarget="iframe" onclick="return ClickHandler();"/>
+            <input type="button" class="link1" value="发送验证码" name="sendemail" id="sendemail"/>
             <input type="text" placeholder="验证码" class="input" name="vericode" id="vericode"/>
             <input type="password" placeholder="重置密码" class="input" name="password" id="password"/>
             <input type="password" placeholder="确认密码" class="input" name="confirm_password" id="confirm_password"/>
             <a href="\MyRanch\login.jsp" class="link">返回登录页面</a>
-            <input type="submit" class="btn" value="确认" onclick="return ClickHandler1();" formtarget="iframe"/>
-        </form>
+            <input type="button" class="btn" value="确认" id="confirm"/>
+        </div>
     </div>
-    <iframe name="iframe" class="iframe"></iframe>
 </div>
 
 <script>
-    // <%--const fistForm = document.getElementById("form1");
-            // const secondForm = document.getElementById("form2"); --%>
-    const password = document.getElementById("password");
-    const confirm_password = document.getElementById("confirm_password");
-    const email = document.getElementById("email");
-    const vericode = document.getElementById("vericode");
+    window.onload = function () {
+        const password = document.getElementById("password");
+        const confirm_password = document.getElementById("confirm_password");
+        const email = document.getElementById("email");
+        const vericode = document.getElementById("vericode");
 
-    // <%-- fistForm.addEventListener("submit", (e) => e.preventDefault());
-            //  secondForm.addEventListener("submit", (e) => e.preventDefault()); --%>
+        document.getElementById("sendemail").onclick = function () {
+            if (email.value == ''){
+                alert('邮箱不能为空');
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText);
+                    }
+                }
+                xhr.open("POST", "/MyRanch/user/sendemail3", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("email=" + document.getElementById("email").value);
+            }
+        }
 
-    function ClickHandler() {
-        if (email.value == ''){
-            alert('邮箱不能为空');
-            return false;
-        } else {
-            return true;
+        document.getElementById("confirm").onclick = function () {
+            if (password.value == '') {
+                alert('密码不能为空');
+            } else if (confirm_password.value == '') {
+                alert('请确认您的密码');
+            } else if (password.value != confirm_password.value) {
+                alert('两次密码输入不一致');
+            } else if (password.value.length < 6) {
+                alert('输入的密码太短，长度应在6-16位之间');
+            } else if (password.value.length > 16) {
+                alert('输入的密码太长，长度应在6-16位之间');
+            } else if (email.value == ''){
+                alert('邮箱不能为空');
+            } else if (vericode.value == '') {
+                alert('请输入验证码');
+            } else {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText);
+                    }
+                }
+                xhr.open("POST", "/MyRanch/user/retrievepasswd", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("password=" + document.getElementById("password").value + "&" +
+                        "email=" + document.getElementById("email").value + "&" +
+                        "vericode=" + document.getElementById("vericode").value);
+            }
         }
     }
-
-    function ClickHandler1() {
-        if (password.value == '') {
-            alert('密码不能为空');
-            return false;
-        } else if (confirm_password.value == '') {
-            alert('请确认您的密码');
-            return false;
-        } else if (password.value != confirm_password.value) {
-            alert('两次密码输入不一致');
-            return false;
-        } else if (password.value.length < 6) {
-            alert('输入的密码太短，长度应在6-16位之间');
-            return false;
-        } else if (password.value.length > 16) {
-            alert('输入的密码太长，长度应在6-16位之间');
-            return false;
-        } else if (email.value == '') {
-            alert('邮箱不能为空');
-            return false;
-        } else if (vericode.value == '') {
-            alert('请输入验证码');
-            return false;
-        } else {
-            return true;
-        }
-    }
-    <%
-              Boolean emailExist = (Boolean) request.getAttribute("emailExist");
-              if (emailExist != null) {
-                if (emailExist) {
-                  out.print("alert('验证码已发送', 'success', 10000)");
-                } else {
-                  out.print("alert('无效邮箱', 'error', 10000)");
-                }
-              }
-
-              Boolean vericodeIsRight = (Boolean) request.getAttribute("vericodeIsRight");
-              if (vericodeIsRight != null && !vericodeIsRight) {
-                  out.print("alert('验证码错误')");
-              }
-
-              Boolean retrieveSuccess = (Boolean) request.getAttribute("retrieveSuccess");
-                if (retrieveSuccess != null && !retrieveSuccess) {
-                    out.print("alert('验证码错误')");
-                }
-            %>
 </script>
 </body>
 
