@@ -155,7 +155,7 @@ public class GroupServlet extends HttpServlet {
             String curDir = (String) session.getAttribute("curDir");
             String batchName = request.getParameter("batchName");
             File file = new File(curDir + "/" + batchName);
-            if (file.exists() && file.delete()) {
+            if (file.exists() && file.isFile() && file.delete()) {
                 out.print("0");
             } else {
                 out.print("1");

@@ -264,7 +264,8 @@
         }
 
         .group-button {
-
+            width: 550px;
+            text-align: left;
         }
 
         .group-button:hover {
@@ -285,6 +286,21 @@
         .confirm-cancel-box:hover {
             cursor: pointer;
             background-color: #4ba7e8;
+            color: #ffffff;
+        }
+
+        .del-group-button {
+            display: none;
+            width: 50px;
+            height: 30px;
+            border: 1px solid #bfbfbf;
+            border-radius: 60em;
+            margin-top: 7px;
+        }
+
+        .del-group-button:hover {
+            cursor: pointer;
+            background-color: #e34c26;
             color: #ffffff;
         }
 
@@ -1183,17 +1199,18 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var fileList = JSON.parse(xhr.responseText);
                     var HTMLStr = "";
-                    HTMLStr +='<div class="group-line">';
+                    HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + '.."' + '>';
                     HTMLStr +=          '<div style="margin-left:23px; margin-top:3px; float: left; position: absolute;">';
                     HTMLStr +=          '<button ' + 'id="' + '..' + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
                         '..' + '</button>';
                     HTMLStr +=          '</div>';
                     HTMLStr += '</div>';
                     for (let i = 0; i < fileList.length; i++) {
-                        HTMLStr +='<div class="group-line">';
+                        HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + fileList[i].filename + '"' + '>';
                         HTMLStr +=          '<div style="margin-left:23px; margin-top:3px;float: left; position: absolute;">';
                         HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
                             fileList[i].filename + '</button>';
+                        HTMLStr += '<input type="button" id="del-group-' + fileList[i].filename + '" class="del-group-button" value="删除">';
                         HTMLStr +=          '</div>';
                         HTMLStr +='</div>';
                     }
@@ -1223,6 +1240,28 @@
                                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                 xhr.send("filename=" + fileList[i].filename);
                             }
+                        }
+                        document.getElementById('group-line-' + fileList[i].filename).onmouseover = function () {
+                            const del_group_button = document.getElementById("del-group-" + fileList[i].filename);
+                            del_group_button.style.display = 'inline-block';
+                            del_group_button.onclick = function () {
+                                var xhr = new XMLHttpRequest();
+                                xhr.onreadystatechange = function () {
+                                    if (xhr.readyState == 4 && xhr.status == 200) {
+                                        if (xhr.responseText == "0") {
+                                            getGroupList();
+                                        } else {
+                                            alert("删除分组失败");
+                                        }
+                                    }
+                                }
+                                xhr.open("POST", "/MyRanch/group/delGroup");
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                xhr.send("groupName=" + fileList[i].filename);
+                            }
+                        }
+                        document.getElementById('group-line-' + fileList[i].filename).onmouseout = function () {
+                            document.getElementById("del-group-" + fileList[i].filename).style.display = 'none';
                         }
                     }
                 }
