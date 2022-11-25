@@ -108,12 +108,31 @@ public class GroupServlet extends HttpServlet {
             String curDir = (String) session.getAttribute("curDir");
             String groupName = request.getParameter("groupName");
             File file = new File(curDir + "/" + groupName);
-            if (file.exists() && file.delete()) {
+            if (deleteDir(file)) {
                 out.print("0");
             } else {
                 out.print("1");
             }
         }
+    }
+
+
+    private static boolean deleteDir(File dir) {
+        if (!dir.exists() || !dir.isDirectory()) {
+            return false;
+        }
+
+        // 递归删除非空目录
+        File[] files = dir.listFiles();
+        for (File f : files) {
+            if (f.isDirectory()) {
+                deleteDir(f);
+            } else {
+                f.delete();
+            }
+        }
+
+        return dir.delete();
     }
 
     private void doAddBatch(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -167,6 +186,7 @@ public class GroupServlet extends HttpServlet {
 
 
     }
+
 }
 
 class JSONFile {
