@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="MyRanch" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-2.0.9.jar" />
+        </element>
       </element>
     </root>
   </artifact>

@@ -4,7 +4,6 @@ import edu.scu.myranch.service.Acounts;
 import edu.scu.myranch.utils.DBUtils;
 import edu.scu.myranch.utils.Emails;
 import edu.scu.myranch.utils.encryption.Sha256;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -22,6 +21,8 @@ import java.util.ResourceBundle;
 
 @WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin", "/user/sendemail2", "/user/register"})
 public class UserServlet extends HttpServlet {
+    private static String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();
@@ -57,6 +58,11 @@ public class UserServlet extends HttpServlet {
                 ps.setString(2, Sha256.getSHA256(password));
                 rs = ps.executeQuery();
                 if (rs.next()) {
+                    HttpSession session = request.getSession();
+                    String curDir = userDataDir + "/" + id;
+                    session.setAttribute("curDir", curDir);
+                    session.setAttribute("rootDir", curDir);
+                    session.setAttribute("username", rs.getString("userName"));
                     out.print("");
                 } else {
                     out.print("账号或密码错误");
@@ -91,6 +97,7 @@ public class UserServlet extends HttpServlet {
         ResultSet rs = null;
         boolean emailExist = false;
         String id = "";
+        String username = "";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
@@ -98,6 +105,7 @@ public class UserServlet extends HttpServlet {
             emailExist = rs.next();
             if (emailExist) {
                 id = rs.getString("id");
+                username = rs.getString("username");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -117,6 +125,8 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("vericode", vericode);
             session.setAttribute("email", email);
+            session.setAttribute("id", id);
+            session.setAttribute("username", username);
 
             out.print("验证码已发送");
         } else {
@@ -132,10 +142,16 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String vericode = (session == null ? null : (String) session.getAttribute("vericode"));
         String email = (session == null ? null : (String) session.getAttribute("email"));
+        String id = (session == null ? null : (String) session.getAttribute("id"));
+        String username = (session == null ? null : (String) session.getAttribute("username"));
         String vericodeProvided = request.getParameter("vericode");
         String emailProvided = request.getParameter("email");
 
         if (vericode != null && email != null && vericode.equals(vericodeProvided) && email.equals(emailProvided)) {
+            String curDir = userDataDir + "/" + id;
+            session.setAttribute("curDir", curDir);
+            session.setAttribute("rootDir", curDir);
+            session.setAttribute("username", username);
             out.print("");
         } else {
             out.print("邮箱或验证码错误");

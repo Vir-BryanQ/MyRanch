@@ -3,6 +3,7 @@ package edu.scu.myranch.service;
 import edu.scu.myranch.utils.DBUtils;
 import edu.scu.myranch.utils.encryption.Sha256;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -41,6 +42,16 @@ public class Acounts {
         ps = conn.prepareStatement(sql);
         int res = ps.executeUpdate();
 
+        // create a repo for the new user
+        String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
+        String repoPath = userDataDir + "/" + id;
+        File file = new File(repoPath);
+        file.mkdir();
+
+        // provide a sample group for the new user
+        File file1 = new File(repoPath + "/sample");
+        file1.mkdir();
+
         DBUtils.close(conn, ps, rs);
         return (res == 0 ? null : id);
     }
@@ -56,6 +67,8 @@ public class Acounts {
         DBUtils.close(conn, ps, rs);
         return rs.next();
     }
+
+
 }
 
 

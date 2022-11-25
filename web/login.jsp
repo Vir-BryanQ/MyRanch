@@ -116,7 +116,7 @@
 
     .overlay {
       background-color: var(--lightblue);
-      background: url("/MyRanch/image/ocean.jpg");
+      background: url("/MyRanch/img/ocean.jpg");
       background-attachment: fixed;
       background-position: center;
       background-repeat: no-repeat;
@@ -285,7 +285,7 @@
           {
             alert(xhr.responseText);
           } else {
-            alert('登录成功');
+            window.location.href = "/MyRanch/home.html"
           }
         }
       }
@@ -303,7 +303,7 @@
           {
             alert(xhr.responseText);
           } else {
-            alert('登录成功');
+            window.location.href = "/MyRanch/home.html"
           }
         }
       }

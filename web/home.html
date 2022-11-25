@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYRANCH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        
+        .w {
+            /*  width: 1520px; */
+            /* 1200 */
+            width: 100%;
+            /*  height: 700px; */
+            /* 650 */
+            height: 100%;
+            /* background-color: aquamarine; */
+            /* margin: auto; */
+            border: 2px solid rgb(0 0 0 / 6%);
+        }
+        /* 顶栏 */
+        
+        .first_part {
+            box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
+            width: 100%;
+            /*1200px */
+            height: 42px;
+            /* 69px */
+            /* margin: auto; */
+        }
+        
+        .logo {
+            height: 62px;
+            float: left;
+            line-height: 10px;
+            font-size: 16px;
+            padding-top: 2px;
+        }
+        
+        img {
+            height: 40px;
+            vertical-align: middle;
+        }
+        
+        .user_touxiang {
+            float: right;
+            margin-right: 5px;
+            margin-top: 1px;
+            width: 40px;
+            height: 40px;
+            background: url(/MyRanch/img/user.jpg);
+            background-position: -72px -40px;
+            border-radius: 50%;
+        }
+        
+        .user_name {
+            height: 62px;
+            float: right;
+            margin-right: 20px;
+            line-height: 43px;
+        }
+        
+        .second_part {
+            height: 658px;
+            width: 100%;
+            /* border:  2px solid red; */
+        }
+        
+        .second_1 {
+            box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
+            width: 100px;
+            height: 655px;
+            float: left;
+            text-align: center;
+            /* border: 2px solid blue; */
+        }
+        
+        .second_2 {
+            width: 150px;
+            height: 655px;
+            float: left;
+            border: 1px solid rgb(241, 242, 244);
+        }
+        
+        .second_3 {
+            width: 932px;
+            height: 655px;
+            position: relative;
+            float: left;
+            border: 1px solid rgb(241, 242, 244);
+        }
+        /* 首页的文件界面 */
+        
+        .second_1-1 {
+            width: 932px;
+            height: 655px;
+            position: absolute;
+            z-index: 3;
+            background-color: white;
+            /* display: none; */
+        }
+        
+        .second_part .second_1 ul li {
+            list-style: none;
+            margin-top: 28px;
+            width: 100px;
+            height: 80px;
+            font-size: 12px;
+            font-family: '微软雅黑';
+        }
+        
+        .second_part .second_1 ul .index {
+            list-style: none;
+            margin-top: 28px;
+            width: 100px;
+            height: 80px;
+            font-size: 12px;
+            background-color: #e1e1e1;
+            font-family: '微软雅黑';
+        }
+        
+        /*.second_part .second_1 ul .help {*/
+        /*    position: fixed;*/
+        /*    bottom: 10%;*/
+        /*}*/
+        
+        .second_part .second_1 ul li:hover {
+            /* transform: translate(-2px, -2px); */
+            background-color: #e1e1e1 !important;
+        }
+        
+        .second_2-1 {
+            width: 140px;
+            height: 40px;
+            margin-top: 32px;
+            margin-left: 5px;
+            border-radius: 18px;
+            /* background-color: #a8fcdf; */
+            text-align: center;
+            line-height: 42px;
+            font-family: SFUIText, PingFangSC-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            /* color:#54d1a6; */
+        }
+        
+        .second_2-1:hover {
+            background-color: #54d1a6;
+            color: black;
+        }
+        
+        .second_2-2 {
+            width: 140px;
+            height: 40px;
+            margin-top: 8px;
+            margin-left: 5px;
+            border-radius: 18px;
+            /* background-color: #a8fcdf; */
+            text-align: center;
+            line-height: 37px;
+            font-family: SFUIText, PingFangSC-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            /* color:#54d1a6; */
+        }
+        
+        .second_2-2:hover {
+            background-color: #54d1a6;
+            color: black;
+        }
+        
+        .second_2-3 {
+            width: 120px;
+            height: 10px;
+            margin-top: 180px;
+            background-color: darkgray;
+        }
+        
+        .second_3-1 {
+            width: 932px;
+            height: 46px;
+            margin-top: 8px;
+            /* background-color: #a8fcdf; */
+        }
+        
+        .second_3-1-1-zengjia {
+            width: 120px;
+            height: 40px;
+            float: left;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
+            background-color: #e1e1e1;
+            /* background-color: #54d1a6; */
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+        }
+        
+        .second_3-1-1-zengjia:hover {
+            background-color: #54d1a6;
+            cursor: pointer;
+        }
+        
+        .second_3-1-2-shanchu {
+            width: 120px;
+            height: 40px;
+            float: left;
+            margin: 3px 28px 5px;
+            border-radius: 5px;
+            background-color: #e1e1e1;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+        }
+        
+        .second_3-1-2-shanchu:hover {
+            background-color: #54d1a6;
+            cursor: pointer;
+        }
+        
+        .second_3-1-3-search {
+            /* width: 300px; */
+            height: 40px;
+            float: right;
+            margin-right: 15px;
+            margin-top: 26px;
+            /* 11 */
+            /* border: 2px solid red;
+            border-right: 0; */
+        }
+        /* .second_3-1-3-search */
+        
+        .searchbox {
+            width: 202px;
+            height: 35px;
+            border-radius: 25px;
+            /* float: left; */
+            color: #bfbfbf;
+            border: 1px solid #bfbfbf;
+            background-color: #f1f3f8;
+            padding-left: 15px;
+        }
+
+        .group-line {
+            height: 50px;
+            width: 100%;
+            position: relative;
+        }
+
+        .group-line:hover {
+            background-color: #f7f9fc;
+        }
+
+        .group-button {
+
+        }
+
+        .group-button:hover {
+            cursor: pointer;
+            color: #4ba7e8;
+            background-color: #f7f9fc;
+        }
+
+        .confirm-cancel-box {
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            margin-left: 15px;
+            border: 1px solid #bfbfbf;
+            border-radius: 60em;
+        }
+
+        .confirm-cancel-box:hover {
+            cursor: pointer;
+            background-color: #4ba7e8;
+            color: #ffffff;
+        }
+
+        .wp-s-pan-list__file-name-edit--title-edit-input {
+            width: 180px;
+        }
+
+        .u-input--small {
+            font-size: 13px;
+        }
+
+        .u-input {
+            position: relative;
+            font-size: 14px;
+            display: inline-block;
+            width: 30%;
+            margin-left: 7px;
+        }
+
+        .u-input__inner {
+            -webkit-appearance: none;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #59c837;
+            box-sizing: border-box;
+            color: #03081a;
+            display: inline-block;
+            font-size: inherit;
+            height: 27px;
+            line-height: 27px;
+            outline: 0;
+            padding: 0 12px;
+            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            width: 100%;
+        }
+
+        /* .second_3-1-3-search */
+        
+        button {
+            border: 0;
+            /* float: left; */
+            height: 40px;
+            background-color: white;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        
+        .second_3-2-1 {
+            width: 655px;
+            height: 591px;
+            float: left;
+            margin-top: 10px;
+            border: 1px solid rgb(241, 242, 244);
+            border-top: 0;
+        }
+        
+        .second_3-2-1-1 {
+            width: 665px;
+            height: 30px;
+            margin-top: 18px;
+        }
+        
+        .second_3-2-1-1-1 {
+            width: 80px;
+            height: 25px;
+            float: left;
+            margin-left: 29px;
+            font-size: 18px;
+            font-weight: 700;
+            /* background-color: #54d1a6; */
+        }
+        
+        .second_3-2-1-1 img {
+            float: right;
+            margin-right: 115px;
+            margin-top: 8px;
+        }
+        
+        .second_3-2-1-2 {
+            width: 656px;
+            height: 40px;
+            margin-top: 18px;
+            border: 1px solid rgb(241, 242, 244);
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+        
+        .second_3-2-1-2 input {
+            margin-left: 28px;
+            margin-top: 2px;
+            width: 20px;
+        }
+        
+        .second_3-2-1-2 span:nth-child(2) {
+            color: #818999;
+            font-size: 19px;
+        }
+        
+        .second_3-2-1-2 span:nth-child(3) {
+            color: #818999;
+            font-size: 19px;
+            margin-left: 194px;
+        }
+        
+        .second_3-2-1-2 span:nth-child(4) {
+            color: #818999;
+            font-size: 19px;
+            margin-left: 152px;
+        }
+        
+        .second_3-2-1-3 {
+            width: 654px;
+            height: 500px;
+            /* border: 1px solid red; */
+        }
+        
+        .second_3-2-2 {
+            width: 275px;
+            height: 491px;
+            float: left;
+        }
+        
+        .second_3-2-2-1 {
+            width: 275px;
+            height: 50px;
+            margin-top: 25px;
+            margin-left: 22px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: SFUIText, PingFangSC-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
+            /* background-color: #818999; */
+        }
+        
+        .second_3-2-2 div:nth-child(2) {
+            margin-top: 98px;
+            margin-left: 75px;
+            color: #818999;
+        }
+        /* 经验界面页码设置 */
+        
+        .page-nav {
+            height: 60px;
+            width: 100%;
+            margin-top: 50px;
+            line-height: 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .page-nav>ul {
+            /* overflow: hidden; */
+            margin-top: -9px;
+            margin-left: 154px;
+            /* width:80%;	 */
+        }
+        
+        .page-nav>ul>li {
+            float: left;
+            list-style-type: none;
+            margin-right: 20px;
+        }
+        /* 经验交流界面 */
+        
+        .second_1-2 {
+            width: 932px;
+            height: 655px;
+            position: absolute;
+            z-index: 1;
+            background-color: white;
+            display: none;
+        }
+        /* 经验交流界面的第一行 */
+        
+        .second_1-2-1 {
+            width: 932px;
+            height: 46px;
+        }
+        /* 发布经验 */
+        
+        .second_1-2-1-1 {
+            width: 120px;
+            height: 40px;
+            float: left;
+            margin-top: 24px;
+            margin-left: 10px;
+            border-radius: 12px;
+            background-color: #e1e1e1;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 38px;
+        }
+        /* 删除经验 */
+        
+        .second_1-2-1-2 {
+            width: 120px;
+            height: 40px;
+            float: left;
+            margin-top: 24px;
+            margin-left: 10px;
+            border-radius: 12px;
+            background-color: #e1e1e1;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 38px;
+        }
+        
+        .second_1-2-1-3 {
+            width: 120px;
+            height: 40px;
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            border-radius: 12px;
+            background-color: #e1e1e1;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 38px;
+        }
+        
+        .second_1-2-2 {
+            width: 932px;
+            height: 500px;
+            margin-top: 40px;
+            /* border: 1px solid red; */
+        }
+        
+        .second_1-2-2 li {
+            width: 932px;
+            height: 160px;
+            /* position: relative; */
+            background-color: #f7f7f7;
+            border: 1px solid rgb(241, 242, 244);
+        }
+        /* 个人经验分享中存放头像及名称以及其他按钮的区域 */
+        
+        .persondinfo-other {
+            width: 100%;
+            height: 40px;
+            position: relative;
+            /* border: solid red; */
+        }
+        /* 经验交流头像 */
+        
+        .exp-touxiang {
+            width: 33px;
+            height: 33px;
+            position: absolute;
+            top: 10%;
+            left: 1%;
+            background-color: #54d1a6;
+            border-radius: 50%;
+        }
+        /* 经验交流名字 */
+        
+        .exp-name {
+            width: 40px;
+            height: 33px;
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            line-height: 32px;
+            font-size: 15px;
+        }
+        /* 经验种类 */
+        
+        .exp-kind {
+            width: 100px;
+            height: 33px;
+            position: absolute;
+            top: 10%;
+            left: 73%;
+            line-height: 32px;
+            font-size: 15px;
+            /* background-color: #54d1a6; */
+        }
+        /* 经验交流发布时间 */
+        
+        .exp-date {
+            width: 100px;
+            height: 33px;
+            position: absolute;
+            top: 10%;
+            left: 86%;
+            line-height: 32px;
+            font-size: 15px;
+            /* background-color: #54d1a6; */
+        }
+        /* 详细经验内容 */
+        
+        .exp_detail {
+            width: 100%;
+            height: 110px;
+            margin-top: 5px;
+            /* background-color: #54d1a6; */
+        }
+        
+        .exp_detail p {
+            line-height: 35px;
+        }
+        
+        .page-exp {
+            height: 60px;
+            width: 100%;
+            margin-top: 20px;
+            line-height: 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .page-exp>ul {
+            /* overflow: hidden; */
+            margin-top: -9px;
+            margin-left: 276px;
+            /* width:80%;	 */
+        }
+        
+        .page-exp>ul>li {
+            float: left;
+            list-style-type: none;
+            margin-right: 20px;
+        }
+        /* 交易市场界面 */
+        
+        .second_1-3 {
+            width: 932px;
+            height: 655px;
+            position: absolute;
+            z-index: 2;
+            background-color: white;
+            display: none;
+        }
+        /* 交易市场界面header框*/
+        
+        .second_1-3-1 {
+            width: 100%;
+            height: 100px;
+            position: relative;
+            box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
+            border: 2px solid rgb(0 0 0 / 6%);
+            border-left: 0;
+            border-right: 0;
+            /* border: 1px solid #54d1a6; */
+        }
+        /* 交易市场界面搜索栏 */
+        
+        .second_1-3-1-search {
+            width: 338px;
+            height: 42px;
+            left: 264px;
+            top: 21px;
+            position: absolute;
+            border: 1px solid #54d1a6;
+            background-color: rgb(246, 246, 246);
+        }
+        /* 交易市场界面搜索输入框 */
+        
+        .second_1-3-1-search input {
+            width: 275px;
+            height: 40px;
+            border-radius: 0;
+            outline: none;
+            /* 去掉input的边框 */
+            background-color: rgb(246, 246, 246);
+            /* border-right: 0; */
+        }
+        /* 搜索栏下方小字链接 */
+        
+        .second_1-3-1-2 {
+            width: 300px;
+            height: 20px;
+            position: absolute;
+            left: 264px;
+            top: 65px;
+            font-size: 10px;
+            /* color: #bfbfbf; */
+        }
+        /* 小字a */
+        
+        .second_1-3-1-2 a {
+            color: #bfbfbf;
+        }
+        
+        .second_1-3-1-2 a:hover {
+            color: #8eefcd;
+        }
+        /* 交易界面商品框   */
+        
+        .second_1-3-2 {
+            width: 100%;
+            height: 550px;
+            /* position: absolute; */
+            /* border: 1px solid red; */
+        }
+        /* 页面旁的消息栏 */
+        
+        .second_1-3-2-message {
+            width: 40px;
+            height: 102px;
+            position: fixed;
+            left: 80%;
+            top: 50%;
+            margin-left: 106px;
+            /* background-color: #54d1a6; */
+        }
+        /* 牧业商品栏 */
+        
+        .second_1-3-2-muye {
+            width: 100%;
+            height: 275px;
+            position: relative;
+            /* border: 0.5px solid red; */
+            overflow: hidden;
+        }
+        /* 牧业栏商品状态栏移动左边按钮 */
+        
+        .second_1-3-2-muye button:nth-child(1) {
+            width: 30px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            margin-top: -23px;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, .15);
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+        /* 牧业栏商品状态栏移动图标 */
+        
+        .sanjiao-left {
+            width: 12px;
+            height: 12px;
+            border: 3px solid white;
+            border-top: 0;
+            border-right: 0;
+            transform: rotate(45deg);
+            margin-left: 7px;
+        }
+        /*  牧业栏商品状态栏移动右边按钮*/
+        
+        .second_1-3-2-muye button:nth-child(2) {
+            width: 30px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            margin-left: -30px;
+            margin-top: -23px;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, .15);
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+        }
+        
+        .sanjiao-right {
+            width: 12px;
+            height: 12px;
+            border: 3px solid white;
+            border-top: 0;
+            border-right: 0;
+            transform: rotate(-135deg);
+            margin-left: 9px;
+        }
+        
+        .second_1-3-2-muye button:hover {
+            background-color: rgb(0, 0, 0, .4);
+        }
+        /* 用a来装每个商品 注：a里面还是有div等 */
+        
+        .second_1-3-2-muye a {
+            width: 228px;
+            height: 273px;
+            position: relative;
+            display: inline-block;
+            /* float: left; */
+            border: 1px solid;
+            border-image: linear-gradient( white, rgb(225 216 216), white)10 50 10;
+            border-right: 0;
+            animation: name duration timing-function delay iteration-count direction fill-mode;
+        }
+        /* 装商品图片的框 */
+        
+        .second_1-3-2-muye-photo {
+            width: 227px;
+            height: 132px;
+            position: absolute;
+            text-align: center;
+        }
+        /* 商品图片 */
+        
+        .second_1-3-2-muye img {
+            height: 100%;
+            width: 100%;
+        }
+        /* 商品描述 */
+        
+        .product_produce {
+            width: 160px;
+            position: absolute;
+            top: 60%;
+            left: 14%;
+            /* margin-left: 2px; */
+            /* margin-right: auto; */
+            font-size: 12px;
+            font-weight: 400;
+            color: #666;
+        }
+        
+        .product_produce:hover {
+            color: rgb(234, 110, 110);
+        }
+        /* 商品价格 */
+        
+        .produce_price {
+            width: 160px;
+            height: 14px;
+            position: absolute;
+            top: 86%;
+            left: 14%;
+            font-size: 12px;
+            font-weight: 700;
+            color: red;
+            text-align: center;
+        }
+        /* 消息栏图标 */
+        
+        .second_1-3-2-message img {
+            margin-top: 6px;
+        }
+        
+        .nongmuye {
+            width: 100%;
+            height: 275px;
+            position: relative;
+            /* border: 0.5px solid red; */
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="first_part">
+            <!--logo-->
+            <div class="logo">
+                <img src="/MyRanch/img/myranch1.jpg" alt="MYRANCH"> MYRANCH
+            </div>
+            <!-- user_名称 -->
+            <div class="user_name" id="username"></div>
+            <!-- user_头像 -->
+            <a href="#">
+                <div class="user_touxiang"></div>
+            </a>
+        </div>
+        <div class="second_part">
+            <div class="second_1">
+                <ul>
+                    <li class="index">
+                        <img src="/MyRanch/img/souye.jpg" style="padding-top:10px ; height:36px;">
+                        <br>首页
+                    </li>
+                    <li style="background: src;" class="exchange">
+                        <img src="/MyRanch/img/experience.jpg" style=" padding-top:10px;height: 36px;">
+                        <br>经验交流
+                    </li>
+                    <li class="deal">
+                        <img src="/MyRanch/img/jiaoyi.jpg" style="padding-top:10px ; height:36px;">
+                        <br>交易市场
+                    </li>
+                    <li class="help">
+                        <img src="/MyRanch/img/tool.png" style="padding-top:10px ; height:36px;">
+                        <br>帮助
+                    </li>
+                </ul>
+            </div>
+            <div class="second_2">
+                <div class="second_2-1">
+                    我的农场信息
+                </div>
+                <div class="second_2-2">
+                    其他信息
+                </div>
+                <div class="second_2-3">
+
+                </div>
+            </div>
+            <!-- 三个主要界面 -->
+            <div class="second_3">
+                <!-- 主页中分组文件信息界面 -->
+                <div class="second_1-1">
+                    <div class="second_3-1">
+                        <button class="second_3-1-1-zengjia" id="addGroup">新建分组</button>
+<!--                        <div class="second_3-1-2-shanchu">-->
+<!--                            删除分组-->
+<!--                        </div>-->
+                        <button class="second_3-1-2-shanchu" id="addBatch">新建批次</button>
+<!--                        <div class="second_3-1-2-shanchu">-->
+<!--                            删除批次-->
+<!--                        </div>-->
+                        <div class="second_3-1-3-search">
+                            <input type="text" value="输入要搜索的组或批次" class="searchbox">
+                            <button>搜索</button>
+                        </div>
+                    </div>
+                    <!-- 分组批次信息显示区域 -->
+                    <div class="second_3-2-1">
+                        <div class="second_3-2-1-1">
+                            <div class="second_3-2-1-1-1">
+                                全部分组
+                            </div>
+                            <img src="/MyRanch/img/ge.png" style="height: 19px;">
+                        </div>
+                        <div class="second_3-2-1-2">
+                            <input type="checkbox">
+                            <span>组名</span>
+<!--                            <span>修改时间</span>-->
+<!--                            <span>大小</span>-->
+                        </div>
+                        <div class="second_3-2-1-3">
+                            <!--组文件-->
+                            <div id="group-table" style="height: auto"></div>
+                            <!--页码-->
+                            <div class='page-nav'>
+                                <ul>
+                                    <li><a href="#">首页</a></li>
+                                    <li><a href="#">上一页</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                    <li><a href="#">末页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 相关描述 -->
+                    <div class="second_3-2-2">
+                        <div class="second_3-2-2-1"><span>内容简介</span></div>
+                        <div>
+                            <img src="/MyRanch/img/jiesao.png" style="height: 120px;">
+                            <br> 选中文件，查看详情
+                        </div>
+                    </div>
+                </div>
+                <!-- 经验交流界面 -->
+                <div class="second_1-2">
+                    <!-- 第一行 -->
+                    <div class="second_1-2-1">
+                        <div class="second_1-2-1-1">
+                            发布经验
+                        </div>
+                        <div class="second_1-2-1-2">
+                            删除经验
+                        </div>
+                        <div class="second_3-1-3-search">
+                            <input type="text" value="输入要搜索的类别" class="searchbox">
+                            <button>搜索</button>
+                        </div>
+                    </div>
+                    <!-- 经验内容部分 -->
+                    <div class="second_1-2-2">
+                        <ul>
+                            <li>
+                                <div class="persondinfo-other">
+                                    <div class="exp-touxiang"></div>
+                                    <div class="exp-name">用户1</div>
+                                    <div class="exp-kind">类别：大米</div>
+                                    <div class="exp-date">2022-11-19</div>
+                                </div>
+                                <diV class="exp_detail">
+                                    <p>经验内容描述：.............................</p>
+                                </diV>
+                            </li>
+                            <li>
+                                <div class="persondinfo-other">
+                                    <div class="exp-touxiang"></div>
+                                    <div class="exp-name">用户2</div>
+                                    <div class="exp-kind">类别：奶牛</div>
+                                    <div class="exp-date">2022-9-12</div>
+                                </div>
+                                <diV class="exp_detail">
+                                    <p>经验内容描述：.............................</p>
+                                </diV>
+                            </li>
+                            <li>
+                                <div class="persondinfo-other">
+                                    <div class="exp-touxiang"></div>
+                                    <div class="exp-name">用户1</div>
+                                    <div class="exp-kind">类别：绵羊</div>
+                                    <div class="exp-date">2020-11-11</div>
+                                </div>
+                                <diV class="exp_detail">
+                                    <p>经验内容描述：.............................</p>
+                                </diV>
+                            </li>
+                            <!-- <li></li>
+                            <li></li> -->
+
+                        </ul>
+                    </div>
+                    <!-- 页码 -->
+                    <div class='page-exp'>
+                        <ul>
+                            <li><a href="#">首页</a></li>
+                            <li><a href="#">上一页</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">下一页</a></li>
+                            <li><a href="#">末页</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 交易市场界面 -->
+                <div class="second_1-3">
+                    <!-- 交易界面header框 -->
+                    <div class="second_1-3-1">
+                        <!-- header搜索栏 -->
+                        <div class="second_1-3-1-search">
+                            <input type="text" value="樱桃小丸子">
+                            <button><img src="/MyRanch/img/search.jpg"></button>
+                        </div>
+                        <!-- 搜索栏下方小字 -->
+                        <div class="second_1-3-1-2">
+                            <a href="#">奶牛</a>
+                            <a href="#">小香猪</a>
+                            <a href="#">千里马</a>
+                            <a href="#">绵羊</a>
+                            <a href="#">东北大米</a>
+                        </div>
+                    </div>
+                    <!-- 商品信息框-->
+                    <div class="second_1-3-2">
+                        <!-- 农业可动商品栏 -->
+                        <div class="second_1-3-2-muye">
+                            <button><div class="sanjiao-left"></div></button>
+                            <button><div class="sanjiao-right"></div></button>
+                            <div class="nongmuye">
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/corn.jpg"></div>
+                                    <h6 class="product_produce">
+                                        水果玉米甜玉米云南生鲜蔬菜新鲜甜嫩水果玉米棒鲜玉米茄果瓜 甜脆 5斤
+                                    </h6>
+                                    <div class="produce_price">¥9.99</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/peanut.jpg"></div>
+                                    <h6 class="product_produce">
+                                        新货山东铁锅沙土现炒熟花生原味红皮花生带壳香脆特大农家5斤散装 粉皮两粒大花生(2斤)
+                                    </h6>
+                                    <div class="produce_price">¥28.90</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/potato.jpg"></div>
+                                    <h6 class="product_produce">
+                                        甘肃洋芋定西土豆10斤黄心当季新鲜蔬菜马铃薯大土豆整箱 新鲜蔬菜 生鲜 10斤装
+                                    </h6>
+                                    <div class="produce_price">¥138</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/rice.jpg"></div>
+                                    <h6 class="product_produce">
+                                        2022年新米 大米 稻花软香米 10kg 稻香2号 20斤 珍珠米 甄选粳米
+                                    </h6>
+                                    <div class="produce_price">¥59.9</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/tomato.jpg"></div>
+                                    <h6 class="product_produce">
+                                        普罗旺斯5斤装可生吃新鲜水果大番茄农家蔬菜普罗旺斯自然熟 沙瓤西红柿 3斤装
+                                    </h6>
+                                    <div class="produce_price">¥15.8</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 牧业可动商品栏 -->
+                        <div class="second_1-3-2-muye">
+                            <button><div class="sanjiao-left"></div></button>
+                            <button><div class="sanjiao-right"></div></button>
+                            <div class="nongmuye">
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/chicken.jpg"></div>
+                                    <h6 class="product_produce">
+                                        供港老母鸡 1.2kg 天露高品质供港鸡 农家散养老母鸡 散养土鸡走地鸡
+                                    </h6>
+                                    <div class="produce_price">¥51.80</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/cow.jpg"></div>
+                                    <h6 class="product_produce">
+                                        中国荷斯坦奶牛,体格健壮，结构匀称
+                                    </h6>
+                                    <div class="produce_price">¥20000.00</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/duck.jpg"></div>
+                                    <h6 class="product_produce">
+                                        3年老鸭麻鸭净重约2斤/只林间养殖老鸭子土鸭整鸭鸭肉新鲜食材
+                                    </h6>
+                                    <div class="produce_price">¥108</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/sheep.jpg"></div>
+                                    <h6 class="product_produce">
+                                        萨福克羊,体格健壮，结构匀称
+                                    </h6>
+                                    <div class="produce_price">¥12000.00</div>
+                                </a>
+                                <a href="#">
+                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/horse.jpg"></div>
+                                    <h6 class="product_produce">
+                                        普氏野马，体格匀称，四肢长，重型品种体重达1200千克，体高200厘米
+                                    </h6>
+                                    <div class="produce_price">¥100000.00</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 商品信息界面右边的消息图标 -->
+                    <div class="second_1-3-2-message">
+                        <a href="#"><img src="/MyRanch/img/message.png"></a>
+                        <a href="#"><img src="/MyRanch/img/custom_service.png" style="width:100%"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        // 获取用户名
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("username").innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open("GET", "/MyRanch/group/getUserName");
+        xhr.send();
+
+        getGroupList();
+
+        document.getElementById("addGroup").onclick = function () {
+            const groupTable = document.getElementById("group-table");
+            var tmp = groupTable.innerHTML;
+            var HTMLStr = "";
+            HTMLStr += '<div style="margin-left:23px; margin-top:3px">';
+            HTMLStr += '<img src="/MyRanch/img/wenjianjia.png" style="height: 40px; display: inline-block;">' +
+                '<div class="wp-s-pan-list__file-name-edit--title-edit-input u-input u-input--small">' +
+                '<input type="text" autoComplete="off" class="u-input__inner" id="new-group-name">' +
+                '</div>';
+            HTMLStr += '<input type="button" id="add-group-confirm" class="confirm-cancel-box" value="确认">';
+            HTMLStr += '<input type="button" id="add-group-cancel" class="confirm-cancel-box" value="取消">';
+            HTMLStr += '</div>';
+
+            HTMLStr += tmp;
+
+            groupTable.innerHTML = HTMLStr;
+
+            document.getElementById("add-group-confirm").onclick = function () {
+                const groupName = document.getElementById("new-group-name").value;
+                groupTable.innerHTML = tmp;
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        if (xhr.responseText == "0") {
+                            getGroupList();
+                        } else {
+                            alert('新建分组失败, 请检查分组名是否非法或重复');
+                        }
+                    }
+                }
+                xhr.open("POST", "/MyRanch/group/addGroup");
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("groupName=" + groupName);
+            }
+
+            document.getElementById("add-group-cancel").onclick = function () {
+                groupTable.innerHTML = tmp;
+            }
+        }
+
+        // 获取分组列表
+        function getGroupList() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var fileList = JSON.parse(xhr.responseText);
+                    var HTMLStr = "";
+                    HTMLStr +='<div class="group-line">';
+                    HTMLStr +=          '<div style="margin-left:23px; margin-top:3px; float: left; position: absolute;">';
+                    HTMLStr +=          '<button ' + 'id="' + '..' + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
+                        '..' + '</button>';
+                    HTMLStr +=          '</div>';
+                    HTMLStr += '</div>';
+                    for (let i = 0; i < fileList.length; i++) {
+                        HTMLStr +='<div class="group-line">';
+                        HTMLStr +=          '<div style="margin-left:23px; margin-top:3px;float: left; position: absolute;">';
+                        HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
+                            fileList[i].filename + '</button>';
+                        HTMLStr +=          '</div>';
+                        HTMLStr +='</div>';
+                    }
+                    document.getElementById("group-table").innerHTML = HTMLStr;
+
+                    document.getElementById("..").onclick = function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                                getGroupList();
+                            }
+                        }
+                        xhr.open("POST", "/MyRanch/group/cd");
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.send("filename=..");
+                    }
+                    for (let i = 0; i < fileList.length; i++) {
+                        document.getElementById(fileList[i].filename).onclick = function () {
+                            var xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                                    getGroupList();
+                                }
+                            }
+                            if (fileList[i].type == 0) {
+                                xhr.open("POST", "/MyRanch/group/cd");
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                xhr.send("filename=" + fileList[i].filename);
+                            }
+                        }
+                    }
+                }
+            }
+            xhr.open("GET", "/MyRanch/group/getFiles");
+            xhr.send();
+        }
+
+    }
+
+
+    var index = document.querySelector('.index');
+    var exchange = document.querySelector('.exchange');
+    var deal = document.querySelector('.deal');
+    var second11 = document.querySelector('.second_1-1');
+    var second12 = document.querySelector('.second_1-2');
+    var second13 = document.querySelector('.second_1-3');
+    index.addEventListener('click', function() {
+        index.style.backgroundColor = '#e1e1e1';
+        exchange.style.backgroundColor = 'white';
+        deal.style.backgroundColor = 'white';
+        second11.style.zIndex = 3;
+        second11.style.display = 'block';
+        second12.style.zIndex = 1;
+        second12.style.display = 'none';
+        second13.style.zIndex = 1;
+        second13.style.display = 'none';
+    })
+    exchange.addEventListener('click', function() {
+        exchange.style.backgroundColor = '#e1e1e1';
+        index.style.backgroundColor = 'white';
+        deal.style.backgroundColor = 'white';
+        second11.style.zIndex = 1;
+        second11.style.display = 'none';
+        second12.style.zIndex = 3;
+        second12.style.display = 'block';
+        second13.style.zIndex = 1;
+        second13.style.display = 'none';
+    })
+    deal.addEventListener('click', function() {
+        deal.style.backgroundColor = '#e1e1e1';
+        exchange.style.backgroundColor = 'white';
+        index.style.backgroundColor = 'white';
+        second11.style.zIndex = 1;
+        second11.style.display = 'none';
+        second12.style.zIndex = 1;
+        second12.style.display = 'none';
+        second13.style.zIndex = 3;
+        second13.style.display = 'block';
+    })
+</script>
+
+</html>
