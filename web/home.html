@@ -11,16 +11,16 @@
             margin: 0;
             padding: 0;
         }
-        
+
         li {
             list-style: none;
         }
-        
+
         a {
             color: black;
             text-decoration: none;
         }
-        
+
         .w {
             /*  width: 1520px; */
             /* 1200 */
@@ -31,9 +31,81 @@
             /* background-color: aquamarine; */
             /* margin: auto; */
             border: 2px solid rgb(0 0 0 / 6%);
+            /*position: absolute;*/
         }
+        /*遮挡层*/
+        .container{
+            position: fixed;
+            width: 500px;
+            height: 400px;
+            background-color: beige;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 15px;
+            z-index: 5;
+            display: none;
+        }
+        .container #mask-add-1,.container #mask-add-2 {
+            font-size: larger;
+            text-align: center;
+        }
+        .container #mask-number {
+            margin-top: 40px;
+            width: 250px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .container #mask-food-1,.container #mask-food-2 {
+            margin-top: 30px;
+            width: 250px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .container #mask-growDuration-1,.container #mask-growDuration-2 {
+            margin-top: 30px;
+            width: 250px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .container #mask-healthy-1,.container #mask-healthy-2 {
+            margin-top: 30px;
+            width: 250px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .container #mask-description-1,.container #mask-description-2{
+            margin-top: 30px;
+            width: 250px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .container #mask-confirm-1,.container #mask-confirm-2{
+            position: absolute;
+            width:80px;
+            text-align: center;
+            top: 80%;
+            left: 20%;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+        }
+        .container #mask-cancel-1,.container #mask-cancel-2{
+            position: absolute;
+            width:80px;
+            text-align: center;
+            top: 80%;
+            left: 63%;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
         /* 顶栏 */
-        
+
         .first_part {
             box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
             width: 100%;
@@ -42,7 +114,7 @@
             /* 69px */
             /* margin: auto; */
         }
-        
+
         .logo {
             height: 62px;
             float: left;
@@ -50,12 +122,12 @@
             font-size: 16px;
             padding-top: 2px;
         }
-        
+
         img {
             height: 40px;
             vertical-align: middle;
         }
-        
+
         .user_touxiang {
             float: right;
             margin-right: 5px;
@@ -66,85 +138,88 @@
             background-position: -72px -40px;
             border-radius: 50%;
         }
-        
+
         .user_name {
             height: 62px;
             float: right;
             margin-right: 20px;
             line-height: 43px;
         }
-        
+
         .second_part {
-            height: 658px;
+            height: 700px;
             width: 100%;
+            /*background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);*/
             /* border:  2px solid red; */
         }
-        
+
         .second_1 {
             box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
-            width: 100px;
+            width: 8%;
             height: 655px;
             float: left;
             text-align: center;
+            background-color: #ffffff;
             /* border: 2px solid blue; */
         }
-        
+
         .second_2 {
-            width: 150px;
+            width: 13%;
             height: 655px;
             float: left;
             border: 1px solid rgb(241, 242, 244);
+            background-color: #ffffff;
         }
-        
+
         .second_3 {
-            width: 932px;
+            width: 60%;
             height: 655px;
             position: relative;
             float: left;
             border: 1px solid rgb(241, 242, 244);
         }
         /* 首页的文件界面 */
-        
+
         .second_1-1 {
-            width: 932px;
+            width: 100%;
             height: 655px;
             position: absolute;
             z-index: 3;
             background-color: white;
             /* display: none; */
         }
-        
+
         .second_part .second_1 ul li {
             list-style: none;
             margin-top: 28px;
-            width: 100px;
+            width: 100%;
             height: 80px;
             font-size: 12px;
             font-family: '微软雅黑';
         }
-        
+
         .second_part .second_1 ul .index {
             list-style: none;
             margin-top: 28px;
-            width: 100px;
+            width: 100%;
             height: 80px;
             font-size: 12px;
             background-color: #e1e1e1;
             font-family: '微软雅黑';
         }
-        
+
         /*.second_part .second_1 ul .help {*/
         /*    position: fixed;*/
         /*    bottom: 10%;*/
         /*}*/
-        
+
         .second_part .second_1 ul li:hover {
             /* transform: translate(-2px, -2px); */
             background-color: #e1e1e1 !important;
         }
-        
+
         .second_2-1 {
-            width: 140px;
+            width: 92%;
             height: 40px;
             margin-top: 32px;
             margin-left: 5px;
@@ -156,16 +231,16 @@
             font-weight: 700;
             /* color:#54d1a6; */
         }
-        
+
         .second_2-1:hover {
             background-color: #54d1a6;
             color: black;
         }
-        
+
         .second_2-2 {
-            width: 140px;
+            width: 92%;
             height: 40px;
-            margin-top: 8px;
+            margin-top: 40px;
             margin-left: 5px;
             border-radius: 18px;
             /* background-color: #a8fcdf; */
@@ -175,31 +250,36 @@
             font-weight: 700;
             /* color:#54d1a6; */
         }
-        
+
         .second_2-2:hover {
             background-color: #54d1a6;
             color: black;
         }
-        
+
         .second_2-3 {
-            width: 120px;
+            width: 100%;
             height: 10px;
             margin-top: 180px;
-            background-color: darkgray;
+            /*background-color: darkgray;*/
+            background-color: #ffffff;
         }
-        
+
         .second_3-1 {
-            width: 932px;
+            width: 100%;
             height: 46px;
             margin-top: 8px;
             /* background-color: #a8fcdf; */
         }
-        
+
         .second_3-1-1-zengjia {
+            position: absolute;
+            top: 2%;
+            left: 20px;
             width: 120px;
             height: 40px;
             float: left;
             margin: 3px 3px 5px;
+            font-size: 16px;
             border-radius: 5px;
             background-color: #e1e1e1;
             /* background-color: #54d1a6; */
@@ -207,31 +287,60 @@
             line-height: 40px;
             font-weight: 700;
         }
-        
+        /*.second_3-1-1-shanchu {*/
+
+        /*    width: 120px;*/
+        /*    height: 40px;*/
+        /*    float: left;*/
+        /*    margin: 3px 3px 5px;*/
+        /*    border-radius: 5px;*/
+        /*    background-color: #e1e1e1;*/
+        /*    !* background-color: #54d1a6; *!*/
+        /*    text-align: center;*/
+        /*    line-height: 40px;*/
+        /*    font-weight: 700;*/
+        /*}*/
+        /*.second_3-1-1-xiugai {*/
+        /*    width: 120px;*/
+        /*    height: 40px;*/
+        /*    float: left;*/
+        /*    margin: 3px 3px 5px;*/
+        /*    border-radius: 5px;*/
+        /*    background-color: #e1e1e1;*/
+        /*    !* background-color: #54d1a6; *!*/
+        /*    text-align: center;*/
+        /*    line-height: 40px;*/
+        /*    font-weight: 700;*/
+        /*}*/
+
         .second_3-1-1-zengjia:hover {
             background-color: #54d1a6;
             cursor: pointer;
         }
-        
+
         .second_3-1-2-shanchu {
+            position: absolute;
+            top: 2%;
+            left: 150px;
             width: 120px;
             height: 40px;
             float: left;
-            margin: 3px 28px 5px;
+            margin: 3px 3px 5px;
             border-radius: 5px;
             background-color: #e1e1e1;
             text-align: center;
             line-height: 40px;
+            font-size: 16px;
             font-weight: 700;
         }
-        
+
         .second_3-1-2-shanchu:hover {
             background-color: #54d1a6;
             cursor: pointer;
         }
-        
+
         .second_3-1-3-search {
-            /* width: 300px; */
+            width: 30%;
             height: 40px;
             float: right;
             margin-right: 15px;
@@ -241,9 +350,9 @@
             border-right: 0; */
         }
         /* .second_3-1-3-search */
-        
+
         .searchbox {
-            width: 202px;
+            width: 75%;
             height: 35px;
             border-radius: 25px;
             /* float: left; */
@@ -252,7 +361,34 @@
             background-color: #f1f3f8;
             padding-left: 15px;
         }
-
+        #search-production {
+            position: absolute;
+            top: 6%;
+            left: 93%;
+            width: 40px;
+            height: 20px;
+            float: left;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+            line-height: 20px;
+            font-weight: 700;
+        }
+        #search-experience {
+            position: absolute;
+            top: 5%;
+            left: 93%;
+            width: 40px;
+            height: 20px;
+            float: left;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+            line-height: 20px;
+            font-weight: 700;
+        }
         .group-line {
             height: 50px;
             width: 100%;
@@ -264,7 +400,7 @@
         }
 
         .group-button {
-            width: 550px;
+            width: 80%;
             text-align: left;
         }
 
@@ -339,7 +475,7 @@
         }
 
         /* .second_3-1-3-search */
-        
+
         button {
             border: 0;
             /* float: left; */
@@ -348,22 +484,22 @@
             font-size: 15px;
             font-weight: 700;
         }
-        
+
         .second_3-2-1 {
-            width: 655px;
-            height: 591px;
+            width: 100%;
+            height: 574px;
             float: left;
             margin-top: 10px;
             border: 1px solid rgb(241, 242, 244);
             border-top: 0;
         }
-        
+
         .second_3-2-1-1 {
             width: 665px;
             height: 30px;
             margin-top: 18px;
         }
-        
+
         .second_3-2-1-1-1 {
             width: 80px;
             height: 25px;
@@ -373,13 +509,13 @@
             font-weight: 700;
             /* background-color: #54d1a6; */
         }
-        
+
         .second_3-2-1-1 img {
             float: right;
             margin-right: 115px;
             margin-top: 8px;
         }
-        
+
         .second_3-2-1-2 {
             width: 656px;
             height: 40px;
@@ -389,44 +525,121 @@
             border-left: 0;
             border-right: 0;
         }
-        
+
         .second_3-2-1-2 input {
             margin-left: 28px;
             margin-top: 2px;
             width: 20px;
         }
-        
+
         .second_3-2-1-2 span:nth-child(2) {
             color: #818999;
             font-size: 19px;
         }
-        
+
         .second_3-2-1-2 span:nth-child(3) {
             color: #818999;
             font-size: 19px;
             margin-left: 194px;
         }
-        
+
         .second_3-2-1-2 span:nth-child(4) {
             color: #818999;
             font-size: 19px;
             margin-left: 152px;
         }
-        
+
         .second_3-2-1-3 {
-            width: 654px;
-            height: 500px;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
             /* border: 1px solid red; */
         }
-        
+        .second_3-2-1-3 #group-table {
+            width: 100%;
+        }
+        .second_3-2-1-3 #group-table table{
+            border-collapse: collapse;
+            border-bottom: solid 1px #222;
+            border-right: solid 1px #222;
+            width: 100%;
+        }
+        /*table #add-tbody tr:nth-child(odd) {*/
+        /*    background: #ccc;*/
+        /*}*/
+        table #add-tbody tr:hover {
+            background: #ccc;
+        }
+        .second_3-2-1-3 #group-table table tbody{
+            height: 40px;
+            width: 100%;
+            background: #baeb08;
+            color: white;
+        }
+
+        .second_3-2-1-3 #group-table table tbody th{
+            border-top: solid 1px #222;
+            border-left: solid 1px #222;
+        }
+
+        .second_3-2-1-3 #group-table table #add-tbody {
+            height: 20px;
+            width: 100%;
+            color: black;
+        }
+        .second_3-2-1-3 #group-table table #add-tbody {
+            background-color: white;
+        }
+        .second_3-2-1-3 #group-table table tbody tr{
+            width: 100%;
+            border: 1px solid black;
+        }
+        .second_3-2-1-3 #group-table td {
+            width: 16%;
+            border-top: solid 1px #222;
+            border-left: solid 1px #222;
+            text-align: left;
+        }
+        .del-production {
+            width: 40%;
+            height: 20px;
+            float: left;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
+            background-color: #e1e1e1;
+            /* background-color: #54d1a6; */
+            text-align: center;
+            line-height: 20px;
+            font-weight: 700;
+        }
+        .del-production:hover {
+            background-color: #54d1a6;
+            cursor: pointer;
+        }
+        .update-production {
+            width: 40%;
+            height: 20px;
+            float: left;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
+            background-color: #e1e1e1;
+            /* background-color: #54d1a6; */
+            text-align: center;
+            line-height: 20px;
+            font-weight: 700;
+        }
+        .update-production:hover {
+            background-color: #54d1a6;
+            cursor: pointer;
+        }
         .second_3-2-2 {
-            width: 275px;
+            width: 24%;
             height: 491px;
             float: left;
         }
-        
+
         .second_3-2-2-1 {
-            width: 275px;
+            width: 100%;
             height: 50px;
             margin-top: 25px;
             margin-left: 22px;
@@ -435,39 +648,39 @@
             font-family: SFUIText, PingFangSC-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
             /* background-color: #818999; */
         }
-        
+
         .second_3-2-2 div:nth-child(2) {
             margin-top: 98px;
-            margin-left: 75px;
+            margin-left: 20%;
             color: #818999;
         }
         /* 经验界面页码设置 */
-        
-        .page-nav {
-            height: 60px;
-            width: 100%;
-            margin-top: 50px;
-            line-height: 60px;
-            text-align: center;
-            overflow: hidden;
-        }
-        
-        .page-nav>ul {
-            /* overflow: hidden; */
-            margin-top: -9px;
-            margin-left: 154px;
-            /* width:80%;	 */
-        }
-        
-        .page-nav>ul>li {
-            float: left;
-            list-style-type: none;
-            margin-right: 20px;
-        }
+
+        /*.page-nav {*/
+        /*    height: 60px;*/
+        /*    width: 100%;*/
+        /*    margin-top: 50px;*/
+        /*    line-height: 60px;*/
+        /*    text-align: center;*/
+        /*    overflow: hidden;*/
+        /*}*/
+
+        /*.page-nav>ul {*/
+        /*    !* overflow: hidden; *!*/
+        /*    margin-top: -9px;*/
+        /*    margin-left: 20%;*/
+        /*    !* width:80%;	 *!*/
+        /*}*/
+
+        /*.page-nav>ul>li {*/
+        /*    float: left;*/
+        /*    list-style-type: none;*/
+        /*    margin-right: 12px;*/
+        /*}*/
         /* 经验交流界面 */
-        
+
         .second_1-2 {
-            width: 932px;
+            width: 100%;
             height: 655px;
             position: absolute;
             z-index: 1;
@@ -475,42 +688,46 @@
             display: none;
         }
         /* 经验交流界面的第一行 */
-        
+
         .second_1-2-1 {
-            width: 932px;
+            width: 100%;
             height: 46px;
         }
         /* 发布经验 */
-        
+
         .second_1-2-1-1 {
+            position: absolute;
+            top: 2%;
+            left: 20px;
             width: 120px;
             height: 40px;
             float: left;
-            margin-top: 24px;
-            margin-left: 10px;
-            border-radius: 12px;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
             background-color: #e1e1e1;
+            text-align: center;
+            line-height: 40px;
             font-size: 16px;
             font-weight: 700;
-            text-align: center;
-            line-height: 38px;
         }
         /* 删除经验 */
-        
+
         .second_1-2-1-2 {
+            position: absolute;
+            top: 2%;
+            left: 150px;
             width: 120px;
             height: 40px;
             float: left;
-            margin-top: 24px;
-            margin-left: 10px;
-            border-radius: 12px;
+            margin: 3px 3px 5px;
+            border-radius: 5px;
             background-color: #e1e1e1;
+            text-align: center;
+            line-height: 40px;
             font-size: 16px;
             font-weight: 700;
-            text-align: center;
-            line-height: 38px;
         }
-        
+
         .second_1-2-1-3 {
             width: 120px;
             height: 40px;
@@ -524,23 +741,23 @@
             text-align: center;
             line-height: 38px;
         }
-        
+
         .second_1-2-2 {
-            width: 932px;
+            width: 100%;
             height: 500px;
             margin-top: 40px;
             /* border: 1px solid red; */
         }
-        
+
         .second_1-2-2 li {
-            width: 932px;
+            width: 100%;
             height: 160px;
             /* position: relative; */
             background-color: #f7f7f7;
             border: 1px solid rgb(241, 242, 244);
         }
         /* 个人经验分享中存放头像及名称以及其他按钮的区域 */
-        
+
         .persondinfo-other {
             width: 100%;
             height: 40px;
@@ -548,7 +765,7 @@
             /* border: solid red; */
         }
         /* 经验交流头像 */
-        
+
         .exp-touxiang {
             width: 33px;
             height: 33px;
@@ -559,18 +776,19 @@
             border-radius: 50%;
         }
         /* 经验交流名字 */
-        
+
         .exp-name {
             width: 40px;
             height: 33px;
             position: absolute;
             top: 10%;
             left: 5%;
+            padding-left: 1%;
             line-height: 32px;
             font-size: 15px;
         }
         /* 经验种类 */
-        
+
         .exp-kind {
             width: 100px;
             height: 33px;
@@ -582,7 +800,7 @@
             /* background-color: #54d1a6; */
         }
         /* 经验交流发布时间 */
-        
+
         .exp-date {
             width: 100px;
             height: 33px;
@@ -594,18 +812,18 @@
             /* background-color: #54d1a6; */
         }
         /* 详细经验内容 */
-        
+
         .exp_detail {
             width: 100%;
             height: 110px;
             margin-top: 5px;
             /* background-color: #54d1a6; */
         }
-        
+
         .exp_detail p {
             line-height: 35px;
         }
-        
+
         .page-exp {
             height: 60px;
             width: 100%;
@@ -614,23 +832,23 @@
             text-align: center;
             overflow: hidden;
         }
-        
+
         .page-exp>ul {
             /* overflow: hidden; */
             margin-top: -9px;
             margin-left: 276px;
             /* width:80%;	 */
         }
-        
+
         .page-exp>ul>li {
             float: left;
             list-style-type: none;
             margin-right: 20px;
         }
         /* 交易市场界面 */
-        
+
         .second_1-3 {
-            width: 932px;
+            width: 100%;
             height: 655px;
             position: absolute;
             z-index: 2;
@@ -638,7 +856,7 @@
             display: none;
         }
         /* 交易市场界面header框*/
-        
+
         .second_1-3-1 {
             width: 100%;
             height: 100px;
@@ -650,7 +868,7 @@
             /* border: 1px solid #54d1a6; */
         }
         /* 交易市场界面搜索栏 */
-        
+
         .second_1-3-1-search {
             width: 338px;
             height: 42px;
@@ -661,7 +879,7 @@
             background-color: rgb(246, 246, 246);
         }
         /* 交易市场界面搜索输入框 */
-        
+
         .second_1-3-1-search input {
             width: 275px;
             height: 40px;
@@ -672,7 +890,7 @@
             /* border-right: 0; */
         }
         /* 搜索栏下方小字链接 */
-        
+
         .second_1-3-1-2 {
             width: 300px;
             height: 20px;
@@ -683,16 +901,16 @@
             /* color: #bfbfbf; */
         }
         /* 小字a */
-        
+
         .second_1-3-1-2 a {
             color: #bfbfbf;
         }
-        
+
         .second_1-3-1-2 a:hover {
             color: #8eefcd;
         }
         /* 交易界面商品框   */
-        
+
         .second_1-3-2 {
             width: 100%;
             height: 550px;
@@ -700,7 +918,7 @@
             /* border: 1px solid red; */
         }
         /* 页面旁的消息栏 */
-        
+
         .second_1-3-2-message {
             width: 40px;
             height: 102px;
@@ -711,7 +929,7 @@
             /* background-color: #54d1a6; */
         }
         /* 牧业商品栏 */
-        
+
         .second_1-3-2-muye {
             width: 100%;
             height: 275px;
@@ -720,7 +938,7 @@
             overflow: hidden;
         }
         /* 牧业栏商品状态栏移动左边按钮 */
-        
+
         .second_1-3-2-muye button:nth-child(1) {
             width: 30px;
             height: 40px;
@@ -733,7 +951,7 @@
             border-bottom-right-radius: 18px;
         }
         /* 牧业栏商品状态栏移动图标 */
-        
+
         .sanjiao-left {
             width: 12px;
             height: 12px;
@@ -744,7 +962,7 @@
             margin-left: 7px;
         }
         /*  牧业栏商品状态栏移动右边按钮*/
-        
+
         .second_1-3-2-muye button:nth-child(2) {
             width: 30px;
             height: 40px;
@@ -758,7 +976,7 @@
             border-top-left-radius: 18px;
             border-bottom-left-radius: 18px;
         }
-        
+
         .sanjiao-right {
             width: 12px;
             height: 12px;
@@ -768,12 +986,12 @@
             transform: rotate(-135deg);
             margin-left: 9px;
         }
-        
+
         .second_1-3-2-muye button:hover {
             background-color: rgb(0, 0, 0, .4);
         }
         /* 用a来装每个商品 注：a里面还是有div等 */
-        
+
         .second_1-3-2-muye a {
             width: 228px;
             height: 273px;
@@ -786,7 +1004,7 @@
             animation: name duration timing-function delay iteration-count direction fill-mode;
         }
         /* 装商品图片的框 */
-        
+
         .second_1-3-2-muye-photo {
             width: 227px;
             height: 132px;
@@ -794,13 +1012,13 @@
             text-align: center;
         }
         /* 商品图片 */
-        
+
         .second_1-3-2-muye img {
             height: 100%;
             width: 100%;
         }
         /* 商品描述 */
-        
+
         .product_produce {
             width: 160px;
             position: absolute;
@@ -812,12 +1030,12 @@
             font-weight: 400;
             color: #666;
         }
-        
+
         .product_produce:hover {
             color: rgb(234, 110, 110);
         }
         /* 商品价格 */
-        
+
         .produce_price {
             width: 160px;
             height: 14px;
@@ -830,11 +1048,11 @@
             text-align: center;
         }
         /* 消息栏图标 */
-        
+
         .second_1-3-2-message img {
             margin-top: 6px;
         }
-        
+
         .nongmuye {
             width: 100%;
             height: 275px;
@@ -846,297 +1064,320 @@
 </head>
 
 <body>
-    <div class="w">
-        <div class="first_part">
-            <!--logo-->
-            <div class="logo">
-                <img src="/MyRanch/img/myranch1.jpg" alt="MYRANCH"> MYRANCH
-            </div>
-            <!-- user_名称 -->
-            <div class="user_name" id="username"></div>
-            <!-- user_头像 -->
-            <a href="#">
-                <div class="user_touxiang"></div>
-            </a>
+<div class="w" id="w">
+    <div class="container" id = "mask-1">
+        <form id="mask-add-1">
+            <input type="text" placeholder="产品数量" class="input" id="mask-number"/><br>
+            <input type="text" placeholder="肥料" class="input" id="mask-food-1"/><br>
+            <input type="text" placeholder="生长周期" class="input" id="mask-growDuration-1"/><br>
+            <input type="text" placeholder="健康状况" class="input" id="mask-healthy-1"/><br>
+            <input type="text" placeholder="备注" class="input" id="mask-description-1"/><br>
+        </form>
+        <button id="mask-confirm-1">确认</button>
+        <button id="mask-cancel-1">取消</button>
+    </div>
+    <div class="container" id = "mask-2">
+        <form id="mask-add-2">
+            <input type="text" placeholder="肥料" class="input" id="mask-food-2"/><br>
+            <input type="text" placeholder="生长周期" class="input" id="mask-growDuration-2"/><br>
+            <input type="text" placeholder="健康状况" class="input" id="mask-healthy-2"/><br>
+            <input type="text" placeholder="备注" class="input" id="mask-description-2"/><br>
+        </form>
+        <button id="mask-confirm-2">确认</button>
+        <button id="mask-cancel-2">取消</button>
+    </div>
+
+    <div class="first_part">
+        <!--logo-->
+        <div class="logo">
+            <img src="/MyRanch/img/myranch1.jpg" alt="MYRANCH"> MYRANCH
         </div>
-        <div class="second_part">
-            <div class="second_1">
-                <ul>
-                    <li class="index">
-                        <img src="/MyRanch/img/souye.jpg" style="padding-top:10px ; height:36px;">
-                        <br>首页
-                    </li>
-                    <li style="background: src;" class="exchange">
-                        <img src="/MyRanch/img/experience.jpg" style=" padding-top:10px;height: 36px;">
-                        <br>经验交流
-                    </li>
-                    <li class="deal">
-                        <img src="/MyRanch/img/jiaoyi.jpg" style="padding-top:10px ; height:36px;">
-                        <br>交易市场
-                    </li>
-                    <li class="help">
-                        <img src="/MyRanch/img/message.png" style="padding-top:10px ; height:36px;">
-                        <br>消息
-                    </li>
-                </ul>
+        <!-- user_名称 -->
+        <div class="user_name" id="username"></div>
+        <!-- user_头像 -->
+        <a href="#">
+            <div class="user_touxiang"></div>
+        </a>
+    </div>
+    <div class="second_part" id="second_part">
+        <div class="second_1">
+            <ul>
+                <li class="index">
+                    <img src="/MyRanch/img/souye.jpg" style="padding-top:10px ; height:36px;">
+                    <br>首页
+                </li>
+                <li style="background: src;" class="exchange">
+                    <img src="/MyRanch/img/experience.jpg" style=" padding-top:10px;height: 36px;">
+                    <br>经验交流
+                </li>
+                <li class="deal">
+                    <img src="/MyRanch/img/jiaoyi.jpg" style="padding-top:10px ; height:36px;">
+                    <br>交易市场
+                </li>
+                <li class="help">
+                    <img src="/MyRanch/img/message.png" style="padding-top:10px ; height:36px;">
+                    <br>消息
+                </li>
+            </ul>
+        </div>
+        <div class="second_2">
+            <div class="second_2-1">
+                我的农场信息
             </div>
-            <div class="second_2">
-                <div class="second_2-1">
-                    我的农场信息
-                </div>
-                <div class="second_2-2">
-                    其他信息
-                </div>
-                <div class="second_2-3">
+            <div class="second_2-2">
+                其他信息
+            </div>
+            <div class="second_2-3">
 
+            </div>
+        </div>
+        <!-- 三个主要界面 -->
+        <div class="second_3">
+            <!-- 主页中分组文件信息界面 -->
+            <div class="second_1-1">
+                <div class="second_3-1" id="button-region">
+                    <button class="second_3-1-1-zengjia" id="addGroup">新建分组</button>
+                    <!--                        <div class="second_3-1-2-shanchu">-->
+                    <!--                            删除分组-->
+                    <!--                        </div>-->
+                    <button class="second_3-1-2-shanchu" id="addBatch">新建批次</button>
+                    <!--                        <div class="second_3-1-2-shanchu">-->
+                    <!--                            删除批次-->
+                    <!--                        </div>-->
+                    <div class="second_3-1-3-search">
+                        <input type="text" value="输入要搜索的组或批次" class="searchbox">
+                        <button id="search-production">搜索</button>
+                    </div>
+                </div>
+                <!-- 分组批次信息显示区域 -->
+                <div class="second_3-2-1">
+                    <!--                        <div class="second_3-2-1-1">-->
+                    <!--                            <div class="second_3-2-1-1-1">-->
+                    <!--                                全部分组-->
+                    <!--                            </div>-->
+                    <!--                            <img src="/MyRanch/img/ge.png" style="height: 19px;">-->
+                    <!--                        </div>-->
+                    <!--                        <div class="second_3-2-1-2" id="show-region">-->
+                    <!--                            <input type="checkbox">-->
+                    <!--                            <span>组名</span>-->
+                    <!--&lt;!&ndash;                            <span>修改时间</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                            <span>大小</span>&ndash;&gt;-->
+                    <!--                        </div>-->
+                    <div class="second_3-2-1-3">
+                        <!--组文件-->
+                        <div id="group-table" style="height: auto"></div>
+                        <!--页码-->
+                        <!--                        <div class='page-nav'>-->
+                        <!--                            <ul>-->
+                        <!--                                <li><a href="#">首页</a></li>-->
+                        <!--                                <li><a href="#">上一页</a></li>-->
+                        <!--                                <li><a href="#">1</a></li>-->
+                        <!--                                <li><a href="#">2</a></li>-->
+                        <!--                                <li><a href="#">3</a></li>-->
+                        <!--                                <li><a href="#">4</a></li>-->
+                        <!--                                <li><a href="#">5</a></li>-->
+                        <!--                                <li><a href="#">下一页</a></li>-->
+                        <!--                                <li><a href="#">末页</a></li>-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+                <!-- 相关描述 -->
+                <!--                <div class="second_3-2-2">-->
+                <!--                    <div class="second_3-2-2-1"><span>内容简介</span></div>-->
+                <!--                    <div>-->
+                <!--                        <img src="/MyRanch/img/jiesao.png" style="height: 120px;">-->
+                <!--                        <br> 选中文件，查看详情-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+            <!-- 经验交流界面 -->
+            <div class="second_1-2">
+                <!-- 第一行 -->
+                <div class="second_1-2-1">
+                    <div class="second_1-2-1-1">
+                        发布经验
+                    </div>
+                    <div class="second_1-2-1-2">
+                        删除经验
+                    </div>
+                    <div class="second_3-1-3-search">
+                        <input type="text" value="输入要搜索的类别" class="searchbox">
+                        <button id="search-experience">搜索</button>
+                    </div>
+                </div>
+                <!-- 经验内容部分 -->
+                <div class="second_1-2-2">
+                    <ul>
+                        <li>
+                            <div class="persondinfo-other">
+                                <div class="exp-touxiang"></div>
+                                <div class="exp-name">用户1</div>
+                                <div class="exp-kind">类别：大米</div>
+                                <div class="exp-date">2022-11-19</div>
+                            </div>
+                            <diV class="exp_detail">
+                                <p>经验内容描述：.............................</p>
+                            </diV>
+                        </li>
+                        <li>
+                            <div class="persondinfo-other">
+                                <div class="exp-touxiang"></div>
+                                <div class="exp-name">用户2</div>
+                                <div class="exp-kind">类别：奶牛</div>
+                                <div class="exp-date">2022-9-12</div>
+                            </div>
+                            <diV class="exp_detail">
+                                <p>经验内容描述：.............................</p>
+                            </diV>
+                        </li>
+                        <li>
+                            <div class="persondinfo-other">
+                                <div class="exp-touxiang"></div>
+                                <div class="exp-name">用户1</div>
+                                <div class="exp-kind">类别：绵羊</div>
+                                <div class="exp-date">2020-11-11</div>
+                            </div>
+                            <diV class="exp_detail">
+                                <p>经验内容描述：.............................</p>
+                            </diV>
+                        </li>
+                        <!-- <li></li>
+                        <li></li> -->
+
+                    </ul>
+                </div>
+                <!-- 页码 -->
+                <div class='page-exp'>
+                    <ul>
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">下一页</a></li>
+                        <li><a href="#">末页</a></li>
+                    </ul>
                 </div>
             </div>
-            <!-- 三个主要界面 -->
-            <div class="second_3">
-                <!-- 主页中分组文件信息界面 -->
-                <div class="second_1-1">
-                    <div class="second_3-1">
-                        <button class="second_3-1-1-zengjia" id="addGroup">新建分组</button>
-<!--                        <div class="second_3-1-2-shanchu">-->
-<!--                            删除分组-->
-<!--                        </div>-->
-                        <button class="second_3-1-2-shanchu" id="addBatch">新建批次</button>
-<!--                        <div class="second_3-1-2-shanchu">-->
-<!--                            删除批次-->
-<!--                        </div>-->
-                        <div class="second_3-1-3-search">
-                            <input type="text" value="输入要搜索的组或批次" class="searchbox">
-                            <button>搜索</button>
+            <!-- 交易市场界面 -->
+            <div class="second_1-3">
+                <!-- 交易界面header框 -->
+                <div class="second_1-3-1">
+                    <!-- header搜索栏 -->
+                    <div class="second_1-3-1-search">
+                        <input type="text" value="樱桃小丸子">
+                        <button><img src="/MyRanch/img/search.jpg"></button>
+                    </div>
+                    <!-- 搜索栏下方小字 -->
+<!--                    <div class="second_1-3-1-2">-->
+<!--                        <a href="#">奶牛</a>-->
+<!--                        <a href="#">小香猪</a>-->
+<!--                        <a href="#">千里马</a>-->
+<!--                        <a href="#">绵羊</a>-->
+<!--                        <a href="#">东北大米</a>-->
+<!--                    </div>-->
+                </div>
+                <!-- 商品信息框-->
+                <div class="second_1-3-2">
+                    <!-- 农业可动商品栏 -->
+                    <div class="second_1-3-2-muye">
+                        <button><div class="sanjiao-left"></div></button>
+                        <button><div class="sanjiao-right"></div></button>
+                        <div class="nongmuye">
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/corn.jpg"></div>
+                                <h6 class="product_produce">
+                                    水果玉米甜玉米云南生鲜蔬菜新鲜甜嫩水果玉米棒鲜玉米茄果瓜 甜脆 5斤
+                                </h6>
+                                <div class="produce_price">¥9.99</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/peanut.jpg"></div>
+                                <h6 class="product_produce">
+                                    新货山东铁锅沙土现炒熟花生原味红皮花生带壳香脆特大农家5斤散装 粉皮两粒大花生(2斤)
+                                </h6>
+                                <div class="produce_price">¥28.90</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/potato.jpg"></div>
+                                <h6 class="product_produce">
+                                    甘肃洋芋定西土豆10斤黄心当季新鲜蔬菜马铃薯大土豆整箱 新鲜蔬菜 生鲜 10斤装
+                                </h6>
+                                <div class="produce_price">¥138</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/rice.jpg"></div>
+                                <h6 class="product_produce">
+                                    2022年新米 大米 稻花软香米 10kg 稻香2号 20斤 珍珠米 甄选粳米
+                                </h6>
+                                <div class="produce_price">¥59.9</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/tomato.jpg"></div>
+                                <h6 class="product_produce">
+                                    普罗旺斯5斤装可生吃新鲜水果大番茄农家蔬菜普罗旺斯自然熟 沙瓤西红柿 3斤装
+                                </h6>
+                                <div class="produce_price">¥15.8</div>
+                            </a>
                         </div>
                     </div>
-                    <!-- 分组批次信息显示区域 -->
-                    <div class="second_3-2-1">
-                        <div class="second_3-2-1-1">
-                            <div class="second_3-2-1-1-1">
-                                全部分组
-                            </div>
-                            <img src="/MyRanch/img/ge.png" style="height: 19px;">
-                        </div>
-                        <div class="second_3-2-1-2">
-                            <input type="checkbox">
-                            <span>组名</span>
-<!--                            <span>修改时间</span>-->
-<!--                            <span>大小</span>-->
-                        </div>
-                        <div class="second_3-2-1-3">
-                            <!--组文件-->
-                            <div id="group-table" style="height: auto"></div>
-                            <!--页码-->
-                            <div class='page-nav'>
-                                <ul>
-                                    <li><a href="#">首页</a></li>
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                    <li><a href="#">末页</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 相关描述 -->
-                    <div class="second_3-2-2">
-                        <div class="second_3-2-2-1"><span>内容简介</span></div>
-                        <div>
-                            <img src="/MyRanch/img/jiesao.png" style="height: 120px;">
-                            <br> 选中文件，查看详情
+                    <!-- 牧业可动商品栏 -->
+                    <div class="second_1-3-2-muye">
+                        <button><div class="sanjiao-left"></div></button>
+                        <button><div class="sanjiao-right"></div></button>
+                        <div class="nongmuye">
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/chicken.jpg"></div>
+                                <h6 class="product_produce">
+                                    供港老母鸡 1.2kg 天露高品质供港鸡 农家散养老母鸡 散养土鸡走地鸡
+                                </h6>
+                                <div class="produce_price">¥51.80</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/cow.jpg"></div>
+                                <h6 class="product_produce">
+                                    中国荷斯坦奶牛,体格健壮，结构匀称
+                                </h6>
+                                <div class="produce_price">¥20000.00</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/duck.jpg"></div>
+                                <h6 class="product_produce">
+                                    3年老鸭麻鸭净重约2斤/只林间养殖老鸭子土鸭整鸭鸭肉新鲜食材
+                                </h6>
+                                <div class="produce_price">¥108</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/sheep.jpg"></div>
+                                <h6 class="product_produce">
+                                    萨福克羊,体格健壮，结构匀称
+                                </h6>
+                                <div class="produce_price">¥12000.00</div>
+                            </a>
+                            <a href="#">
+                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/horse.jpg"></div>
+                                <h6 class="product_produce">
+                                    普氏野马，体格匀称，四肢长，重型品种体重达1200千克，体高200厘米
+                                </h6>
+                                <div class="produce_price">¥100000.00</div>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <!-- 经验交流界面 -->
-                <div class="second_1-2">
-                    <!-- 第一行 -->
-                    <div class="second_1-2-1">
-                        <div class="second_1-2-1-1">
-                            发布经验
-                        </div>
-                        <div class="second_1-2-1-2">
-                            删除经验
-                        </div>
-                        <div class="second_3-1-3-search">
-                            <input type="text" value="输入要搜索的类别" class="searchbox">
-                            <button>搜索</button>
-                        </div>
-                    </div>
-                    <!-- 经验内容部分 -->
-                    <div class="second_1-2-2">
-                        <ul>
-                            <li>
-                                <div class="persondinfo-other">
-                                    <div class="exp-touxiang"></div>
-                                    <div class="exp-name">用户1</div>
-                                    <div class="exp-kind">类别：大米</div>
-                                    <div class="exp-date">2022-11-19</div>
-                                </div>
-                                <diV class="exp_detail">
-                                    <p>经验内容描述：.............................</p>
-                                </diV>
-                            </li>
-                            <li>
-                                <div class="persondinfo-other">
-                                    <div class="exp-touxiang"></div>
-                                    <div class="exp-name">用户2</div>
-                                    <div class="exp-kind">类别：奶牛</div>
-                                    <div class="exp-date">2022-9-12</div>
-                                </div>
-                                <diV class="exp_detail">
-                                    <p>经验内容描述：.............................</p>
-                                </diV>
-                            </li>
-                            <li>
-                                <div class="persondinfo-other">
-                                    <div class="exp-touxiang"></div>
-                                    <div class="exp-name">用户1</div>
-                                    <div class="exp-kind">类别：绵羊</div>
-                                    <div class="exp-date">2020-11-11</div>
-                                </div>
-                                <diV class="exp_detail">
-                                    <p>经验内容描述：.............................</p>
-                                </diV>
-                            </li>
-                            <!-- <li></li>
-                            <li></li> -->
-
-                        </ul>
-                    </div>
-                    <!-- 页码 -->
-                    <div class='page-exp'>
-                        <ul>
-                            <li><a href="#">首页</a></li>
-                            <li><a href="#">上一页</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">下一页</a></li>
-                            <li><a href="#">末页</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 交易市场界面 -->
-                <div class="second_1-3">
-                    <!-- 交易界面header框 -->
-                    <div class="second_1-3-1">
-                        <!-- header搜索栏 -->
-                        <div class="second_1-3-1-search">
-                            <input type="text" value="樱桃小丸子">
-                            <button><img src="/MyRanch/img/search.jpg"></button>
-                        </div>
-                        <!-- 搜索栏下方小字 -->
-                        <div class="second_1-3-1-2">
-                            <a href="#">奶牛</a>
-                            <a href="#">小香猪</a>
-                            <a href="#">千里马</a>
-                            <a href="#">绵羊</a>
-                            <a href="#">东北大米</a>
-                        </div>
-                    </div>
-                    <!-- 商品信息框-->
-                    <div class="second_1-3-2">
-                        <!-- 农业可动商品栏 -->
-                        <div class="second_1-3-2-muye">
-                            <button><div class="sanjiao-left"></div></button>
-                            <button><div class="sanjiao-right"></div></button>
-                            <div class="nongmuye">
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/corn.jpg"></div>
-                                    <h6 class="product_produce">
-                                        水果玉米甜玉米云南生鲜蔬菜新鲜甜嫩水果玉米棒鲜玉米茄果瓜 甜脆 5斤
-                                    </h6>
-                                    <div class="produce_price">¥9.99</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/peanut.jpg"></div>
-                                    <h6 class="product_produce">
-                                        新货山东铁锅沙土现炒熟花生原味红皮花生带壳香脆特大农家5斤散装 粉皮两粒大花生(2斤)
-                                    </h6>
-                                    <div class="produce_price">¥28.90</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/potato.jpg"></div>
-                                    <h6 class="product_produce">
-                                        甘肃洋芋定西土豆10斤黄心当季新鲜蔬菜马铃薯大土豆整箱 新鲜蔬菜 生鲜 10斤装
-                                    </h6>
-                                    <div class="produce_price">¥138</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/rice.jpg"></div>
-                                    <h6 class="product_produce">
-                                        2022年新米 大米 稻花软香米 10kg 稻香2号 20斤 珍珠米 甄选粳米
-                                    </h6>
-                                    <div class="produce_price">¥59.9</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/tomato.jpg"></div>
-                                    <h6 class="product_produce">
-                                        普罗旺斯5斤装可生吃新鲜水果大番茄农家蔬菜普罗旺斯自然熟 沙瓤西红柿 3斤装
-                                    </h6>
-                                    <div class="produce_price">¥15.8</div>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- 牧业可动商品栏 -->
-                        <div class="second_1-3-2-muye">
-                            <button><div class="sanjiao-left"></div></button>
-                            <button><div class="sanjiao-right"></div></button>
-                            <div class="nongmuye">
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/chicken.jpg"></div>
-                                    <h6 class="product_produce">
-                                        供港老母鸡 1.2kg 天露高品质供港鸡 农家散养老母鸡 散养土鸡走地鸡
-                                    </h6>
-                                    <div class="produce_price">¥51.80</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/cow.jpg"></div>
-                                    <h6 class="product_produce">
-                                        中国荷斯坦奶牛,体格健壮，结构匀称
-                                    </h6>
-                                    <div class="produce_price">¥20000.00</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/duck.jpg"></div>
-                                    <h6 class="product_produce">
-                                        3年老鸭麻鸭净重约2斤/只林间养殖老鸭子土鸭整鸭鸭肉新鲜食材
-                                    </h6>
-                                    <div class="produce_price">¥108</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/sheep.jpg"></div>
-                                    <h6 class="product_produce">
-                                        萨福克羊,体格健壮，结构匀称
-                                    </h6>
-                                    <div class="produce_price">¥12000.00</div>
-                                </a>
-                                <a href="#">
-                                    <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/horse.jpg"></div>
-                                    <h6 class="product_produce">
-                                        普氏野马，体格匀称，四肢长，重型品种体重达1200千克，体高200厘米
-                                    </h6>
-                                    <div class="produce_price">¥100000.00</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 商品信息界面右边的消息图标 -->
-                    <div class="second_1-3-2-message">
-                        <a href="#"><img src="/MyRanch/img/message.png"></a>
-                        <a href="#"><img src="/MyRanch/img/custom_service.png" style="width:100%"></a>
-                    </div>
+                <!-- 商品信息界面右边的消息图标 -->
+                <div class="second_1-3-2-message">
+                    <a href="#"><img src="/MyRanch/img/message.png"></a>
+                    <a href="#"><img src="/MyRanch/img/custom_service.png" style="width:100%"></a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
+
 <script>
     window.onload = function () {
         // 获取用户名
@@ -1152,13 +1393,13 @@
         getGroupList();
 
         var addGroupOn = false;
-        document.getElementById("addGroup").onclick = function () {
+        function addGroup() {
             if (!addGroupOn) {
                 const groupTable = document.getElementById("group-table");
                 var tmp = groupTable.innerHTML;
                 var HTMLStr = "";
                 HTMLStr += '<div style="margin-left:23px; margin-top:3px">';
-                HTMLStr += '<img src="/MyRanch/img/wenjianjia.png" style="height: 40px; display: inline-block;">' +
+                HTMLStr += '<img src="/MyRanch/img/gp.png" style="height: 40px; display: inline-block;">' +
                     '<div class="wp-s-pan-list__file-name-edit--title-edit-input u-input u-input--small">' +
                     '<input type="text" autoComplete="off" class="u-input__inner" id="new-group-name">' +
                     '</div>';
@@ -1196,6 +1437,7 @@
                 }
             }
         }
+        document.getElementById("addGroup").onclick = addGroup
 
         // 获取分组列表
         function getGroupList() {
@@ -1205,20 +1447,32 @@
                     var fileList = JSON.parse(xhr.responseText);
                     var HTMLStr = "";
                     HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + '.."' + '>';
-                    HTMLStr +=          '<div style="margin-left:23px; margin-top:3px; float: left; position: absolute;">';
-                    HTMLStr +=          '<button ' + 'id="' + '..' + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
-                        '..' + '</button>';
+                    HTMLStr +=          '<div style="width:100%;margin-left:23px; margin-top:3px; float: left; position: absolute;">';
+                    HTMLStr +=          '<button ' + 'id="' + '..' + '" class="group-button"><img src="/MyRanch/img/RC.PNG" style="height: 40px;">' +
+                        ' ..' + '</button>';
                     HTMLStr +=          '</div>';
                     HTMLStr += '</div>';
+
                     for (let i = 0; i < fileList.length; i++) {
                         HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + fileList[i].filename + '"' + '>';
-                        HTMLStr +=          '<div style="margin-left:23px; margin-top:3px;float: left; position: absolute;">';
-                        HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button"><img src="/MyRanch/img/wenjianjia.png" style="height: 40px;">' +
-                            fileList[i].filename + '</button>';
+                        HTMLStr +=          '<div style="width: 100%; margin-left:23px; margin-top:3px;float: left; position: absolute;">';
+                        if(fileList[i].type == 0){
+                            HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button"><img src="/MyRanch/img/gp.png" style="height: 40px;">' +
+                                " " + fileList[i].filename + '</button>';
+                        }else{
+                            HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button">' +
+                                '<img src="/MyRanch/img/pc.png" style="height: 40px;">' +
+                                " " + fileList[i].filename.substring(0,fileList[i].filename.length-4) +
+                                '</button>';
+                            // HTMLStr += '<button style="height: 40px;" id="up->' + fileList[i].filename + '"value="上架" </button>' +
+                            //     '<button style="height: 40px;" id="down->' + fileList[i].filename + '" value="下架" </button>';
+                        }
+
                         HTMLStr += '<input type="button" id="del-group-' + fileList[i].filename + '" class="del-group-button" value="删除">';
                         HTMLStr +=          '</div>';
                         HTMLStr +='</div>';
                     }
+
                     document.getElementById("group-table").innerHTML = HTMLStr;
 
                     document.getElementById("..").onclick = function () {
@@ -1232,37 +1486,353 @@
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         xhr.send("filename=..");
                     }
+
                     for (let i = 0; i < fileList.length; i++) {
-                        document.getElementById(fileList[i].filename).onclick = function () {
-                            var xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
-                                    getGroupList();
+                        if (fileList[i].type == 0) {
+                            document.getElementById(fileList[i].filename).onclick = function () {
+                                var xhr = new XMLHttpRequest();
+                                xhr.onreadystatechange = function () {
+                                    if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                                        getGroupList();
+                                    }
+                                }
+                                if (fileList[i].type == 0) {
+                                    xhr.open("POST", "/MyRanch/group/cd");
+                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                    xhr.send("filename=" + fileList[i].filename);
                                 }
                             }
-                            if (fileList[i].type == 0) {
-                                xhr.open("POST", "/MyRanch/group/cd");
-                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                xhr.send("filename=" + fileList[i].filename);
-                            }
                         }
-                        document.getElementById('group-line-' + fileList[i].filename).onmouseover = function () {
-                            const del_group_button = document.getElementById("del-group-" + fileList[i].filename);
-                            del_group_button.style.display = 'inline-block';
-                            del_group_button.onclick = function () {
+                        else {
+                            document.getElementById(fileList[i].filename).onclick = function () {
                                 var xhr = new XMLHttpRequest();
                                 xhr.onreadystatechange = function () {
                                     if (xhr.readyState == 4 && xhr.status == 200) {
-                                        if (xhr.responseText == "0") {
+                                        // 把上半部分的按钮界面重新渲染
+                                        var HTMLStr = "";
+                                        HTMLStr += '<button ' + 'class="second_3-1-1-zengjia" id="addProduction">' + '添加产品' + '</button>';
+                                        HTMLStr += '<button ' + 'class="second_3-1-2-shanchu" id="return">' + '返回' + '</button>';
+                                        document.getElementById("button-region").innerHTML = HTMLStr;
+
+                                        // 为返回按钮绑定响应事件
+                                        document.getElementById("return").onclick = function (){
+                                            // console.log("=====")
+                                            var HTMLStr = "";
+                                            HTMLStr += '<button ' + 'class="second_3-1-1-zengjia"' + 'id="addGroup">' + '新建分组' + '</button>';
+                                            HTMLStr += '<button ' + 'class="second_3-1-2-shanchu" id="addBatch">' + '新建批次' + '</button>';
+                                            document.getElementById("button-region").innerHTML = HTMLStr;
                                             getGroupList();
-                                        } else {
-                                            alert("删除分组失败");
+                                            // 重新注册事件
+                                            document.getElementById("addGroup").onclick = addGroup;
+                                            document.getElementById("addBatch").onclick = addBatch;
                                         }
+                                        // 接下来还应该渲染展示界面
+                                        var HTMLStr = "";
+
+                                        HTMLStr += '<table id="add-table">'
+                                        HTMLStr += '<tr><th id="add-number">编号</th><th id="add-food">肥料/饲料</th><th id="add-healthy">健康状况</th><th id="add-growDuration">生长周期</th><th id="add-description">备注描述</th><th>操作</th></tr>'
+                                        HTMLStr += '<tbody id="add-tbody">'
+
+                                        // 从后端拿到数据
+                                        productions = JSON.parse(xhr.responseText);
+                                        console.log("==展示production==")
+                                        console.log(productions)
+                                        console.log("==展示结束==")
+
+                                        // 渲染从后端拿到的数据
+                                        for (let i = 0; i < productions.length; ++i) {
+                                            production = productions[i];
+                                            HTMLStr += '<tr id="' + production.productionId + '">'
+                                            HTMLStr += '<td>' + production.productionId + '</td>'
+                                            HTMLStr += '<td>' + production.food + '</td>'
+                                            HTMLStr += '<td>' + production.healthy + '</td>'
+                                            HTMLStr += '<td>' + production.growDuration + '</td>'
+                                            HTMLStr += '<td>' + production.description + '</td>'
+                                            HTMLStr += '<td>' + '<button ' + 'id="del-production-'+ production.productionId + '" class="del-production">'+ '删除' +'</button>' + '<button ' + 'id="update-production-'+ production.productionId + '" class="update-production">'+'修改'+'</button>' + '</td>'
+                                            HTMLStr += '</tr>'
+                                        }
+
+                                        HTMLStr += '</tbody>'
+                                        HTMLStr += '</table>'
+
+                                        document.getElementById("group-table").innerHTML = HTMLStr
+
+                                        //点击添加产品，弹出遮罩层请求
+                                        document.getElementById("addProduction").onclick = function (){
+                                            var mask = document.getElementById("mask-1");
+                                            mask.style.display = "block";
+                                            var second_part = document.getElementById("second_part");
+                                            second_part.style.opacity = "0.3";
+                                        }
+
+                                        //给遮罩层的取消按钮注册事件
+                                        function maskCancel() {
+                                            var mask = document.getElementById("mask-1");
+                                            mask.style.display = "none";
+                                            var second_part = document.getElementById("second_part");
+                                            second_part.style.opacity = "1";
+                                        }
+                                        document.getElementById("mask-cancel-1").onclick = maskCancel
+
+                                        //完成实际上的添加产品请求
+                                        const addNum = document.getElementById("mask-number");
+                                        const addFood = document.getElementById("mask-food-1");
+                                        const addGrowDuration = document.getElementById("mask-growDuration-1");
+                                        const addHealthy = document.getElementById("mask-healthy-1");
+                                        const addDescription = document.getElementById("mask-description-1");
+
+                                        //添加产品需要用到的请求
+                                        document.getElementById("mask-confirm-1").onclick = function (){
+                                            if (addNum.value == '' || Number(addNum.value).toString() == "NaN") {
+                                                alert('添加数量不能为空或输入不合法');
+                                            } else if (addFood.value == ''){
+                                                alert('饲料不能为空')
+                                            } else if (addGrowDuration.value == ''){
+                                                alert('成熟周期不能为空')
+                                            } else if (addHealthy.value == ''){
+                                                alert('健康状况不能为空')
+                                            } else {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function (){
+                                                    if(xhr.readyState == 4 && xhr.status == 200){
+                                                        var HTMLStr = "";
+
+                                                        HTMLStr += '<table id="add-table">'
+                                                        HTMLStr += '<tr><th id="add-number">编号</th><th id="add-food">肥料/饲料</th><th id="add-healthy">健康状况</th><th id="add-growDuration">生长周期</th><th id="add-description">备注描述</th><th>操作</th></tr>'
+                                                        HTMLStr += '<tbody id="add-tbody">'
+
+                                                        productions = JSON.parse(xhr.responseText);
+                                                        console.log(".....");
+                                                        console.log(xhr.responseText)
+                                                        console.log("==添加渲染production==")
+                                                        console.log(productions)
+                                                        console.log("==添加渲染结束==")
+
+                                                        // 渲染从后端拿到的数据
+                                                        for (let i = 0; i < productions.length; ++i) {
+                                                            production = productions[i];
+                                                            HTMLStr += '<tr id="' + production.productionId + '">'
+                                                            HTMLStr += '<td>' + production.productionId + '</td>'
+                                                            HTMLStr += '<td>' + production.food + '</td>'
+                                                            HTMLStr += '<td>' + production.healthy + '</td>'
+                                                            HTMLStr += '<td>' + production.growDuration + '</td>'
+                                                            HTMLStr += '<td>' + production.description + '</td>'
+                                                            HTMLStr += '<td>' + '<button ' + 'id="del-production-'+ production.productionId + '" class="del-production">'+ '删除' +'</button>' + '<button ' + 'id="update-production-'+ production.productionId + '" class="update-production">'+ '修改' +'</button>' + '</td>'
+                                                            HTMLStr += '</tr>'
+                                                        }
+
+                                                        HTMLStr += '</tbody>'
+                                                        HTMLStr += '</table>'
+                                                        document.getElementById("group-table").innerHTML = HTMLStr
+
+                                                        maskCancel()
+
+                                                        delBP()
+                                                        changeBP()
+
+                                                        addNum.value = '';
+                                                        addFood.value = '';
+                                                        addGrowDuration.value = '';
+                                                        addHealthy.value = '';
+                                                        addDescription.value = '';
+                                                    }
+                                                }
+                                                xhr.open("POST","/MyRanch/group/addProduction");
+                                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                                xhr.send("addNum=" + addNum.value + "&" +
+                                                    "addFood=" + addFood.value + "&" +
+                                                    "addGrowDuration=" + addGrowDuration.value + "&" +
+                                                    "addHealthy=" + addHealthy.value + '&' +
+                                                    "addDescription=" + addDescription.value);
+                                            }
+                                        }
+
+                                        // 接下来为每一个删除按钮添加请求
+                                        function delBP() {
+                                            for (let i = 0; i < productions.length; ++i){
+                                                production = productions[i];
+                                                let delB = document.getElementById("del-production-" + production.productionId);
+                                                if (delB != null){
+                                                    delB.onclick = function () {
+                                                        var xhr = new XMLHttpRequest();
+                                                        xhr.onreadystatechange = function () {
+                                                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                                                var HTMLStr = "";
+                                                                HTMLStr += '<table id="add-table">'
+                                                                HTMLStr += '<tr><th id="add-number">编号</th><th id="add-food">肥料/饲料</th><th id="add-healthy">健康状况</th><th id="add-growDuration">生长周期</th><th id="add-description">备注描述</th><th>操作</th></tr>'
+                                                                HTMLStr += '<tbody id="add-tbody">'
+                                                                // console.log(xhr.responseText);
+                                                                productions = JSON.parse(xhr.responseText);
+
+                                                                console.log("==删除渲染production==")
+                                                                console.log(productions)
+                                                                console.log("==删除结束==")
+
+                                                                // 渲染从后端拿到的数据
+                                                                for (let i = 0; i < productions.length; ++i) {
+                                                                    production = productions[i];
+                                                                    HTMLStr += '<tr id="' + production.productionId + '">'
+                                                                    HTMLStr += '<td>' + production.productionId + '</td>'
+                                                                    HTMLStr += '<td>' + production.food + '</td>'
+                                                                    HTMLStr += '<td>' + production.healthy + '</td>'
+                                                                    HTMLStr += '<td>' + production.growDuration + '</td>'
+                                                                    HTMLStr += '<td>' + production.description + '</td>'
+                                                                    HTMLStr += '<td>' + '<button ' + 'id="del-production-'+ production.productionId + '" class="del-production">'+ '删除' +'</button>' + '<button ' + 'id="update-production-'+ production.productionId + '" class="update-production">'+'修改'+'</button>' + '</td>'
+                                                                    HTMLStr += '</tr>'
+                                                                }
+                                                                HTMLStr += '</tbody>'
+                                                                HTMLStr += '</table>'
+                                                                document.getElementById("group-table").innerHTML = HTMLStr
+
+                                                                //为每个删除按钮重新注册事件
+                                                                delBP();
+                                                                // console.log("进入")
+                                                                changeBP();
+                                                                // console.log("出来")
+                                                                // alert("删除产品成功");
+                                                            }
+                                                        }
+                                                        xhr.open("POST","/MyRanch/group/delProduction",true);
+                                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                                        let tmpDelId = delB.getAttribute("id")
+                                                        let delId = tmpDelId.substring(15,tmpDelId.length);
+                                                        console.log(delId)
+                                                        xhr.send("delId=" + delId);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        delBP();
+
+                                        // 添加修改请求
+                                        function changeBP() {
+                                            for (let i = 0; i < productions.length; ++i){
+                                                production = productions[i];
+                                                let changeB = document.getElementById("update-production-" + production.productionId);
+                                                if (changeB != null){
+                                                    changeB.onclick = function () {
+                                                        //先弹出遮罩层
+                                                        var mask = document.getElementById("mask-2");
+                                                        mask.style.display = "block";
+                                                        var second_part = document.getElementById("second_part");
+                                                        second_part.style.opacity = "0.3";
+
+                                                        const cFood = document.getElementById("mask-food-2");
+                                                        const cGrowDuration = document.getElementById("mask-growDuration-2");
+                                                        const cHealthy = document.getElementById("mask-healthy-2");
+                                                        const cDescription = document.getElementById("mask-description-2");
+
+                                                        //为遮罩层的确认按钮添加修改事件
+                                                        document.getElementById("mask-confirm-2").onclick = function () {
+                                                            if (cFood.value == '') {
+                                                                alert('饲料不能为空')
+                                                            } else if (cGrowDuration.value == '') {
+                                                                alert('成熟周期不能为空')
+                                                            } else if (cHealthy.value == '') {
+                                                                alert('健康状况不能为空')
+                                                            } else {
+                                                                var xhr = new XMLHttpRequest();
+                                                                xhr.onreadystatechange = function () {
+                                                                    if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+
+                                                                        console.log("==修改渲染production==")
+                                                                        console.log("==修改结束==")
+                                                                        let tmpChangeId = changeB.getAttribute("id")
+                                                                        let changeId = tmpChangeId.substring(18,tmpChangeId.length);
+
+                                                                        console.log(changeId)
+
+                                                                        let childNodes = document.getElementById(changeId).childNodes;
+                                                                        childNodes[1].innerText = cFood.value
+                                                                        childNodes[2].innerText = cHealthy.value
+                                                                        childNodes[3].innerText = cGrowDuration.value
+                                                                        childNodes[4].innerText = cDescription.value
+
+                                                                        maskCancle2()
+
+                                                                        // alert("修改产品成功");
+                                                                    } else if (xhr.responseText == "1") {
+                                                                        alert("修改产品失败了，再试一下吧！")
+                                                                    }
+                                                                }
+                                                                xhr.open("POST","/MyRanch/group/changeProduction",true);
+                                                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                                                let tmpChangeId = changeB.getAttribute("id")
+                                                                let changeId = tmpChangeId.substring(18,tmpChangeId.length);
+                                                                // console.log(changeId)
+                                                                xhr.send("cId=" + changeId + "&" +
+                                                                    "cFood=" + cFood.value + "&" +
+                                                                    "cGrowDuration=" + cGrowDuration.value + "&" +
+                                                                    "cHealthy=" + cHealthy.value + '&' +
+                                                                    "cDescription=" + cDescription.value);
+                                                            }
+                                                        }
+
+                                                        //取消遮罩层
+                                                        function maskCancle2 () {
+                                                            var mask = document.getElementById("mask-2");
+                                                            mask.style.display = "none";
+                                                            var second_part = document.getElementById("second_part");
+                                                            second_part.style.opacity = "1";
+                                                        }
+
+                                                        document.getElementById("mask-cancel-2").onclick = maskCancle2
+
+                                                        cFood.value = '';
+                                                        cGrowDuration.value = '';
+                                                        cHealthy.value = '';
+                                                        cDescription.value = '';
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        changeBP()
                                     }
                                 }
-                                xhr.open("POST", "/MyRanch/group/delGroup");
-                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                xhr.send("groupName=" + fileList[i].filename);
+                                if (fileList[i].type == 1) {
+                                    xhr.open("POST", "/MyRanch/group/showProduction");
+                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                    xhr.send("filename=" + fileList[i].filename);
+                                }
+                            }
+                        }
+                        //删除分组和批次
+                        document.getElementById('group-line-' + fileList[i].filename).onmouseover = function () {
+                            const del_group_button = document.getElementById("del-group-" + fileList[i].filename);
+                            del_group_button.style.display = 'inline-block';
+                            if(fileList[i].type == 0)
+                            {
+                                del_group_button.onclick = function () {
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                            if (xhr.responseText == "0") {
+                                                getGroupList();
+                                            } else {
+                                                alert("删除分组失败");
+                                            }
+                                        }
+                                    }
+                                    xhr.open("POST", "/MyRanch/group/delGroup");
+                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                    xhr.send("groupName=" + fileList[i].filename);
+                                }
+                            }else{
+                                del_group_button.onclick = function () {
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                            if (xhr.responseText == "0") {
+                                                getGroupList();
+                                            } else {
+                                                alert("删除批次失败");
+                                            }
+                                        }
+                                    }
+                                    xhr.open("POST", "/MyRanch/group/delBatch");
+                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                    xhr.send("batchName=" + fileList[i].filename);
+                                }
                             }
                         }
                         document.getElementById('group-line-' + fileList[i].filename).onmouseout = function () {
@@ -1275,6 +1845,54 @@
             xhr.send();
         }
 
+        var addGroupOn = false;
+        function addBatch() {
+            if(!addGroupOn){
+                const batchTable = document.getElementById("group-table");
+                var tmp = batchTable.innerHTML;
+                var HTMLStr = "";
+                HTMLStr += '<div style="margin-left:23px; margin-top:3px">';
+                HTMLStr += '<img src="/MyRanch/img/pc.png" style="height: 40px; display: inline-block;">' +
+                    '<div class="wp-s-pan-list__file-name-edit--title-edit-input u-input u-input--small">' +
+                    '<input type="text" autoComplete="off" class="u-input__inner" id="new-batch-name">' +
+                    '</div>';
+                HTMLStr += '<input type="button" id="add-group-confirm" class="confirm-cancel-box" value="确认">';
+                HTMLStr += '<input type="button" id="add-group-cancel" class="confirm-cancel-box" value="取消">';
+                HTMLStr += '</div>';
+
+                HTMLStr += tmp;
+
+                batchTable.innerHTML = HTMLStr;
+
+                addGroupOn = true;
+
+                document.getElementById("add-group-confirm").onclick = function () {
+                    const batchName = document.getElementById("new-batch-name").value;
+                    addGroupOn = false;
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (xhr.responseText == "1") {
+                                alert('新建批次失败, 请检查批次名是否非法或重复');
+                                // console.log("新建批次成功");
+                            } else {
+                                getGroupList();
+                            }
+                        }
+                    }
+                    xhr.open("POST", "/MyRanch/group/addBatch");
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.send("batchName=" + batchName);
+                }
+
+                document.getElementById("add-group-cancel").onclick = function () {
+                    addGroupOn = false;
+                    getGroupList();
+                }
+            }
+        }
+        document.getElementById("addBatch").onclick = addBatch
     }
 
 
@@ -1319,7 +1937,7 @@
         second13.style.display = 'block';
     })
     help.addEventListener('click', function() {
-        window.location.href = '/MyRanch/chat.html';
+        window.location.href = "/MyRanch/chat.html";
     })
 
 </script>
