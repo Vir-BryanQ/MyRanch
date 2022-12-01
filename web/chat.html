@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyRanch</title>
+    <link rel="stylesheet" href="/MyRanch/css/chat.css">
+    <script src="/MyRanch/js/md5.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="chatbox">
+        <div class="top" id="top">
+
+        </div>
+        <div class="box">
+            <div class="chat-list" id="chat-list">
+
+            </div>
+            <div class="box-right" id="box-right">
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var myId = "";
+        var myUserName = "";
+        var xhr = new XMLHttpRequest();
+        var imgHeaders = [];
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let json = JSON.parse(xhr.responseText);
+                myId = json.id;
+                myUserName = json.username;
+
+                document.getElementById('top').innerHTML = '<p style="margin-left: 25px;\n' +
+                    '    padding-top: 10px;\n' +
+                    '    color: #ffffff;\n' +
+                    '    font-size: 30px;">' + myUserName + '</p>';
+
+                var ws = new WebSocket('ws://q3z8400525.oicp.vip:25588/MyRanch/chat');
+                // var ws = new WebSocket('ws://localhost:8080/MyRanch/chat');
+
+                ws.onopen = function () {
+
+                }
+
+                ws.onerror = function () {
+                    alert('连接出现错误，请刷新页面');
+                    location.reload();
+                }
+
+                ws.onclose = function () {
+                    alert('连接已断开，请刷新页面');
+                    location.reload();
+                }
+
+                var idx = 0;
+                var onlineUsersList = [];
+                var curUserIdx = -1;
+                var framework = '<div class="recvfrom">' +
+                    '<div class="nav-top" id="nav-top">' +
+                    '</div>' +
+                    '<div class="news-top" id="chatbox">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="sendto">' +
+                    '<div class="but-nav">' +
+                    '<button class="uploadImg" id="uploadImg">' +
+                    '<img src="/MyRanch/img/uploadImg.png" class="bgimg" title="发送图片 Ctrl + M" alt="">' +
+                    '</button>' +
+                    '<input type="file" id="browse-button" style="display: none;" accept="image/*">' +
+                    '</div>' +
+                    '<div class="but-text">' +
+                    '<textarea id="input-text" cols="110" rows="6" ></textarea>' +
+                    '<input type="button" class="button" value="发送" id="send-button">' +
+                    '</div>' +
+                    '</div>';
+                ws.onmessage = function (message) {
+                    const chatbox = document.getElementById('chatbox');
+                    if (typeof (message.data) === 'string') {
+                        var msg = JSON.parse(message.data);
+                        var sender = msg['sender'];
+                        var senderName = msg['senderName'];
+                        var type = msg['type'];
+                        var date = msg['date'];
+                        var content = msg['content'];
+
+                        if (type === 'text') {
+                            let x = 0;
+                            if (myId === sender) {
+                                onlineUsersList[curUserIdx].msgBox.push(msg);
+                                document.getElementById('thum-' + onlineUsersList[curUserIdx].id).innerText = content;
+                            } else {
+                                for (let i = 0; i < onlineUsersList.length; i++) {
+                                    if (onlineUsersList[i].id === sender) {
+                                        x = i;
+                                        onlineUsersList[i].msgBox.push(msg);
+                                        break;
+                                    }
+                                }
+                                document.getElementById('thum-' + sender).innerText = content;
+                            }
+
+                            if (myId === sender || onlineUsersList[curUserIdx].id === sender) {
+                                chatbox.innerHTML += '<div class="' + ((myId === sender) ? 'self' : 'other') + '" id="other' + idx + '">' +
+                                    '<div class="avatar"><img src="/MyRanch/img/getAvatar.jpeg" alt=""></div>' +
+                                    '<div class="msg" id="msg' + idx + '">' +
+                                    '<p class="msg-name-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-name' + idx + '">' + senderName + '</p>' +
+                                    '<p class="msg-text-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-text' + idx + '">' + '</p>' +
+                                    '<time class="time-' + ((myId === sender) ? 'right' : 'left') + '" id="time-' + idx + '">' + date + '</time>' +
+                                    '</div>' +
+                                    '</div>';
+
+                                document.getElementById('msg-text' + idx).innerText = content;
+
+                                document.getElementById('msg' + idx).style.height =
+                                    document.getElementById('msg-text' + idx).offsetHeight +
+                                    document.getElementById('msg-name' + idx).offsetHeight +
+                                    document.getElementById('time-' + idx).offsetHeight + 'px';
+                                document.getElementById('other' + idx).style.height =
+                                    document.getElementById('msg-text' + idx).offsetHeight +
+                                    document.getElementById('msg-name' + idx).offsetHeight +
+                                    document.getElementById('time-' + idx).offsetHeight + 'px';
+
+                                chatbox.scrollTop = chatbox.scrollHeight;
+
+                                idx++;
+                            } else {
+                                onlineUsersList[x].unread++;
+                                document.getElementById(sender).style.backgroundColor = '#F1AE1B';
+
+                                let unread = document.getElementById('unread-' + sender);
+                                unread.innerText = onlineUsersList[x].unread.toString();
+                                unread.style.display = 'block';
+                            }
+
+                        } else if (type === 'system-broadcast') {
+                            var onlineUsers = JSON.parse(content);
+                            var chatList = document.getElementById('chat-list');
+
+                            var colorSaver = [];
+                            for (let i = 0; i < onlineUsersList.length; i++) {
+                                let color = {
+                                  "id": onlineUsersList[i].id,
+                                    "unread": onlineUsersList[i].unread,
+                                  "color": document.getElementById(onlineUsersList[i].id).style.backgroundColor,
+                                    "thum": document.getElementById('thum-' + onlineUsersList[i].id).innerText
+                                };
+                                colorSaver.push(color);
+                            }
+
+                            chatList.innerHTML = '';
+                            for (let i = 0; i < onlineUsers.length; i++) {
+                                chatList.innerHTML += '<div class="list-box" id="' + onlineUsers[i].id + '"><img class="chat-head" src="/MyRanch/img/getAvatar.jpeg" alt="">' +
+                                    '<div class="chat-rig">' +
+                                    '<p class="title">' + onlineUsers[i].username + '</p>' +
+                                    '<p class="text" id="thum-' + onlineUsers[i].id + '"></p>'+
+                                    '<p class="unread" id="unread-' + onlineUsers[i].id + '">' + '0' + '</p>'+
+                                    '</div>' +
+                                    '</div>';
+
+                                // 恢复用户列表项的背景色和缩略文本以及未读消息数
+                                for (let j = 0; j < colorSaver.length; j++) {
+                                    if (colorSaver[j].id === onlineUsers[i].id) {
+                                        document.getElementById(onlineUsers[i].id).style.backgroundColor = colorSaver[j].color;
+                                        document.getElementById('thum-' + onlineUsers[i].id).innerText = colorSaver[j].thum;
+                                        if (colorSaver[j].unread > 0) {
+                                            let unread = document.getElementById('unread-' + onlineUsers[i].id);
+                                            unread.innerText = colorSaver[j].unread.toString();
+                                            unread.style.display = 'block';
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                            if (myId === sender) {
+                                for (let i = 0; i < onlineUsers.length; i++) {
+                                    let json = {
+                                        "id": onlineUsers[i].id,
+                                        "username": onlineUsers[i].username,
+                                        "msgBox": [],
+                                        "text": '',  // 用于保存用户已经输入的文本内容
+                                        "unread": 0     // 用户未读消息条数
+                                    }
+                                    onlineUsersList.push(json);
+                                }
+                            } else {
+                                if (onlineUsersList.length + 1 === onlineUsers.length) {
+                                    let json = {
+                                        "id": sender,
+                                        "username": senderName,
+                                        "msgBox": [],
+                                        "text": '' ,   // 用于保存用户已经输入的文本内容
+                                        "unread": 0     // 用户未读消息条数
+                                    }
+                                    onlineUsersList.push(json);
+                                } else if (onlineUsersList.length === onlineUsers.length + 1) {
+                                    if (sender === onlineUsersList[curUserIdx].id) {
+                                        document.getElementById('box-right').innerHTML = '';
+                                        curUserIdx = -1;
+                                    }
+
+                                    for (let i = 0; i < onlineUsersList.length; i++) {
+                                        if (onlineUsersList[i].id === sender) {
+                                            onlineUsersList.splice(i, 1);
+                                            break;
+                                        }
+                                    }
+
+                                }
+                            }
+
+                            for (let i = 0; i < onlineUsers.length; i++) {
+                                document.getElementById(onlineUsers[i].id).onclick = function () {
+                                    if (curUserIdx >= 0 && onlineUsersList[curUserIdx].id === onlineUsers[i].id) {
+                                        return;
+                                    }
+                                    if (curUserIdx >= 0) {
+                                        document.getElementById(onlineUsersList[curUserIdx].id).style.backgroundColor = '#F4F4F4';
+                                    }
+                                    this.style.backgroundColor = '#EDFCED';
+
+                                    var tmp = document.getElementById('box-right');
+
+                                    for (let j = 0; j < onlineUsersList.length; j++) {
+                                        if (onlineUsersList[j].id === onlineUsers[i].id) {
+
+                                            // 保存用户已输入的文本
+                                            if (curUserIdx >= 0) {
+                                                onlineUsersList[curUserIdx].text = document.getElementById('input-text').value;
+                                            }
+
+                                            curUserIdx = j;
+                                            tmp.innerHTML = framework;
+
+                                            // 恢复目标用户的已输入文本
+                                            document.getElementById('input-text').value = onlineUsersList[curUserIdx].text;
+
+                                            // 未读消息清零
+                                            onlineUsersList[curUserIdx].unread = 0;
+                                            document.getElementById('unread-' + onlineUsersList[curUserIdx].id).style.display = 'none';
+
+                                            // 将焦点定位到输入框
+                                            document.getElementById('input-text').focus();
+
+                                            document.getElementById('send-button').onclick = function () {
+                                                let text = document.getElementById('input-text');
+
+                                                if (text.value !== '') {
+                                                    var msg = {
+                                                        "receiver": onlineUsers[i].id,
+                                                        "type": "text",
+                                                        "date": dateToStr(new Date()),
+                                                        "content": text.value
+                                                    };
+                                                    ws.send(JSON.stringify(msg));
+                                                    text.value = '';
+                                                }
+
+                                                text.focus();
+                                            }
+
+                                            document.getElementById('uploadImg').onclick = function () {
+                                                document.getElementById('browse-button').click();
+                                            }
+
+                                            document.getElementById('browse-button').onchange = function () {
+                                                var reader = new FileReader();
+                                                reader.readAsArrayBuffer(this.files[0]);
+                                                reader.onload = function (e) {
+                                                    let msg = {
+                                                        "receiver": onlineUsers[i].id,
+                                                        "type": "image",
+                                                        "date": dateToStr(new Date()),
+                                                        "content": ''
+                                                    };
+                                                    ws.send(JSON.stringify(msg));
+                                                    ws.send(e.target.result);
+                                                }
+                                                this.value = '';
+                                                document.getElementById('input-text').focus();
+                                            }
+
+                                            // 添加键盘快捷键
+                                            document.addEventListener("keydown", function (e) {
+                                                if (e.ctrlKey && e.key === 'm') {
+                                                    document.getElementById('browse-button').click();
+                                                }
+                                            })
+
+                                            document.addEventListener("keydown", function (e) {
+                                                if (e.ctrlKey && e.key === 'i') {
+                                                    document.getElementById('input-text').focus();
+                                                }
+                                            })
+
+                                            document.getElementById('nav-top').innerHTML = '<p>' + onlineUsersList[j].username + '</p>';
+
+                                            idx = 0;
+                                            const chatbox = document.getElementById('chatbox');
+                                            for (let k = 0; k < onlineUsersList[j].msgBox.length; k++) {
+                                                var msg = onlineUsersList[j].msgBox[k];
+                                                var sender = msg['sender'];
+                                                var senderName = msg['senderName'];
+                                                var type = msg['type'];
+                                                var date = msg['date'];
+                                                var content = msg['content'];
+
+                                                if (type === 'text') {
+                                                    chatbox.innerHTML += '<div class="' + ((myId === sender) ? 'self' : 'other') + '" id="other' + idx + '">' +
+                                                        '<div class="avatar"><img src="/MyRanch/img/getAvatar.jpeg" alt=""></div>' +
+                                                        '<div class="msg" id="msg' + idx + '">' +
+                                                        '<p class="msg-name-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-name' + idx + '">' + senderName + '</p>' +
+                                                        '<p class="msg-text-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-text' + idx + '">' + '</p>' +
+                                                        '<time class="time-' + ((myId === sender) ? 'right' : 'left') + '" id="time-' + idx + '">' + date + '</time>' +
+                                                        '</div>' +
+                                                        '</div>';
+
+                                                    document.getElementById('msg-text' + idx).innerText = content;
+
+                                                    document.getElementById('msg' + idx).style.height =
+                                                        document.getElementById('msg-text' + idx).offsetHeight +
+                                                        document.getElementById('msg-name' + idx).offsetHeight +
+                                                        document.getElementById('time-' + idx).offsetHeight + 'px';
+                                                    document.getElementById('other' + idx).style.height =
+                                                        document.getElementById('msg-text' + idx).offsetHeight +
+                                                        document.getElementById('msg-name' + idx).offsetHeight +
+                                                        document.getElementById('time-' + idx).offsetHeight + 'px';
+
+                                                    idx++;
+                                                } else if (type === 'image') {
+                                                    chatbox.innerHTML += '<div class="' + ((myId === sender) ? 'self' : 'other') + '" id="other' + idx + '">' +
+                                                        '<div class="avatar"><img src="/MyRanch/img/getAvatar.jpeg" alt=""></div>' +
+                                                        '<div class="msg" id="msg' + idx + '">' +
+                                                        '<p class="msg-name-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-name' + idx + '">' + senderName + '</p>' +
+                                                        '<p class="msg-text-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-text' + idx + '">' +
+                                                        '<img src="' + content + '" id="msg-img' + idx + '" alt="">' +
+                                                        '</p>' +
+                                                        '<time class="time-' + ((myId === sender) ? 'right' : 'left') + '" id="time-' + idx + '">' + date + '</time>' +
+                                                        '</div>' +
+                                                        '</div>';
+
+                                                    (function (idx) {
+                                                        document.getElementById('msg-img' + idx).onload = function () {
+                                                            document.getElementById('msg' + idx).style.height =
+                                                                document.getElementById('msg-text' + idx).offsetHeight +
+                                                                document.getElementById('msg-name' + idx).offsetHeight +
+                                                                document.getElementById('time-' + idx).offsetHeight + 'px';
+                                                            document.getElementById('other' + idx).style.height =
+                                                                document.getElementById('msg-text' + idx).offsetHeight +
+                                                                document.getElementById('msg-name' + idx).offsetHeight +
+                                                                document.getElementById('time-' + idx).offsetHeight + 'px';
+
+                                                            chatbox.scrollTop = chatbox.scrollHeight;
+                                                        }
+                                                    })(idx);
+
+                                                    idx++;
+                                                }
+                                            }
+
+                                            chatbox.scrollTop = chatbox.scrollHeight;
+
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (type === 'image') {
+                            imgHeaders.push(msg);
+                        }
+
+                    } else {
+                        var reader = new FileReader();
+                        reader.readAsArrayBuffer(message.data);
+                        reader.onload = function (e) {
+                            var spark = new SparkMD5.ArrayBuffer();
+                            spark.append(e.target.result);
+                            var md5 = spark.end();
+
+                            reader.readAsDataURL(message.data);
+                            reader.onload = function (e) {
+                                var msg = '';
+                                for (let i = 0; i < imgHeaders.length; i++) {
+                                    if (imgHeaders[i].content === md5) {
+                                       msg = imgHeaders[i];
+                                       break;
+                                    }
+                                }
+                                msg.content = e.target.result;
+                                var sender = msg['sender'];
+                                var senderName = msg['senderName'];
+                                var date = msg['date'];
+                                var content = msg['content'];
+
+                                let x = 0;
+                                if (myId === sender) {
+                                    onlineUsersList[curUserIdx].msgBox.push(msg);
+                                    document.getElementById('thum-' + onlineUsersList[curUserIdx].id).innerText = '[图片]';
+                                } else {
+                                    for (let i = 0; i < onlineUsersList.length; i++) {
+                                        if (onlineUsersList[i].id === sender) {
+                                            x = i;
+                                            onlineUsersList[i].msgBox.push(msg);
+                                        }
+                                    }
+                                    document.getElementById('thum-' + sender).innerText = '[图片]';
+                                }
+
+                                if (myId === sender || onlineUsersList[curUserIdx].id === sender) {
+                                    chatbox.innerHTML += '<div class="' + ((myId === sender) ? 'self' : 'other') + '" id="other' + idx + '">' +
+                                        '<div class="avatar"><img src="/MyRanch/img/getAvatar.jpeg" alt=""></div>' +
+                                        '<div class="msg" id="msg' + idx + '">' +
+                                        '<p class="msg-name-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-name' + idx + '">' + senderName + '</p>' +
+                                        '<p class="msg-text-' + ((myId === sender) ? 'right' : 'left') + '" id="msg-text' + idx + '">' +
+                                        '<img src="' + content + '" id="msg-img' + idx + '" alt="">' +
+                                        '</p>' +
+                                        '<time class="time-' + ((myId === sender) ? 'right' : 'left') + '" id="time-' + idx + '">' + date + '</time>' +
+                                        '</div>' +
+                                        '</div>';
+
+                                    (function (idx) {
+                                        document.getElementById('msg-img' + idx).onload = function () {
+                                            document.getElementById('msg' + idx).style.height =
+                                                document.getElementById('msg-text' + idx).offsetHeight +
+                                                document.getElementById('msg-name' + idx).offsetHeight +
+                                                document.getElementById('time-' + idx).offsetHeight + 'px';
+                                            document.getElementById('other' + idx).style.height =
+                                                document.getElementById('msg-text' + idx).offsetHeight +
+                                                document.getElementById('msg-name' + idx).offsetHeight +
+                                                document.getElementById('time-' + idx).offsetHeight + 'px';
+
+                                            chatbox.scrollTop = chatbox.scrollHeight;
+                                        }
+                                    })(idx);
+
+                                    idx++;
+                                } else {
+                                    onlineUsersList[x].unread++;
+                                    document.getElementById(sender).style.backgroundColor = '#F1AE1B';
+
+                                    let unread = document.getElementById('unread-' + sender);
+                                    unread.innerText = onlineUsersList[x].unread.toString();
+                                    unread.style.display = 'block';
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 每隔一段时间发送一个数据包使Session不会失效
+                setInterval(keepSessionAlive, 1000 * 60 * 5);
+            }
+        }
+        xhr.open("GET", "/MyRanch/user/getUserInfo", true);
+        xhr.send();
+
+        var pktNum = 0;
+        function keepSessionAlive() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (xhr.responseText === "0") {
+                        console.log('Receive a packet from the server.');
+                    } else {
+                        console.log('The session may be dead.');
+                    }
+                }
+            }
+            xhr.open("GET", "/MyRanch/user/getSession", true);
+            xhr.send();
+            console.log('Send a packet ' + pktNum + ' to keep the session alive.');
+            pktNum++;
+        }
+
+        function dateToStr(date) {
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
+            var hours = date.getHours();
+            var min = date.getMinutes();
+            var second = date.getSeconds();
+            return year + "-" +
+                ((month + 1) > 9 ? (month + 1) : "0" + (month + 1)) + "-" +
+                (day > 9 ? day : ("0" + day)) + " " +
+                (hours > 9 ? hours : ("0" + hours)) + ":" +
+                (min > 9 ? min : ("0" + min)) + ":" +
+                (second > 9 ? second : ("0" + second));
+        }
+
+    </script>
+</div>
+
+</body>
+</html>

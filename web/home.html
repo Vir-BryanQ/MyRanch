@@ -875,8 +875,8 @@
                         <br>交易市场
                     </li>
                     <li class="help">
-                        <img src="/MyRanch/img/tool.png" style="padding-top:10px ; height:36px;">
-                        <br>帮助
+                        <img src="/MyRanch/img/message.png" style="padding-top:10px ; height:36px;">
+                        <br>消息
                     </li>
                 </ul>
             </div>
@@ -1151,44 +1151,49 @@
 
         getGroupList();
 
+        var addGroupOn = false;
         document.getElementById("addGroup").onclick = function () {
-            const groupTable = document.getElementById("group-table");
-            var tmp = groupTable.innerHTML;
-            var HTMLStr = "";
-            HTMLStr += '<div style="margin-left:23px; margin-top:3px">';
-            HTMLStr += '<img src="/MyRanch/img/wenjianjia.png" style="height: 40px; display: inline-block;">' +
-                '<div class="wp-s-pan-list__file-name-edit--title-edit-input u-input u-input--small">' +
-                '<input type="text" autoComplete="off" class="u-input__inner" id="new-group-name">' +
-                '</div>';
-            HTMLStr += '<input type="button" id="add-group-confirm" class="confirm-cancel-box" value="确认">';
-            HTMLStr += '<input type="button" id="add-group-cancel" class="confirm-cancel-box" value="取消">';
-            HTMLStr += '</div>';
+            if (!addGroupOn) {
+                const groupTable = document.getElementById("group-table");
+                var tmp = groupTable.innerHTML;
+                var HTMLStr = "";
+                HTMLStr += '<div style="margin-left:23px; margin-top:3px">';
+                HTMLStr += '<img src="/MyRanch/img/wenjianjia.png" style="height: 40px; display: inline-block;">' +
+                    '<div class="wp-s-pan-list__file-name-edit--title-edit-input u-input u-input--small">' +
+                    '<input type="text" autoComplete="off" class="u-input__inner" id="new-group-name">' +
+                    '</div>';
+                HTMLStr += '<input type="button" id="add-group-confirm" class="confirm-cancel-box" value="确认">';
+                HTMLStr += '<input type="button" id="add-group-cancel" class="confirm-cancel-box" value="取消">';
+                HTMLStr += '</div>';
 
-            HTMLStr += tmp;
+                HTMLStr += tmp;
 
-            groupTable.innerHTML = HTMLStr;
+                groupTable.innerHTML = HTMLStr;
 
-            document.getElementById("add-group-confirm").onclick = function () {
-                const groupName = document.getElementById("new-group-name").value;
-                groupTable.innerHTML = tmp;
+                addGroupOn = true;
 
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        if (xhr.responseText == "0") {
+                document.getElementById("add-group-confirm").onclick = function () {
+                    const groupName = document.getElementById("new-group-name").value;
+                    addGroupOn = false;
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (xhr.responseText == "1") {
+                                alert('新建分组失败, 请检查分组名是否非法或重复');
+                            }
                             getGroupList();
-                        } else {
-                            alert('新建分组失败, 请检查分组名是否非法或重复');
                         }
                     }
+                    xhr.open("POST", "/MyRanch/group/addGroup");
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.send("groupName=" + groupName);
                 }
-                xhr.open("POST", "/MyRanch/group/addGroup");
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send("groupName=" + groupName);
-            }
 
-            document.getElementById("add-group-cancel").onclick = function () {
-                groupTable.innerHTML = tmp;
+                document.getElementById("add-group-cancel").onclick = function () {
+                    addGroupOn = false;
+                    getGroupList();
+                }
             }
         }
 
@@ -1276,6 +1281,7 @@
     var index = document.querySelector('.index');
     var exchange = document.querySelector('.exchange');
     var deal = document.querySelector('.deal');
+    var help = document.querySelector('.help');
     var second11 = document.querySelector('.second_1-1');
     var second12 = document.querySelector('.second_1-2');
     var second13 = document.querySelector('.second_1-3');
@@ -1312,6 +1318,10 @@
         second13.style.zIndex = 3;
         second13.style.display = 'block';
     })
+    help.addEventListener('click', function() {
+        window.location.href = '/MyRanch/chat.html';
+    })
+
 </script>
 
 </html>

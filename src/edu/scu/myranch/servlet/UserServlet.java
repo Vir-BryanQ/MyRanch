@@ -1,5 +1,7 @@
 package edu.scu.myranch.servlet;
 
+import com.alibaba.fastjson.JSON;
+import com.sun.mail.smtp.DigestMD5;
 import edu.scu.myranch.service.Acounts;
 import edu.scu.myranch.utils.DBUtils;
 import edu.scu.myranch.utils.Emails;
@@ -16,10 +18,65 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-@WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin", "/user/sendemail2", "/user/register"})
+class User {
+    private String id;
+    private String username;
+
+    public User() {
+    }
+
+
+    public User(String id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
+}
+
+@WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin",
+        "/user/sendemail2", "/user/register", "/user/getUserInfo",
+        "/user/getSession"
+})
 public class UserServlet extends HttpServlet {
     private static String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
 
@@ -36,6 +93,32 @@ public class UserServlet extends HttpServlet {
             doSendEmail2(request, response);
         } else if ("/user/register".equals(servletPath)) {
             doRegister(request,response);
+        } else if ("/user/getUserInfo".equals(servletPath)) {
+            doGetUserInfo(request, response);
+        } else if ("/user/getSession".equals(servletPath)) {
+            doGetSession(request, response);
+        }
+    }
+
+    private void doGetSession(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        out.print(session == null ? "1" : "0");
+    }
+
+    private void doGetUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String id = (String) session.getAttribute("id");
+            String username = (String) session.getAttribute("username");
+            if (id != null && username != null) {
+                out.print(JSON.toJSONString(new User(id, username)));
+            }
         }
     }
 
@@ -62,6 +145,7 @@ public class UserServlet extends HttpServlet {
                     String curDir = userDataDir + "/" + id;
                     session.setAttribute("curDir", curDir);
                     session.setAttribute("rootDir", curDir);
+                    session.setAttribute("id", id);
                     session.setAttribute("username", rs.getString("userName"));
                     out.print("");
                 } else {
