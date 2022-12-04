@@ -29,7 +29,6 @@ class User {
     public User() {
     }
 
-
     public User(String id, String username) {
         this.id = id;
         this.username = username;
@@ -52,6 +51,14 @@ class User {
     }
 
     @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -63,19 +70,11 @@ class User {
     public int hashCode() {
         return Objects.hash(id, username);
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                '}';
-    }
 }
 
 @WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin",
         "/user/sendemail2", "/user/register", "/user/getUserInfo",
-        "/user/getSession"
+        "/user/getSession", "/user/showUserInfo", "/user/changeInfo"
 })
 public class UserServlet extends HttpServlet {
     private static String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
@@ -97,6 +96,22 @@ public class UserServlet extends HttpServlet {
             doGetUserInfo(request, response);
         } else if ("/user/getSession".equals(servletPath)) {
             doGetSession(request, response);
+        } else if ("/user/showUserInfo".equals(servletPath)) {
+            try {
+                doShowUserInfo(request,response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if ("/user/changeInfo".equals(servletPath)) {
+            try {
+                try {
+                    doChangeInfo(request,response);
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -236,6 +251,7 @@ public class UserServlet extends HttpServlet {
             session.setAttribute("curDir", curDir);
             session.setAttribute("rootDir", curDir);
             session.setAttribute("username", username);
+            session.setAttribute("id",id);
             out.print("");
         } else {
             out.print("邮箱或验证码错误");
@@ -323,5 +339,177 @@ public class UserServlet extends HttpServlet {
         } else {
             out.print("邮箱或验证码错误");
         }
+    }
+
+    protected void doShowUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String userId = (String) session.getAttribute("id");
+//            System.out.println(userId);
+            Connection conn = DBUtils.getConnection();
+            String sql = "select * from userinfo where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                String userName = rs.getString("userName");
+                String email = rs.getString("email");
+                String region = rs.getString("region");
+                String gender = rs.getString("gender");
+                String phone = rs.getString("phone");
+                showUser showUser = new showUser(userId, userName, email, phone, region, gender);
+                String jsonStr = JSON.toJSONString(showUser);
+                out.print(jsonStr);
+            }
+            DBUtils.close(conn,ps,rs);
+        }
+    }
+
+    protected void doChangeInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NoSuchAlgorithmException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String newMessage = request.getParameter("newMessage");
+            String userId = (String) session.getAttribute("id");
+            String type = request.getParameter("type");
+//            System.out.println(newMessage);
+//            System.out.println(userId);
+//            System.out.println(type);
+            Connection conn = DBUtils.getConnection();
+            String sql = null;
+            PreparedStatement ps = null;
+            int i = 0;
+            if (type.equals("0")) {
+                sql = "UPDATE userInfo SET `userName` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+//                ps.setString(1,userId);
+                ps = conn.prepareStatement(sql);
+                i = ps.executeUpdate();
+            } else if (type.equals("1")) {
+                sql = "UPDATE userInfo SET `phone` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+//                ps.setString(1,userId);
+                ps = conn.prepareStatement(sql);
+                i = ps.executeUpdate();
+            } else if (type.equals("2")) {
+                sql = "UPDATE userInfo SET `gender` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+//                ps.setString(1,userId);
+                ps = conn.prepareStatement(sql);
+                i = ps.executeUpdate();
+            } else if (type.equals("3")) {
+                sql = "UPDATE userInfo SET `region` = " + "'" + newMessage + "'" + " WHERE `id` = "+ userId;
+//                ps.setString(1,userId);
+                ps = conn.prepareStatement(sql);
+                i = ps.executeUpdate();
+            } else if (type.equals("4")) {
+                sql = "UPDATE userInfo SET `passWd` = " + "'" + Sha256.getSHA256(newMessage) + "'" + " WHERE `id` = "+ userId;
+//                ps.setString(1,userId);
+                ps = conn.prepareStatement(sql);
+                i = ps.executeUpdate();
+            }
+
+            if (i > 0) {
+                out.print("0");
+            }
+
+            DBUtils.close(conn,ps,null);
+        }
+    }
+}
+
+class showUser {
+    private String userId;
+    private String userName;
+    private String userEmail;
+    private String userPhone;
+    private String userRegion;
+    private String userGender;
+
+    public showUser() {
+    }
+
+    public showUser(String userId, String userName, String userEmail, String userPhone, String userRegion, String userGender) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
+        this.userRegion = userRegion;
+        this.userGender = userGender;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserRegion() {
+        return userRegion;
+    }
+
+    public void setUserRegion(String userRegion) {
+        this.userRegion = userRegion;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        showUser showUser = (showUser) o;
+        return Objects.equals(userId, showUser.userId) && Objects.equals(userName, showUser.userName) && Objects.equals(userEmail, showUser.userEmail) && Objects.equals(userPhone, showUser.userPhone) && Objects.equals(userRegion, showUser.userRegion) && Objects.equals(userGender, showUser.userGender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, userName, userEmail, userPhone, userRegion, userGender);
+    }
+
+    @Override
+    public String toString() {
+        return "showUser{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userRegion='" + userRegion + '\'' +
+                ", userGender='" + userGender + '\'' +
+                '}';
     }
 }
