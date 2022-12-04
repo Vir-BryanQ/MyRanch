@@ -34,7 +34,7 @@ public class Acounts {
         } while (rs.next());
 
         // Obviously, the password must be encrypted before it's stored.
-        sql = "insert into UserInfo values (" + ("'" + id + "'") + ", " +
+        sql = "insert into UserInfo" + "(`id`,`userName`,`passWd`,`email`,`userType`) VALUES " + "(" + ("'" + id + "'") + ", " +
                                                 ("'" + userName + "'") + ", " +
                                                 ("'" + Sha256.getSHA256(passwd) + "'") + ", " +
                                                 ("'" + email + "'") + ", " +
