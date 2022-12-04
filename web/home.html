@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3807373_gglblcpic0h.css">
     <title>MYRANCH</title>
     <style>
         * {
@@ -135,6 +136,7 @@
             width: 40px;
             height: 40px;
             background: url(/MyRanch/img/user.jpg);
+            background-size: 40px 40px;
             background-position: -72px -40px;
             border-radius: 50%;
         }
@@ -147,9 +149,8 @@
         }
 
         .second_part {
-            height: 700px;
+            height: 658px;
             width: 100%;
-            /*background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);*/
             /* border:  2px solid red; */
         }
 
@@ -159,7 +160,6 @@
             height: 655px;
             float: left;
             text-align: center;
-            background-color: #ffffff;
             /* border: 2px solid blue; */
         }
 
@@ -168,7 +168,6 @@
             height: 655px;
             float: left;
             border: 1px solid rgb(241, 242, 244);
-            background-color: #ffffff;
         }
 
         .second_3 {
@@ -217,7 +216,7 @@
             /* transform: translate(-2px, -2px); */
             background-color: #e1e1e1 !important;
         }
-
+        /*改2*/
         .second_2-1 {
             width: 92%;
             height: 40px;
@@ -229,11 +228,11 @@
             line-height: 42px;
             font-family: SFUIText, PingFangSC-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
             font-weight: 700;
-            /* color:#54d1a6; */
+            background-color:#54d1a6;
         }
-
+        /*改2*/
         .second_2-1:hover {
-            background-color: #54d1a6;
+            background-color: #54d1a6 !important;
             color: black;
         }
 
@@ -250,9 +249,9 @@
             font-weight: 700;
             /* color:#54d1a6; */
         }
-
+        /*改2*/
         .second_2-2:hover {
-            background-color: #54d1a6;
+            background-color: #54d1a6 !important;
             color: black;
         }
 
@@ -260,8 +259,7 @@
             width: 100%;
             height: 10px;
             margin-top: 180px;
-            /*background-color: darkgray;*/
-            background-color: #ffffff;
+            background-color: darkgray;
         }
 
         .second_3-1 {
@@ -1060,6 +1058,238 @@
             /* border: 0.5px solid red; */
             overflow: hidden;
         }
+        /*改2*/
+        /* 详细的个人信息界面 */
+
+        .persondinfo_detail {
+            width: 100%;
+            height: 655px;
+            position: absolute;
+            z-index: 6;
+            background-color: #f8f8f8;
+            display: none;
+            /*text-align: center;*/
+            /*line-height: 655px;*/
+        }
+        /* 详细个人信息页面左侧部分 */
+
+        /*.per_info_detail_left {*/
+        /*    width: 16%;*/
+        /*    height: 100%;*/
+        /*    float: left;*/
+        /*    !* background-color:#f8f8f8; *!*/
+        /*    position: relative;*/
+        /*}*/
+        /*!* 详细个人信息页面头像 *!*/
+
+        /*.per_info_detail_left_touxiang {*/
+        /*    width: 70px;*/
+        /*    height: 70px;*/
+        /*    position: absolute;*/
+        /*    top: 10%;*/
+        /*    left: 25%;*/
+        /*    border-radius: 50%;*/
+        /*    background: url(img/user.jpg);*/
+        /*    background-position: -52px -40px;*/
+        /*}*/
+
+        /*.per_info_detail_left_name {*/
+        /*    width: 100%;*/
+        /*    height: 3%;*/
+        /*    position: absolute;*/
+        /*    top: 26%;*/
+        /*    left: 0%;*/
+        /*    !* background-color: red; *!*/
+        /*    text-align: center;*/
+        /*    line-height: 20px;*/
+        /*    font-size: 18px;*/
+        /*}*/
+        /*!* 个人信息和修改信息两按钮 *!*/
+
+        /*.per_info_detail_left_twoaniu {*/
+        /*    width: 100%;*/
+        /*    height: 15%;*/
+        /*    position: absolute;*/
+        /*    top: 45%;*/
+        /*    left: 0%;*/
+        /*    text-align: center;*/
+        /*    font-size: 18px;*/
+        /*}*/
+        .infoShowRegion{
+            display: flex;
+            justify-content: space-evenly;
+            height: 100%;
+            /*text-align: center;*/
+        }
+
+        .infoShowRegion-left,.infoShowRegion-right{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .infoShowRegion-left{
+            flex-basis: 30%;
+            text-align: right;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .infoShowRegion-right{
+            flex-basis: 40%;
+        }
+
+        .per_info_detail_left_twoaniu .twoaniu-1 {
+            position: absolute;
+            width: 90%;
+            text-align: center;
+            top: 0%;
+            left: 5%;
+            border-radius: 15px;
+            background-color: #54d1a6;
+        }
+        .per_info_detail_left_twoaniu .twoaniu-1:hover {
+            background-color: #54d1a6 !important;
+            border-radius: 15px;
+        }
+        .per_info_detail_left_twoaniu .twoaniu-2 {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            text-align: center;
+            border-radius: 15px;
+            top: 50%;
+        }
+        .per_info_detail_left_twoaniu .twoaniu-2:hover {
+            background-color: #54d1a6 !important;
+            border-radius: 15px;
+        }
+        /* 详细个人信息页面右侧部分 */
+
+        .per_info_detail_right {
+            width: 84%;
+            height: 100%;
+            float: left;
+            position: relative;
+            /* background-color: red; */
+        }
+        /* 账号  */
+
+        .per_info_detail_right_zhanghao {
+            width: 60%;
+            height: 3%;
+            position: absolute;
+            top: 9%;
+            left: 6%;
+            /* background-color: #54d1a6; */
+        }
+        /* 个人信息内容 */
+
+        .per_info_detail_right_neirong {
+            width: 95%;
+            height: 80%;
+            position: absolute;
+            top: 15%;
+            left: 0%;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
+            z-index: 2;
+            /* display: none; */
+        }
+        /* 基本信息框架 */
+
+        .per_info_detail_right_neirong_basicinfo {
+            width: 30%;
+            height: 100%;
+            position: relative;
+            float: left;
+            /* background-color: #54d1a6; */
+        }
+        /* 基本信息内容 */
+
+        .per_info_detail_right_neirong_basicinfo_detail {
+            width: 100%;
+            height: 45%;
+            position: absolute;
+            top: 8%;
+            left: 0%;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        /* 相关分组批次或售卖品 */
+
+        /*.per_info_detail_right_neirong_basicinfo_guanlinneirong {*/
+        /*    width: 70%;*/
+        /*    height: 100%;*/
+        /*    !* position: relative; *!*/
+        /*    float: left;*/
+        /*    !* background-color: #54d1a6; *!*/
+        /*}*/
+        /*!* 每个组的内容 *!*/
+
+        /*.per_info_detail_right_neirong_basicinfo_guanlinneirong_1 {*/
+        /*    width: 93%;*/
+        /*    height: 16%;*/
+        /*    margin-top: 18px;*/
+        /*    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);*/
+        /*}*/
+
+        .per_info_detail_right_neirong_basicinfo_guanlinneirong_1 div {
+            width: 100%;
+            height: 25%;
+            margin-left: 6px;
+            font-size: 10px;
+        }
+        /* 修改个人信息界面 */
+
+        .per_info_datail_right_chang {
+            width: 95%;
+            height: 65%;
+            position: absolute;
+            top: 20%;
+            left: 0%;
+            background-color: white;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 3px 10px 0 rgb(0 0 0 / 6%);
+            z-index: 1;
+            display: none;
+            /* background-color: red; */
+        }
+
+        .per_info_datail_right_chang div {
+            width: 100%;
+            height: 15%;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .per_info_datail_right_chang input {
+            background-color: white;
+            height: 25px;
+            border-radius: 5px;
+        }
+
+        .per_info_datail_right_chang button {
+            width: 50px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-left: 60px;
+        }
+        .per_info_datail_right_chang button:hover {
+            background-color: #8eefcd;
+        }
+
+        .changeInfoB{
+            margin-left: 60px;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            background: #ffffff;
+            width: 50px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -1124,7 +1354,7 @@
             <div class="second_2-1">
                 我的农场信息
             </div>
-            <div class="second_2-2">
+            <div class="second_2-2" id="other-info">
                 其他信息
             </div>
             <div class="second_2-3">
@@ -1137,13 +1367,7 @@
             <div class="second_1-1">
                 <div class="second_3-1" id="button-region">
                     <button class="second_3-1-1-zengjia" id="addGroup">新建分组</button>
-                    <!--                        <div class="second_3-1-2-shanchu">-->
-                    <!--                            删除分组-->
-                    <!--                        </div>-->
                     <button class="second_3-1-2-shanchu" id="addBatch">新建批次</button>
-                    <!--                        <div class="second_3-1-2-shanchu">-->
-                    <!--                            删除批次-->
-                    <!--                        </div>-->
                     <div class="second_3-1-3-search">
                         <input type="text" value="输入要搜索的组或批次" class="searchbox">
                         <button id="search-production">搜索</button>
@@ -1151,45 +1375,11 @@
                 </div>
                 <!-- 分组批次信息显示区域 -->
                 <div class="second_3-2-1">
-                    <!--                        <div class="second_3-2-1-1">-->
-                    <!--                            <div class="second_3-2-1-1-1">-->
-                    <!--                                全部分组-->
-                    <!--                            </div>-->
-                    <!--                            <img src="/MyRanch/img/ge.png" style="height: 19px;">-->
-                    <!--                        </div>-->
-                    <!--                        <div class="second_3-2-1-2" id="show-region">-->
-                    <!--                            <input type="checkbox">-->
-                    <!--                            <span>组名</span>-->
-                    <!--&lt;!&ndash;                            <span>修改时间</span>&ndash;&gt;-->
-                    <!--&lt;!&ndash;                            <span>大小</span>&ndash;&gt;-->
-                    <!--                        </div>-->
                     <div class="second_3-2-1-3">
                         <!--组文件-->
                         <div id="group-table" style="height: auto"></div>
-                        <!--页码-->
-                        <!--                        <div class='page-nav'>-->
-                        <!--                            <ul>-->
-                        <!--                                <li><a href="#">首页</a></li>-->
-                        <!--                                <li><a href="#">上一页</a></li>-->
-                        <!--                                <li><a href="#">1</a></li>-->
-                        <!--                                <li><a href="#">2</a></li>-->
-                        <!--                                <li><a href="#">3</a></li>-->
-                        <!--                                <li><a href="#">4</a></li>-->
-                        <!--                                <li><a href="#">5</a></li>-->
-                        <!--                                <li><a href="#">下一页</a></li>-->
-                        <!--                                <li><a href="#">末页</a></li>-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
-                <!-- 相关描述 -->
-                <!--                <div class="second_3-2-2">-->
-                <!--                    <div class="second_3-2-2-1"><span>内容简介</span></div>-->
-                <!--                    <div>-->
-                <!--                        <img src="/MyRanch/img/jiesao.png" style="height: 120px;">-->
-                <!--                        <br> 选中文件，查看详情-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
             <!-- 经验交流界面 -->
             <div class="second_1-2">
@@ -1371,6 +1561,33 @@
                 <div class="second_1-3-2-message">
                     <a href="#"><img src="/MyRanch/img/message.png"></a>
                     <a href="#"><img src="/MyRanch/img/custom_service.png" style="width:100%"></a>
+                </div>
+            </div>
+
+            <!-- 个人详细信息界面 -->
+            <!-- 改2 -->
+            <div class="persondinfo_detail">
+                <div class="infoShowRegion">
+                    <div class="infoShowRegion-left">
+                        <div><i class="iconfont icon-zhanghao" style="margin-right: 5px; font-size: 25px"></i>账号：</div>
+                        <div><i class="iconfont icon-mima" style="margin-right: 5px; font-size: 25px"></i>密码：</div>
+                        <div><i class="iconfont icon-nicheng" style="margin-right: 5px; font-size: 25px"></i>用户名：</div>
+                        <div><i class="iconfont icon-youxiang" style="margin-right: 5px; font-size: 25px"></i>邮箱：</div>
+                        <div><i class="iconfont icon-dianhua" style="margin-right: 5px; font-size: 25px"></i>电话：</div>
+                        <div><i class="iconfont icon-xingbie" style="margin-right: 5px; font-size: 25px"></i>性别：</div>
+                        <div><i class="iconfont icon-suozaidi" style="margin-right: 5px; font-size: 25px"></i>所在地：</div>
+                        <div><i class="iconfont icon-shoukuanma1" style="margin-right: 5px; font-size: 25px"></i>收款码：</div>
+                    </div>
+                    <div class="infoShowRegion-right">
+                        <div id="infoID"></div>
+                        <div id="infoPwd">******</div>
+                        <div id="infoUsername"></div>
+                        <div id="infoEmail"></div>
+                        <div id="infoPhone"></div>
+                        <div id="infoGender"></div>
+                        <div id="infoRegion"></div>
+                        <div><button style="height: 21px">上传按钮</button></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1893,8 +2110,241 @@
             }
         }
         document.getElementById("addBatch").onclick = addBatch
-    }
 
+        function getUserInfo() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    var userJson = JSON.parse(xhr.responseText);
+                    // console.log(userJson)
+
+                    document.getElementById("infoID").innerText = userJson.userId;
+                    document.getElementById("infoPwd").innerHTML = '******' + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserpd">';
+                    document.getElementById("infoEmail").innerText = userJson.userEmail;
+                    document.getElementById("infoUsername").innerHTML = userJson.userName + '<input type="button" value="修改" class="changeInfoB" id="changeInfousername">';
+                    document.getElementById("infoPhone").innerHTML = userJson.userPhone + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserphone">';
+                    document.getElementById("infoRegion").innerHTML = userJson.userRegion + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserregion">';
+                    document.getElementById("infoGender").innerHTML = userJson.userGender + '<input type="button" value="修改" class="changeInfoB" id="changeInfousergender">';
+                }
+            }
+            xhr.open("GET","/MyRanch/user/showUserInfo");
+            xhr.send();
+        }
+        //获得个人信息
+        document.getElementById("other-info").onclick = getUserInfo
+
+        // 用户名
+        document.getElementById("infoUsername").onmouseover = function () {
+            const changeInfoUsername = document.getElementById("changeInfousername");
+            if (changeInfoUsername != null) {
+                changeInfoUsername.style.display = 'inline-block';
+                changeInfoUsername.onclick = function () {
+                    var HTMLStr = "";
+                    HTMLStr += '<input type="text" autoComplete="off" id="newName">'
+                    HTMLStr += '<input type="button" id="changename-confirm" class="confirm-cancel-box" value="确认">';
+                    HTMLStr += '<input type="button" id="changename-cancle" class="confirm-cancel-box" value="取消">';
+                    document.getElementById("infoUsername").innerHTML = HTMLStr;
+
+                    document.getElementById("changename-confirm").onclick = function () {
+                        const newMessage = document.getElementById("newName");
+                        if (newMessage.value != ''){
+                            var xhr = new XMLHttpRequest()
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                    document.getElementById("infoUsername").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfousername">';
+                                }
+                            }
+                            xhr.open("POST", "/MyRanch/user/changeInfo");
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send("newMessage=" + newMessage.value + "&" + "type=0");
+                        } else {
+                            alert("修改信息输入不能为空")
+                        }
+                    }
+
+                    document.getElementById("changename-cancle").onclick = function () {
+                        getUserInfo()
+                    }
+                }
+            }
+        }
+        document.getElementById("infoUsername").onmouseout = function () {
+            const changeInfoUsername = document.getElementById("changeInfousername");
+            if (changeInfoUsername != null){
+                changeInfoUsername.style.display = 'none';
+            }
+        }
+
+        // 电话
+        document.getElementById("infoPhone").onmouseover = function () {
+            const changeInfoUserphone = document.getElementById("changeInfouserphone");
+            if (changeInfoUserphone != null) {
+                changeInfoUserphone.style.display = 'inline-block';
+                changeInfoUserphone.onclick = function () {
+                    var HTMLStr = "";
+                    HTMLStr += '<input type="text" autoComplete="off" id="newphone">'
+                    HTMLStr += '<input type="button" id="changephone-confirm" class="confirm-cancel-box" value="确认">';
+                    HTMLStr += '<input type="button" id="changephone-cancle" class="confirm-cancel-box" value="取消">';
+                    document.getElementById("infoPhone").innerHTML = HTMLStr;
+
+                    document.getElementById("changephone-confirm").onclick = function () {
+                        const newMessage = document.getElementById("newphone");
+                        if (newMessage.value != ''){
+                            var xhr = new XMLHttpRequest()
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                    document.getElementById("infoPhone").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserphone">';
+                                }
+                            }
+                            xhr.open("POST", "/MyRanch/user/changeInfo");
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send("newMessage=" + newMessage.value + "&" +
+                                "type=1");
+                        } else {
+                            alert("修改信息输入不能为空")
+                        }
+                    }
+
+                    document.getElementById("changephone-cancle").onclick = function () {
+                        getUserInfo()
+                    }
+                }
+            }
+        }
+        document.getElementById("infoPhone").onmouseout = function () {
+            const changeInfoUserphone = document.getElementById("changeInfouserphone");
+            if (changeInfoUserphone != null) {
+                changeInfoUserphone.style.display = 'none';
+            }
+        }
+
+    //    性别
+        document.getElementById("infoGender").onmouseover = function () {
+            const changeInfoUsergender = document.getElementById("changeInfousergender");
+            if (changeInfoUsergender != null) {
+                changeInfoUsergender.style.display = 'inline-block';
+                changeInfoUsergender.onclick = function () {
+                    var HTMLStr = "";
+                    HTMLStr += '<input type="text" autoComplete="off" id="newgender">'
+                    HTMLStr += '<input type="button" id="changegender-confirm" class="confirm-cancel-box" value="确认">';
+                    HTMLStr += '<input type="button" id="changegender-cancle" class="confirm-cancel-box" value="取消">';
+                    document.getElementById("infoGender").innerHTML = HTMLStr;
+
+                    document.getElementById("changegender-confirm").onclick = function () {
+                        const newMessage = document.getElementById("newgender");
+                        if (newMessage.value != ''){
+                            var xhr = new XMLHttpRequest()
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                    document.getElementById("infoGender").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfousergender">';
+                                }
+                            }
+                            xhr.open("POST", "/MyRanch/user/changeInfo");
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send("newMessage=" + newMessage.value + "&" +
+                                "type=2");
+                        } else {
+                         alert("修改信息输入不能为空")
+                        }
+                    }
+
+                    document.getElementById("changegender-cancle").onclick = function () {
+                        getUserInfo()
+                    }
+                }
+            }
+        }
+        document.getElementById("infoGender").onmouseout = function () {
+            const changeInfoUsergender = document.getElementById("changeInfousergender");
+            if (changeInfoUsergender != null){
+                changeInfoUsergender.style.display = 'none';
+            }
+        }
+
+    //    所在地
+        document.getElementById("infoRegion").onmouseover = function () {
+            const changeInfoUserregion = document.getElementById("changeInfouserregion");
+            if (changeInfoUserregion != null) {
+                changeInfoUserregion.style.display = 'inline-block';
+                changeInfoUserregion.onclick = function () {
+                    var HTMLStr = "";
+                    HTMLStr += '<input type="text" autoComplete="off" id="newregion">'
+                    HTMLStr += '<input type="button" id="changeregion-confirm" class="confirm-cancel-box" value="确认">';
+                    HTMLStr += '<input type="button" id="changeregion-cancle" class="confirm-cancel-box" value="取消">';
+                    document.getElementById("infoRegion").innerHTML = HTMLStr;
+
+                    document.getElementById("changeregion-confirm").onclick = function () {
+                        const newMessage = document.getElementById("newregion");
+                        if (newMessage.value != ''){
+                            var xhr = new XMLHttpRequest()
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                    document.getElementById("infoRegion").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserregion">';
+                                }
+                            }
+                            xhr.open("POST", "/MyRanch/user/changeInfo");
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send("newMessage=" + newMessage.value + "&" +
+                                "type=3");
+                        }
+                    }
+
+                    document.getElementById("changeregion-cancle").onclick = function () {
+                        getUserInfo()
+                    }
+                }
+            }
+        }
+        document.getElementById("infoRegion").onmouseout = function () {
+            const changeInfoUserregion = document.getElementById("changeInfouserregion");
+            if (changeInfoUserregion != null){
+                changeInfoUserregion.style.display = 'none';
+            }
+        }
+
+        //    密码
+        document.getElementById("infoPwd").onmouseover = function () {
+            const changeInfoUserpd = document.getElementById("changeInfouserpd");
+            if (changeInfoUserpd != null) {
+                changeInfoUserpd.style.display = 'inline-block';
+                changeInfoUserpd.onclick = function () {
+                    var HTMLStr = "";
+                    HTMLStr += '<input type="text" autoComplete="off" id="newpd">'
+                    HTMLStr += '<input type="button" id="changepd-confirm" class="confirm-cancel-box" value="确认">';
+                    HTMLStr += '<input type="button" id="changepd-cancle" class="confirm-cancel-box" value="取消">';
+                    document.getElementById("infoPwd").innerHTML = HTMLStr;
+
+                    document.getElementById("changepd-confirm").onclick = function () {
+                        const newMessage = document.getElementById("newpd");
+                        if (newMessage.value != '' || (newMessage.value.length <= 16 && newMessage.value.length >= 6)) {
+                            var xhr = new XMLHttpRequest()
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                    document.getElementById("infoPwd").innerHTML = '******' + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserpd">';
+                                }
+                            }
+                            xhr.open("POST", "/MyRanch/user/changeInfo");
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send("newMessage=" + newMessage.value + "&" +
+                                "type=4");
+                        } else {
+                            alert("修改信息不能为空或输入密码长度应为6-16位");
+                        }
+                    }
+
+                    document.getElementById("changepd-cancle").onclick = function () {
+                        getUserInfo()
+                    }
+                }
+            }
+        }
+        document.getElementById("infoPwd").onmouseout = function () {
+            const changeInfoUserpd = document.getElementById("changeInfouserpd");
+            if (changeInfoUserpd != null) {
+                changeInfoUserpd.style.display = 'none';
+            }
+        }
+    }
 
     var index = document.querySelector('.index');
     var exchange = document.querySelector('.exchange');
@@ -1903,6 +2353,12 @@
     var second11 = document.querySelector('.second_1-1');
     var second12 = document.querySelector('.second_1-2');
     var second13 = document.querySelector('.second_1-3');
+    var second2 = document.querySelector('.second_2');
+    var second3 = document.querySelector('.second_3');
+    //改2
+    var second21 = document.querySelector('.second_2-1');
+    var second22 = document.querySelector('.second_2-2')
+    var persondinfo_detail = document.querySelector('.persondinfo_detail');
     index.addEventListener('click', function() {
         index.style.backgroundColor = '#e1e1e1';
         exchange.style.backgroundColor = 'white';
@@ -1913,6 +2369,19 @@
         second12.style.display = 'none';
         second13.style.zIndex = 1;
         second13.style.display = 'none';
+        //改2
+        second21.style.backgroundColor = '#54d1a6';
+        second22.style.backgroundColor = 'white';
+        persondinfo_detail.style.display = 'none';
+        persondinfo_detail.style.zIndex = 1;
+        second2.style.display = 'block';
+        second3.style.width = '60%';
+        second3.style.marginLeft = '0';
+        // update_username.valueOf().value = '请输入新的用户名';
+        // update_email.valueOf().value = '请输入新的电子邮箱';
+        // update_phone.valueOf().value = '请输入新的手机号';
+        // update_location.valueOf().value = '请输入新的地区';
+        // update_dept.valueOf().value = '请输入新的部门';
     })
     exchange.addEventListener('click', function() {
         exchange.style.backgroundColor = '#e1e1e1';
@@ -1924,6 +2393,19 @@
         second12.style.display = 'block';
         second13.style.zIndex = 1;
         second13.style.display = 'none';
+        second2.style.display = 'none';
+        //改2
+        second21.style.backgroundColor = '#54d1a6';
+        second22.style.backgroundColor = 'white';
+        persondinfo_detail.style.display = 'none';
+        persondinfo_detail.style.zIndex = 1;
+        second3.style.width = '70%';
+        second3.style.marginLeft = '3%';
+        // update_username.valueOf().value = '请输入新的用户名';
+        // update_email.valueOf().value = '请输入新的电子邮箱';
+        // update_phone.valueOf().value = '请输入新的手机号';
+        // update_location.valueOf().value = '请输入新的地区';
+        // update_dept.valueOf().value = '请输入新的部门';
     })
     deal.addEventListener('click', function() {
         deal.style.backgroundColor = '#e1e1e1';
@@ -1935,9 +2417,65 @@
         second12.style.display = 'none';
         second13.style.zIndex = 3;
         second13.style.display = 'block';
+        second2.style.display = 'none';
+        //改2
+        second21.style.backgroundColor = '#54d1a6';
+        second22.style.backgroundColor = 'white';
+        persondinfo_detail.style.display = 'none';
+        persondinfo_detail.style.zIndex = 1;
+        second3.style.width = '70%';
+        second3.style.marginLeft = '3%';
+        // update_username.valueOf().value = '请输入新的用户名';
+        // update_email.valueOf().value = '请输入新的电子邮箱';
+        // update_phone.valueOf().value = '请输入新的手机号';
+        // update_location.valueOf().value = '请输入新的地区';
+        // update_dept.valueOf().value = '请输入新的部门';
     })
     help.addEventListener('click', function() {
         window.location.href = "/MyRanch/chat.html";
+    })
+    //后面都是改2
+    second21.addEventListener('click',function (){
+        second21.style.backgroundColor = '#54d1a6';
+        second22.style.backgroundColor = 'white';
+        second11.style.zIndex = 3;
+        second11.style.display = 'block';
+        second12.style.zIndex = 1;
+        second12.style.display = 'none';
+        second13.style.zIndex = 1;
+        second13.style.display = 'none';
+        //改2
+        persondinfo_detail.style.display = 'none';
+        persondinfo_detail.style.zIndex = 1;
+        second2.style.display = 'block';
+        second3.style.width = '60%';
+        second3.style.marginLeft = '0';
+        // update_username.valueOf().value = '请输入新的用户名';
+        // update_email.valueOf().value = '请输入新的电子邮箱';
+        // update_phone.valueOf().value = '请输入新的手机号';
+        // update_location.valueOf().value = '请输入新的地区';
+        // update_dept.valueOf().value = '请输入新的部门';
+    })
+    second22.addEventListener('click',function (){
+        second22.style.backgroundColor = '#54d1a6';
+        second21.style.backgroundColor = 'white';
+        second11.style.zIndex = 1;
+        second11.style.display = 'none';
+        second12.style.zIndex = 1;
+        second12.style.display = 'none';
+        second13.style.zIndex = 1;
+        second13.style.display = 'none';
+        //改2
+        persondinfo_detail.style.display = 'block';
+        persondinfo_detail.style.zIndex = 3;
+        second2.style.display = 'block';
+        second3.style.width = '60%';
+        second3.style.marginLeft = '0';
+        // update_username.valueOf().value = '请输入新的用户名';
+        // update_email.valueOf().value = '请输入新的电子邮箱';
+        // update_phone.valueOf().value = '请输入新的手机号';
+        // update_location.valueOf().value = '请输入新的地区';
+        // update_dept.valueOf().value = '请输入新的部门';
     })
 
 </script>
