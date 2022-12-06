@@ -1824,11 +1824,21 @@
                                             var HTMLStr = "";
                                             HTMLStr += '<button ' + 'class="second_3-1-1-zengjia"' + 'id="addGroup">' + '新建分组' + '</button>';
                                             HTMLStr += '<button ' + 'class="second_3-1-2-shanchu" id="addBatch">' + '新建批次' + '</button>';
+                                            HTMLStr += '<button class="second_3-1-2-shanchu" id="repo" style="left: 280px">个人仓库</button>';
+                                            HTMLStr += '<button class="second_3-1-2-shanchu" id="putOnStuff" style="left: 410px">上架产品</button>';
                                             document.getElementById("button-region").innerHTML = HTMLStr;
                                             getGroupList();
                                             // 重新注册事件
                                             document.getElementById("addGroup").onclick = addGroup;
                                             document.getElementById("addBatch").onclick = addBatch;
+                                            document.getElementById('repo').onclick = function () {
+                                                checkPutOn = false;
+                                                getGroupList();
+                                            }
+                                            document.getElementById('putOnStuff').onclick = function () {
+                                                checkPutOn = true;
+                                                getPutOnList();
+                                            }
                                         }
                                         // 接下来还应该渲染展示界面
                                         var HTMLStr = "";
