@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3807373_gglblcpic0h.css">
     <title>MYRANCH</title>
+    <link rel="stylesheet" href="/MyRanch/css/home.css">
     <style>
         * {
             margin: 0;
@@ -137,7 +138,7 @@
             height: 40px;
             background: url(/MyRanch/img/user.jpg);
             background-size: 40px 40px;
-            background-position: -72px -40px;
+            background-position: -83px -40px;
             border-radius: 50%;
         }
 
@@ -259,7 +260,7 @@
             width: 100%;
             height: 10px;
             margin-top: 180px;
-            background-color: darkgray;
+            background-color: #ffffff;
         }
 
         .second_3-1 {
@@ -430,6 +431,8 @@
             border: 1px solid #bfbfbf;
             border-radius: 60em;
             margin-top: 7px;
+            margin-left: 5px;
+            margin-right: 5px;
         }
 
         .del-group-button:hover {
@@ -912,8 +915,7 @@
         .second_1-3-2 {
             width: 100%;
             height: 550px;
-            /* position: absolute; */
-            /* border: 1px solid red; */
+            overflow: auto;
         }
         /* 页面旁的消息栏 */
 
@@ -1290,6 +1292,85 @@
             width: 50px;
             display: none;
         }
+
+        .input1 {
+            margin-top: 5%;
+            padding-left: 20%;
+        }
+
+        .puton-button {
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: #1A73E8;
+            margin-right: 30%;
+            margin-bottom: 10%;
+        }
+
+        .puton-button:hover {
+            cursor: pointer;
+            background-color: #E9524A;
+        }
+
+
+        #image-desc-button {
+            color: #ffffff;
+            padding: 5px;
+            border-radius: 5em;
+            background-color: #1A73E8;
+            margin-left: 15%;
+        }
+
+        #image-desc-button:hover {
+            cursor: pointer;
+            background-color: #E9524A;
+        }
+
+        #send-pay-code {
+            color: #ffffff;
+            padding: 5px;
+            border-radius: 5em;
+            background-color: #1A73E8;
+            margin-left: 15%;
+        }
+
+        #send-pay-code:hover {
+            cursor: pointer;
+            background-color: #E9524A;
+        }
+
+        .container1 {
+            width: 700px;
+            height: 750px;
+            background-color: beige;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 15px;
+            z-index: 5;
+            display: none;
+            overflow: auto;
+            color: #7e57c1;
+        }
+
+        .container2 {
+            width: 650px;
+            height: 600px;
+            background-color: beige;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 15px;
+            z-index: 5;
+            display: none;
+            overflow: auto;
+        }
     </style>
 </head>
 
@@ -1315,6 +1396,38 @@
         </form>
         <button id="mask-confirm-2">确认</button>
         <button id="mask-cancel-2">取消</button>
+    </div>
+    <div class="container1" id = "mask-3">
+        <div class="input1">产品名称: <input type="text" class="put-on-input-box" id="product-name"></div>
+        <div class="input1">产品价格: <input type="text" class="put-on-input-box" id="product-price"/></div>
+        <div class="input1" >
+            <p>产品描述：</p>
+            <textarea rows="7" cols="50" id="product-desc"></textarea>
+        </div>
+        <input type="file" style="display: none" class="input1" accept="image/*" id="browse-image">
+        <div class="input1" >
+            <p style="display: inline-block">图片描述：</p>
+            <div style="margin-top: 5%; margin-bottom: 5%;"><img src="" alt="" style="max-width: 420px; height: auto" id="show-image"></div>
+            <button id="image-desc-button">上传图片</button>
+        </div>
+        <div class="input1" >
+            <button id="puton-confirm" class="puton-button">确认</button>
+            <button id="puton-cancel" class="puton-button">取消</button>
+        </div>
+    </div>
+    <div class="container2" id = "mask-4">
+        <input type="file" style="display: none" class="input1" accept="image/*" id="browse-image1">
+        <div class="input1" >
+            <p style="display: inline-block">收款码：</p>
+            <div style="margin-top: 5%; margin-bottom: 5%;">
+                <img src="" alt="" style="max-width: 420px; height: auto" id="pay-code-img">
+            </div>
+            <button id="send-pay-code">上传收款码</button>
+        </div>
+        <div class="input1" >
+            <button id="send-pay-code-confirm" class="puton-button">确认</button>
+            <button id="send-pay-code-cancel" class="puton-button">取消</button>
+        </div>
     </div>
 
     <div class="first_part">
@@ -1355,10 +1468,7 @@
                 我的农场信息
             </div>
             <div class="second_2-2" id="other-info">
-                其他信息
-            </div>
-            <div class="second_2-3">
-
+                个人信息
             </div>
         </div>
         <!-- 三个主要界面 -->
@@ -1368,6 +1478,8 @@
                 <div class="second_3-1" id="button-region">
                     <button class="second_3-1-1-zengjia" id="addGroup">新建分组</button>
                     <button class="second_3-1-2-shanchu" id="addBatch">新建批次</button>
+                    <button class="second_3-1-2-shanchu" id="repo" style="left: 280px">个人仓库</button>
+                    <button class="second_3-1-2-shanchu" id="putOnStuff" style="left: 410px">上架产品</button>
                     <div class="second_3-1-3-search">
                         <input type="text" value="输入要搜索的组或批次" class="searchbox">
                         <button id="search-production">搜索</button>
@@ -1461,101 +1573,11 @@
                         <input type="text" value="樱桃小丸子">
                         <button><img src="/MyRanch/img/search.jpg"></button>
                     </div>
-                    <!-- 搜索栏下方小字 -->
-<!--                    <div class="second_1-3-1-2">-->
-<!--                        <a href="#">奶牛</a>-->
-<!--                        <a href="#">小香猪</a>-->
-<!--                        <a href="#">千里马</a>-->
-<!--                        <a href="#">绵羊</a>-->
-<!--                        <a href="#">东北大米</a>-->
-<!--                    </div>-->
+
                 </div>
                 <!-- 商品信息框-->
-                <div class="second_1-3-2">
-                    <!-- 农业可动商品栏 -->
-                    <div class="second_1-3-2-muye">
-                        <button><div class="sanjiao-left"></div></button>
-                        <button><div class="sanjiao-right"></div></button>
-                        <div class="nongmuye">
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/corn.jpg"></div>
-                                <h6 class="product_produce">
-                                    水果玉米甜玉米云南生鲜蔬菜新鲜甜嫩水果玉米棒鲜玉米茄果瓜 甜脆 5斤
-                                </h6>
-                                <div class="produce_price">¥9.99</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/peanut.jpg"></div>
-                                <h6 class="product_produce">
-                                    新货山东铁锅沙土现炒熟花生原味红皮花生带壳香脆特大农家5斤散装 粉皮两粒大花生(2斤)
-                                </h6>
-                                <div class="produce_price">¥28.90</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/potato.jpg"></div>
-                                <h6 class="product_produce">
-                                    甘肃洋芋定西土豆10斤黄心当季新鲜蔬菜马铃薯大土豆整箱 新鲜蔬菜 生鲜 10斤装
-                                </h6>
-                                <div class="produce_price">¥138</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/rice.jpg"></div>
-                                <h6 class="product_produce">
-                                    2022年新米 大米 稻花软香米 10kg 稻香2号 20斤 珍珠米 甄选粳米
-                                </h6>
-                                <div class="produce_price">¥59.9</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/tomato.jpg"></div>
-                                <h6 class="product_produce">
-                                    普罗旺斯5斤装可生吃新鲜水果大番茄农家蔬菜普罗旺斯自然熟 沙瓤西红柿 3斤装
-                                </h6>
-                                <div class="produce_price">¥15.8</div>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- 牧业可动商品栏 -->
-                    <div class="second_1-3-2-muye">
-                        <button><div class="sanjiao-left"></div></button>
-                        <button><div class="sanjiao-right"></div></button>
-                        <div class="nongmuye">
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/chicken.jpg"></div>
-                                <h6 class="product_produce">
-                                    供港老母鸡 1.2kg 天露高品质供港鸡 农家散养老母鸡 散养土鸡走地鸡
-                                </h6>
-                                <div class="produce_price">¥51.80</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/cow.jpg"></div>
-                                <h6 class="product_produce">
-                                    中国荷斯坦奶牛,体格健壮，结构匀称
-                                </h6>
-                                <div class="produce_price">¥20000.00</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/duck.jpg"></div>
-                                <h6 class="product_produce">
-                                    3年老鸭麻鸭净重约2斤/只林间养殖老鸭子土鸭整鸭鸭肉新鲜食材
-                                </h6>
-                                <div class="produce_price">¥108</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/sheep.jpg"></div>
-                                <h6 class="product_produce">
-                                    萨福克羊,体格健壮，结构匀称
-                                </h6>
-                                <div class="produce_price">¥12000.00</div>
-                            </a>
-                            <a href="#">
-                                <div class="second_1-3-2-muye-photo"><img src="/MyRanch/img/horse.jpg"></div>
-                                <h6 class="product_produce">
-                                    普氏野马，体格匀称，四肢长，重型品种体重达1200千克，体高200厘米
-                                </h6>
-                                <div class="produce_price">¥100000.00</div>
-                            </a>
-                        </div>
-                    </div>
+                <div class="second_1-3-2" id="product-list">
+
                 </div>
                 <!-- 商品信息界面右边的消息图标 -->
                 <div class="second_1-3-2-message">
@@ -1586,7 +1608,7 @@
                         <div id="infoPhone"></div>
                         <div id="infoGender"></div>
                         <div id="infoRegion"></div>
-                        <div><button style="height: 21px">上传按钮</button></div>
+                        <div><button class="pay-code" id="check-pay-code">查看我的收款码</button></div>
                     </div>
                 </div>
             </div>
@@ -1600,18 +1622,20 @@
         // 获取用户名
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                 document.getElementById("username").innerHTML = xhr.responseText;
             }
         }
         xhr.open("GET", "/MyRanch/group/getUserName");
         xhr.send();
 
+        var checkPutOn = false;
+
         getGroupList();
 
         var addGroupOn = false;
         function addGroup() {
-            if (!addGroupOn) {
+            if (!checkPutOn && !addGroupOn) {
                 const groupTable = document.getElementById("group-table");
                 var tmp = groupTable.innerHTML;
                 var HTMLStr = "";
@@ -1636,8 +1660,8 @@
 
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            if (xhr.responseText == "1") {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            if (xhr.responseText === "1") {
                                 alert('新建分组失败, 请检查分组名是否非法或重复');
                             }
                             getGroupList();
@@ -1654,13 +1678,77 @@
                 }
             }
         }
-        document.getElementById("addGroup").onclick = addGroup
+        document.getElementById("addGroup").onclick = addGroup;
+
+        document.getElementById('repo').onclick = function () {
+            checkPutOn = false;
+            getGroupList();
+        }
+
+        document.getElementById('putOnStuff').onclick = function () {
+            checkPutOn = true;
+            getPutOnList();
+        }
+
+        // 获取上架产品列表
+        function getPutOnList () {
+            var groupTable = document.getElementById('group-table');
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let putOnList = JSON.parse(xhr.responseText);
+                    groupTable.innerHTML = '';
+                    for (let i = 0; i < putOnList.length; i++) {
+                        groupTable.innerHTML +='<div class="group-line" ' + 'id="' + 'group-line-' + putOnList[i].filename + '"' + '>' +
+                                                  '<div style="width:100%;margin-left:23px; margin-top:3px; float: left; position: absolute;">' +
+                                                   '<button ' + 'id="' + putOnList[i].filename + '" class="group-button"><img src="/MyRanch/img/pc.png" style="height: 40px;">' +
+                            ' ' + putOnList[i].filename.substring(0, putOnList[i].filename.length-4) + '</button>' +
+                            '<input type="button" id="pull-down-' + putOnList[i].filename + '" class="del-group-button" value="下架">' +
+                                                   '</div>' +
+                                          '</div>';
+                    }
+
+                    for (let i = 0; i < putOnList.length; i++) {
+                        document.getElementById('group-line-' + putOnList[i].filename).onmouseover = function () {
+                            let pullDown = document.getElementById('pull-down-' + putOnList[i].filename);
+                            pullDown.style.display = 'inline-block';
+
+                            pullDown.onclick = function () {
+                                var xhr = new XMLHttpRequest();
+                                xhr.onreadystatechange = function () {
+                                    if (xhr.readyState === 4 && xhr.status === 200) {
+                                        if (xhr.responseText === "1") {
+                                            alert('下架产品失败');
+                                        } else {
+                                            alert('下架成功');
+                                        }
+                                        getPutOnList();
+                                    }
+                                }
+                                xhr.open("POST", "/MyRanch/group/pullDown");
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                xhr.send("filename=" + putOnList[i].filename);
+                            }
+                        }
+
+                        document.getElementById('group-line-' + putOnList[i].filename).onmouseout = function () {
+                            let pullDown = document.getElementById('pull-down-' + putOnList[i].filename);
+                            pullDown.style.display = 'none';
+                        }
+
+                    }
+                }
+            }
+            xhr.open("GET", "/MyRanch/group/getPutOnList");
+            xhr.send();
+        }
+
 
         // 获取分组列表
         function getGroupList() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     var fileList = JSON.parse(xhr.responseText);
                     var HTMLStr = "";
                     HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + '.."' + '>';
@@ -1673,7 +1761,7 @@
                     for (let i = 0; i < fileList.length; i++) {
                         HTMLStr +='<div class="group-line" ' + 'id="' + 'group-line-' + fileList[i].filename + '"' + '>';
                         HTMLStr +=          '<div style="width: 100%; margin-left:23px; margin-top:3px;float: left; position: absolute;">';
-                        if(fileList[i].type == 0){
+                        if(fileList[i].type === 0){
                             HTMLStr +=          '<button ' + 'id="' + fileList[i].filename + '" class="group-button"><img src="/MyRanch/img/gp.png" style="height: 40px;">' +
                                 " " + fileList[i].filename + '</button>';
                         }else{
@@ -1681,8 +1769,7 @@
                                 '<img src="/MyRanch/img/pc.png" style="height: 40px;">' +
                                 " " + fileList[i].filename.substring(0,fileList[i].filename.length-4) +
                                 '</button>';
-                            // HTMLStr += '<button style="height: 40px;" id="up->' + fileList[i].filename + '"value="上架" </button>' +
-                            //     '<button style="height: 40px;" id="down->' + fileList[i].filename + '" value="下架" </button>';
+                            HTMLStr += '<input type="button" id="up-' + fileList[i].filename + '" class="del-group-button" value="上架">';
                         }
 
                         HTMLStr += '<input type="button" id="del-group-' + fileList[i].filename + '" class="del-group-button" value="删除">';
@@ -1695,7 +1782,7 @@
                     document.getElementById("..").onclick = function () {
                         var xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function () {
-                            if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                            if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === "0") {
                                 getGroupList();
                             }
                         }
@@ -1705,15 +1792,15 @@
                     }
 
                     for (let i = 0; i < fileList.length; i++) {
-                        if (fileList[i].type == 0) {
+                        if (fileList[i].type === 0) {
                             document.getElementById(fileList[i].filename).onclick = function () {
                                 var xhr = new XMLHttpRequest();
                                 xhr.onreadystatechange = function () {
-                                    if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                                    if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === "0") {
                                         getGroupList();
                                     }
                                 }
-                                if (fileList[i].type == 0) {
+                                if (fileList[i].type === 0) {
                                     xhr.open("POST", "/MyRanch/group/cd");
                                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                     xhr.send("filename=" + fileList[i].filename);
@@ -1724,7 +1811,7 @@
                             document.getElementById(fileList[i].filename).onclick = function () {
                                 var xhr = new XMLHttpRequest();
                                 xhr.onreadystatechange = function () {
-                                    if (xhr.readyState == 4 && xhr.status == 200) {
+                                    if (xhr.readyState === 4 && xhr.status === 200) {
                                         // 把上半部分的按钮界面重新渲染
                                         var HTMLStr = "";
                                         HTMLStr += '<button ' + 'class="second_3-1-1-zengjia" id="addProduction">' + '添加产品' + '</button>';
@@ -1800,18 +1887,18 @@
 
                                         //添加产品需要用到的请求
                                         document.getElementById("mask-confirm-1").onclick = function (){
-                                            if (addNum.value == '' || Number(addNum.value).toString() == "NaN") {
+                                            if (addNum.value === '' || Number(addNum.value).toString() === "NaN") {
                                                 alert('添加数量不能为空或输入不合法');
-                                            } else if (addFood.value == ''){
+                                            } else if (addFood.value === ''){
                                                 alert('饲料不能为空')
-                                            } else if (addGrowDuration.value == ''){
+                                            } else if (addGrowDuration.value === ''){
                                                 alert('成熟周期不能为空')
-                                            } else if (addHealthy.value == ''){
+                                            } else if (addHealthy.value === ''){
                                                 alert('健康状况不能为空')
                                             } else {
                                                 var xhr = new XMLHttpRequest();
                                                 xhr.onreadystatechange = function (){
-                                                    if(xhr.readyState == 4 && xhr.status == 200){
+                                                    if(xhr.readyState === 4 && xhr.status === 200){
                                                         var HTMLStr = "";
 
                                                         HTMLStr += '<table id="add-table">'
@@ -1945,12 +2032,12 @@
                                                                 alert('饲料不能为空')
                                                             } else if (cGrowDuration.value == '') {
                                                                 alert('成熟周期不能为空')
-                                                            } else if (cHealthy.value == '') {
+                                                            } else if (cHealthy.value === '') {
                                                                 alert('健康状况不能为空')
                                                             } else {
                                                                 var xhr = new XMLHttpRequest();
                                                                 xhr.onreadystatechange = function () {
-                                                                    if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == "0") {
+                                                                    if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === "0") {
 
                                                                         console.log("==修改渲染production==")
                                                                         console.log("==修改结束==")
@@ -1968,7 +2055,7 @@
                                                                         maskCancle2()
 
                                                                         // alert("修改产品成功");
-                                                                    } else if (xhr.responseText == "1") {
+                                                                    } else if (xhr.responseText === "1") {
                                                                         alert("修改产品失败了，再试一下吧！")
                                                                     }
                                                                 }
@@ -2006,7 +2093,7 @@
                                         changeBP()
                                     }
                                 }
-                                if (fileList[i].type == 1) {
+                                if (fileList[i].type === 1) {
                                     xhr.open("POST", "/MyRanch/group/showProduction");
                                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                     xhr.send("filename=" + fileList[i].filename);
@@ -2015,45 +2102,149 @@
                         }
                         //删除分组和批次
                         document.getElementById('group-line-' + fileList[i].filename).onmouseover = function () {
-                            const del_group_button = document.getElementById("del-group-" + fileList[i].filename);
-                            del_group_button.style.display = 'inline-block';
-                            if(fileList[i].type == 0)
+                            let del_group_button = document.getElementById("del-group-" + fileList[i].filename);
+                            let up_button = document.getElementById('up-' + fileList[i].filename);
+                            if (del_group_button) {
+                                del_group_button.style.display = 'inline-block';
+                            }
+                            if (up_button) {
+                                up_button.style.display = 'inline-block';
+                            }
+                            if(fileList[i].type === 0)
                             {
-                                del_group_button.onclick = function () {
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == 4 && xhr.status == 200) {
-                                            if (xhr.responseText == "0") {
-                                                getGroupList();
-                                            } else {
-                                                alert("删除分组失败");
+                                if (del_group_button) {
+                                    del_group_button.onclick = function () {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                if (xhr.responseText === "0") {
+                                                    getGroupList();
+                                                } else {
+                                                    alert("删除分组失败");
+                                                }
                                             }
                                         }
+                                        xhr.open("POST", "/MyRanch/group/delGroup");
+                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                        xhr.send("groupName=" + fileList[i].filename);
                                     }
-                                    xhr.open("POST", "/MyRanch/group/delGroup");
-                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                    xhr.send("groupName=" + fileList[i].filename);
                                 }
                             }else{
-                                del_group_button.onclick = function () {
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == 4 && xhr.status == 200) {
-                                            if (xhr.responseText == "0") {
-                                                getGroupList();
-                                            } else {
-                                                alert("删除批次失败");
+                                if (del_group_button) {
+                                    del_group_button.onclick = function () {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                if (xhr.responseText === "0") {
+                                                    getGroupList();
+                                                } else {
+                                                    alert("删除批次失败");
+                                                }
                                             }
                                         }
+                                        xhr.open("POST", "/MyRanch/group/delBatch");
+                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                        xhr.send("batchName=" + fileList[i].filename);
                                     }
-                                    xhr.open("POST", "/MyRanch/group/delBatch");
-                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                    xhr.send("batchName=" + fileList[i].filename);
+                                }
+
+                                if (up_button) {
+                                    up_button.onclick = function () {
+                                        var xhr = new XMLHttpRequest()
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                if (xhr.responseText === "") {
+                                                    alert('请先上传收款码');
+                                                } else {
+                                                    var mask = document.getElementById("mask-3");
+                                                    mask.style.display = "block";
+                                                    var second_part = document.getElementById("second_part");
+                                                    second_part.style.opacity = "0.3";
+
+                                                    var productName = document.getElementById('product-name');
+                                                    var productPrice = document.getElementById('product-price');
+                                                    var productDesc = document.getElementById('product-desc');
+                                                    var imageFile = document.getElementById('browse-image');
+                                                    var show_image = document.getElementById('show-image');
+
+                                                    document.getElementById('image-desc-button').onclick = function () {
+                                                        imageFile.click();
+                                                    }
+
+                                                    imageFile.onchange = function () {
+                                                        if (this.files[0] !== '') {
+                                                            let reader = new FileReader();
+                                                            reader.readAsDataURL(this.files[0]);
+                                                            reader.onload = function (e) {
+                                                                show_image.src = e.target.result;
+                                                                show_image.onload = function () {
+                                                                    mask.scrollTop = mask.scrollHeight;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    document.getElementById('puton-confirm').onclick = function () {
+                                                        if (productName.value === '' || productPrice.value === '' || productDesc.value === '' ||
+                                                            imageFile.value === '' || show_image.src === '') {
+                                                            alert('产品信息未填写完整');
+                                                            return;
+                                                        }
+
+                                                        var formData = new FormData();
+                                                        formData.append("productName", productName.value);
+                                                        formData.append("productPrice", productPrice.value);
+                                                        formData.append("productDesc", productDesc.value);
+                                                        formData.append("imageFile", imageFile.files[0]);
+                                                        formData.append("filename", fileList[i].filename);
+
+                                                        var xhr = new XMLHttpRequest();
+                                                        xhr.onreadystatechange = function () {
+                                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                                if (xhr.responseText === "0") {
+                                                                    productName.value = productPrice.value = productDesc.value =
+                                                                        imageFile.value = show_image.src = '';
+                                                                    mask.style.display = "none";
+                                                                    second_part.style.opacity = "1";
+
+                                                                    // 由于上架后批次文件已被移除，因此需要刷新仓库的显示界面
+                                                                    getGroupList();
+
+                                                                    alert('产品上架成功');
+                                                                } else {
+                                                                    alert('产品上架失败，请稍后再试');
+                                                                }
+                                                            }
+                                                        }
+                                                        xhr.open("POST", "/MyRanch/group/putOn");
+                                                        xhr.send(formData);
+                                                    }
+
+                                                    document.getElementById('puton-cancel').onclick = function () {
+                                                        productName.value = productPrice.value = productDesc.value =
+                                                            imageFile.value = show_image.src = '';
+                                                        mask.style.display = "none";
+                                                        second_part.style.opacity = "1";
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        xhr.open("POST", "/MyRanch/user/getPayCode");
+                                        xhr.send();
+                                    }
                                 }
                             }
                         }
                         document.getElementById('group-line-' + fileList[i].filename).onmouseout = function () {
-                            document.getElementById("del-group-" + fileList[i].filename).style.display = 'none';
+                            let del_group_button = document.getElementById("del-group-" + fileList[i].filename);
+                            if (del_group_button) {
+                                del_group_button.style.display = 'none';
+                            }
+
+                            let up_button = document.getElementById("up-" + fileList[i].filename);
+                            if (up_button) {
+                                up_button.style.display = 'none';
+                            }
                         }
                     }
                 }
@@ -2064,7 +2255,7 @@
 
         var addGroupOn = false;
         function addBatch() {
-            if(!addGroupOn){
+            if(!checkPutOn && !addGroupOn){
                 const batchTable = document.getElementById("group-table");
                 var tmp = batchTable.innerHTML;
                 var HTMLStr = "";
@@ -2089,8 +2280,8 @@
 
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            if (xhr.responseText == "1") {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            if (xhr.responseText === "1") {
                                 alert('新建批次失败, 请检查批次名是否非法或重复');
                                 // console.log("新建批次成功");
                             } else {
@@ -2109,12 +2300,12 @@
                 }
             }
         }
-        document.getElementById("addBatch").onclick = addBatch
+        document.getElementById("addBatch").onclick = addBatch;
 
         function getUserInfo() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
+                if (xhr.status === 200 && xhr.readyState === 4) {
                     var userJson = JSON.parse(xhr.responseText);
                     // console.log(userJson)
 
@@ -2147,10 +2338,10 @@
 
                     document.getElementById("changename-confirm").onclick = function () {
                         const newMessage = document.getElementById("newName");
-                        if (newMessage.value != ''){
+                        if (newMessage.value !== ''){
                             var xhr = new XMLHttpRequest()
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === '0') {
                                     document.getElementById("infoUsername").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfousername">';
                                 }
                             }
@@ -2158,7 +2349,7 @@
                             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                             xhr.send("newMessage=" + newMessage.value + "&" + "type=0");
                         } else {
-                            alert("修改信息输入不能为空")
+                            alert("修改信息输入不能为空");
                         }
                     }
 
@@ -2189,10 +2380,10 @@
 
                     document.getElementById("changephone-confirm").onclick = function () {
                         const newMessage = document.getElementById("newphone");
-                        if (newMessage.value != ''){
+                        if (newMessage.value !== ''){
                             var xhr = new XMLHttpRequest()
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === '0') {
                                     document.getElementById("infoPhone").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserphone">';
                                 }
                             }
@@ -2232,10 +2423,10 @@
 
                     document.getElementById("changegender-confirm").onclick = function () {
                         const newMessage = document.getElementById("newgender");
-                        if (newMessage.value != ''){
+                        if (newMessage.value !== ''){
                             var xhr = new XMLHttpRequest()
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === '0') {
                                     document.getElementById("infoGender").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfousergender">';
                                 }
                             }
@@ -2275,10 +2466,10 @@
 
                     document.getElementById("changeregion-confirm").onclick = function () {
                         const newMessage = document.getElementById("newregion");
-                        if (newMessage.value != ''){
+                        if (newMessage.value !== ''){
                             var xhr = new XMLHttpRequest()
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === '0') {
                                     document.getElementById("infoRegion").innerHTML = newMessage.value + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserregion">';
                                 }
                             }
@@ -2316,10 +2507,10 @@
 
                     document.getElementById("changepd-confirm").onclick = function () {
                         const newMessage = document.getElementById("newpd");
-                        if (newMessage.value != '' || (newMessage.value.length <= 16 && newMessage.value.length >= 6)) {
+                        if (newMessage.value !== '' || (newMessage.value.length <= 16 && newMessage.value.length >= 6)) {
                             var xhr = new XMLHttpRequest()
                             xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == '0') {
+                                if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === '0') {
                                     document.getElementById("infoPwd").innerHTML = '******' + '<input type="button" value="修改" class="changeInfoB" id="changeInfouserpd">';
                                 }
                             }
@@ -2344,6 +2535,71 @@
                 changeInfoUserpd.style.display = 'none';
             }
         }
+
+        document.getElementById('check-pay-code').onclick = function () {
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let payCodeImg = document.getElementById('pay-code-img');
+                    if (xhr.responseText !== "") {
+                        payCodeImg.src = "data:image/png;base64," + xhr.responseText;
+                    }
+                    var mask = document.getElementById("mask-4");
+                    mask.style.display = "block";
+                    var second_part = document.getElementById("second_part");
+                    second_part.style.opacity = "0.3";
+
+                    document.getElementById('send-pay-code').onclick = function () {
+                        document.getElementById('browse-image1').click();
+                    }
+
+                    document.getElementById('browse-image1').onchange = function () {
+                        if (this.value !== '') {
+                            var reader = new FileReader();
+                            reader.readAsDataURL(this.files[0]);
+                            reader.onload = function (e) {
+                                payCodeImg.src = e.target.result;
+                            }
+                        }
+                    }
+
+                    document.getElementById('send-pay-code-confirm').onclick = function () {
+                        if (document.getElementById('browse-image1').value === '') {
+                            alert('请先选择需要上传的收款码');
+                            return;
+                        }
+
+                        var formData = new FormData();
+                        formData.append("payCode", document.getElementById('browse-image1').files[0]);
+
+                        var xhr = new XMLHttpRequest()
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                if (xhr.responseText === "0") {
+                                    alert('上传成功');
+                                    document.getElementById('browse-image1').value = '';
+                                    mask.style.display = "none";
+                                    second_part.style.opacity = "1";
+                                } else {
+                                    alert('收款码上传失败，请稍后再试');
+                                }
+                            }
+                        }
+                        xhr.open("POST", "/MyRanch/user/setPayCode");
+                        xhr.send(formData);
+                    }
+
+                    document.getElementById('send-pay-code-cancel').onclick = function () {
+                        document.getElementById('browse-image1').value = '';
+                        mask.style.display = "none";
+                        second_part.style.opacity = "1";
+                    }
+                }
+            }
+            xhr.open("GET", "/MyRanch/user/getPayCode");
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send();
+        }
     }
 
     var index = document.querySelector('.index');
@@ -2357,7 +2613,8 @@
     var second3 = document.querySelector('.second_3');
     //改2
     var second21 = document.querySelector('.second_2-1');
-    var second22 = document.querySelector('.second_2-2')
+    // var userInfo = document.querySelector('.second_2-2')
+    var userInfo = document.getElementById('other-info');
     var persondinfo_detail = document.querySelector('.persondinfo_detail');
     index.addEventListener('click', function() {
         index.style.backgroundColor = '#e1e1e1';
@@ -2371,7 +2628,7 @@
         second13.style.display = 'none';
         //改2
         second21.style.backgroundColor = '#54d1a6';
-        second22.style.backgroundColor = 'white';
+        userInfo.style.backgroundColor = 'white';
         persondinfo_detail.style.display = 'none';
         persondinfo_detail.style.zIndex = 1;
         second2.style.display = 'block';
@@ -2396,7 +2653,7 @@
         second2.style.display = 'none';
         //改2
         second21.style.backgroundColor = '#54d1a6';
-        second22.style.backgroundColor = 'white';
+        userInfo.style.backgroundColor = 'white';
         persondinfo_detail.style.display = 'none';
         persondinfo_detail.style.zIndex = 1;
         second3.style.width = '70%';
@@ -2420,16 +2677,43 @@
         second2.style.display = 'none';
         //改2
         second21.style.backgroundColor = '#54d1a6';
-        second22.style.backgroundColor = 'white';
+        userInfo.style.backgroundColor = 'white';
         persondinfo_detail.style.display = 'none';
         persondinfo_detail.style.zIndex = 1;
         second3.style.width = '70%';
         second3.style.marginLeft = '3%';
-        // update_username.valueOf().value = '请输入新的用户名';
-        // update_email.valueOf().value = '请输入新的电子邮箱';
-        // update_phone.valueOf().value = '请输入新的手机号';
-        // update_location.valueOf().value = '请输入新的地区';
-        // update_dept.valueOf().value = '请输入新的部门';
+
+        var productList = document.getElementById('product-list');
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let tradeList = JSON.parse(xhr.responseText);
+                productList.innerHTML = '';
+                for (let i = 0; i < tradeList.length; i++) {
+                        if ((i > 0) && (i % 5 === 0)) {
+                            productList.innerHTML += '<br>';
+                        }
+
+                       productList.innerHTML += '<div class="good-box" id="good-' + tradeList[i].id + '">' +
+                           '<div class="img-box" ">' +
+                           '<img src="data:image/png;base64,' + tradeList[i].base64 + '" alt="" style="max-width: 225px; height: auto; max-height: 127px">' +
+                           '</div>' +
+                           '<p class="product-name">' + tradeList[i].productName + '</p>' +
+                           '<p class="product-price">¥' + tradeList[i].productPrice + '</p>' +
+                           '</div>'
+                }
+
+                for (let i = 0; i < tradeList.length; i++) {
+                    document.getElementById('good-' + tradeList[i].id).onclick = function () {
+                        document.getElementById('good-id').value = tradeList[i].id;
+                        document.getElementById('good-id-submit').click();
+                    }
+                }
+            }
+        }
+        xhr.open("GET", "/MyRanch/trade/getAllGoods");
+        xhr.send();
     })
     help.addEventListener('click', function() {
         window.location.href = "/MyRanch/chat.html";
@@ -2437,7 +2721,7 @@
     //后面都是改2
     second21.addEventListener('click',function (){
         second21.style.backgroundColor = '#54d1a6';
-        second22.style.backgroundColor = 'white';
+        userInfo.style.backgroundColor = 'white';
         second11.style.zIndex = 3;
         second11.style.display = 'block';
         second12.style.zIndex = 1;
@@ -2456,8 +2740,8 @@
         // update_location.valueOf().value = '请输入新的地区';
         // update_dept.valueOf().value = '请输入新的部门';
     })
-    second22.addEventListener('click',function (){
-        second22.style.backgroundColor = '#54d1a6';
+    userInfo.addEventListener('click',function (){
+        userInfo.style.backgroundColor = '#54d1a6';
         second21.style.backgroundColor = 'white';
         second11.style.zIndex = 1;
         second11.style.display = 'none';
@@ -2479,5 +2763,10 @@
     })
 
 </script>
+
+<form style="display: none" action="/MyRanch/detail.jsp" method="post">
+    <input type="text" name="id" style="display: none" id="good-id">
+    <input type="submit" style="display: none" id="good-id-submit">
+</form>
 
 </html>

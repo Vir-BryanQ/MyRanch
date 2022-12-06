@@ -34,11 +34,14 @@ public class Acounts {
         } while (rs.next());
 
         // Obviously, the password must be encrypted before it's stored.
-        sql = "insert into UserInfo" + "(`id`,`userName`,`passWd`,`email`,`userType`) VALUES " + "(" + ("'" + id + "'") + ", " +
+        sql = "insert into UserInfo" + "(`id`,`userName`,`passWd`,`email`,`userType`, `payCode`) VALUES " + "(" + ("'" + id + "'") + ", " +
                                                 ("'" + userName + "'") + ", " +
                                                 ("'" + Sha256.getSHA256(passwd) + "'") + ", " +
                                                 ("'" + email + "'") + ", " +
-                                                ("'" + userType + "'")  + ")";
+                                                ("'" + userType + "'")  + ", " +
+                                                ("'" + "none" + "'") + ")";
+
+
         ps = conn.prepareStatement(sql);
         int res = ps.executeUpdate();
 

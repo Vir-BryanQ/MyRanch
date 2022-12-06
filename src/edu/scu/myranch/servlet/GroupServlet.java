@@ -2,12 +2,11 @@ package edu.scu.myranch.servlet;
 
 import com.alibaba.fastjson.JSON;
 import edu.scu.myranch.utils.DBUtils;
+import edu.scu.myranch.utils.MD5Utils;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.*;
 import java.net.ConnectException;
@@ -15,13 +14,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Random;
 
+
+@MultipartConfig
 @WebServlet({"/group/addGroup", "/group/delGroup", "/group/addBatch", "/group/delBatch", "/group/getFiles",
         "/group/getUserName", "/group/cd","/group/showProduction", "/group/addProduction", "/group/delProduction",
-        "/group/changeProduction"})
+        "/group/changeProduction", "/group/putOn", "/group/getPutOnList", "/group/pullDown"})
 public class GroupServlet extends HttpServlet {
+
+    public static String descImgPath = Thread.currentThread().getContextClassLoader().getResource("Data/Trade/DescImg").getPath();
+    public static String userBatchesPath = Thread.currentThread().getContextClassLoader().getResource("Data/Trade/UserBatches").getPath();
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,6 +77,189 @@ public class GroupServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        } else if ("/group/putOn".equals(servletPath)) {
+            try {
+                doPutOn(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if ("/group/getPutOnList".equals(servletPath)) {
+            doGetPutOnList(request, response);
+        } else if ("/group/pullDown".equals(servletPath)) {
+            try {
+                doPullDown(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void doPullDown(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String id = (String) session.getAttribute("id");
+            String filename = request.getParameter("filename");
+
+            Connection conn = DBUtils.getConnection();
+            String sql = "delete from TradeList where userId = '" + id + "' and filename = '" + filename + "'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int ret = ps.executeUpdate();
+            if (!(ret > 0)) {
+                out.print("1");
+                DBUtils.close(conn, ps, null);
+                return;
+            }
+            DBUtils.close(conn, ps, null);
+
+            String curDir = (String) session.getAttribute("curDir");
+            File origin = new File(userBatchesPath + "/" + id + "/" + filename);
+            File target = new File(curDir + "/" + filename);
+
+            FileInputStream fis = new FileInputStream(origin);
+            FileOutputStream fos = new FileOutputStream(target);
+
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = fis.read(buffer, 0, buffer.length)) != -1) {
+                fos.write(buffer, 0, len);
+            }
+
+            fis.close();
+            fos.close();
+
+            origin.delete();
+
+            out.print("0");
+        }
+    }
+
+    private void doGetPutOnList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String id = (String) session.getAttribute("id");
+            File file = new File(userBatchesPath + "/" + id);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            File[] files = file.listFiles();
+            ArrayList<JSONFile> fileList = new ArrayList<>();
+            for (File f : files) {
+                fileList.add(new JSONFile(f.getName(), 1));
+            }
+            out.print(JSON.toJSONString(fileList));
+        }
+    }
+
+    private void doPutOn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Collection<Part> parts = request.getParts();
+
+            String productName = "";
+            String productPrice = "";
+            String productDesc = "";
+            String md5 = "";
+            String userId = (String) session.getAttribute("id");
+            String username = (String) session.getAttribute("username");
+            String filename = "";
+            for (Part part : parts) {
+                String name = part.getName();
+                if ("productName".equals(name)) {
+                    productName = new String(part.getInputStream().readAllBytes());
+                } else if ("productPrice".equals(name)) {
+                    productPrice = new String(part.getInputStream().readAllBytes());
+                } else if ("productDesc".equals(name)) {
+                    productDesc = new String(part.getInputStream().readAllBytes());
+                } else if ("imageFile".equals(name)){
+                    InputStream  imageFile = part.getInputStream();
+                    byte[] buffer = imageFile.readAllBytes();
+
+                    // 使用图片的md5作为其文件名
+                    md5 = MD5Utils.byteArrayToMD5(buffer);
+                    String imgPath = descImgPath + "/" + md5;
+                    File file = new File(imgPath);
+                    if (!file.exists()) {
+                        part.write(imgPath);
+                    }
+                } else if ("filename".equals(name)) {
+                    filename =  new String(part.getInputStream().readAllBytes());
+                }
+            }
+
+            String curDir = (String) session.getAttribute("curDir");
+            File origin = new File(curDir + "/" + filename);
+
+            String newDirStr = userBatchesPath + "/" + userId;
+            File newDir = new File(newDirStr);
+            if (!newDir.exists()) {
+                newDir.mkdir();
+            }
+
+            String newBatchPath = newDirStr + "/" + filename;
+            File newBatch = new File(newBatchPath);
+            String newName = newBatchPath;
+            while (newBatch.exists()) {
+                int idx = newName.lastIndexOf('.');
+                String part = newName.substring(0, idx);
+                String ext = newName.substring(idx);
+
+                // 如果有重名文件，1.txt  => 1-ctp.txt
+                // ctp => counterpart
+                newName = part + "-ctp" + ext;
+                newBatch = new File(newName);
+            }
+            newBatch.createNewFile();
+
+            // 将文件转移到新的位置
+            FileInputStream fis = new FileInputStream(origin);
+            FileOutputStream fos = new FileOutputStream(newBatch);
+
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = fis.read(buffer, 0, buffer.length)) != -1) {
+                fos.write(buffer,0, len);
+            }
+
+            fis.close();
+            fos.close();
+
+            // 原来的批次文件应当从用户仓库中删除
+            origin.delete();
+
+            Connection conn = DBUtils.getConnection();
+            String sql = "insert into TradeList " +
+                    "(userId, username, productName, productPrice, productDesc, imageFile, filename)" +
+                    "values" +
+                    "(?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, userId);
+            ps.setString(2, username);
+            ps.setString(3, productName);
+            ps.setString(4, productPrice);
+            ps.setString(5, productDesc);
+            ps.setString(6, md5);
+            ps.setString(7, newName.substring(newName.lastIndexOf('/') + 1));
+            int ret = ps.executeUpdate();
+
+            if (!(ret > 0)) {
+                // 暂时不提供回滚
+                out.print("1");
+                DBUtils.close(conn, ps, null);
+                return;
+            }
+
+            DBUtils.close(conn, ps, null);
+
+            out.print("0");
         }
     }
 

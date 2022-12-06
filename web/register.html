@@ -157,24 +157,24 @@
         const vericode = document.getElementById("vericode");
 
         document.getElementById("sendemail").onclick = function () {
-            if (username.value == '') {
+            if (username.value === '') {
                 alert('用户名不能为空');
-            } else if (password.value == '') {
+            } else if (password.value === '') {
                 alert('密码不能为空');
-            } else if (confirm_password.value == '') {
+            } else if (confirm_password.value ==='') {
                 alert('请确认您的密码');
-            } else if (password.value != confirm_password.value) {
+            } else if (password.value !== confirm_password.value) {
                 alert('两次密码输入不一致');
             } else if (password.value.length < 6) {
                 alert('输入的密码太短，长度应在6-16位之间');
             } else if (password.value.length > 16) {
                 alert('输入的密码太长，长度应在6-16位之间');
-            } else if (email.value == ''){
+            } else if (email.value === ''){
                 alert('邮箱不能为空');
             } else {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
                         alert(xhr.responseText);
                     }
                 }
@@ -185,27 +185,32 @@
         }
 
         document.getElementById("register").onclick = function () {
-            if (username.value == '') {
+            if (username.value === '') {
                 alert('用户名不能为空');
-            } else if (password.value == '') {
+            } else if (password.value === '') {
                 alert('密码不能为空');
-            } else if (confirm_password.value == '') {
+            } else if (confirm_password.value === '') {
                 alert('请确认您的密码');
-            } else if (password.value != confirm_password.value) {
+            } else if (password.value !== confirm_password.value) {
                 alert('两次密码输入不一致');
             } else if (password.value.length < 6) {
                 alert('输入的密码太短，长度应在6-16位之间');
             } else if (password.value.length > 16) {
                 alert('输入的密码太长，长度应在6-16位之间');
-            } else if (email.value == ''){
+            } else if (email.value === ''){
                 alert('邮箱不能为空');
-            } else if (vericode.value == '') {
+            } else if (vericode.value === '') {
                 alert('请输入验证码');
             } else {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        alert(xhr.responseText);
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        if (xhr.responseText === '') {
+                            alert('注册失败');
+                        } else {
+                            alert('注册成功，您的用户id为：' + xhr.responseText);
+                            window.location.href = '/MyRanch/login.html';
+                        }
                     }
                 }
                 xhr.open("POST", "/MyRanch/user/register", true);

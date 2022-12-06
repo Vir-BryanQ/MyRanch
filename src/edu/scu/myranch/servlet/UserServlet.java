@@ -5,12 +5,15 @@ import com.sun.mail.smtp.DigestMD5;
 import edu.scu.myranch.service.Acounts;
 import edu.scu.myranch.utils.DBUtils;
 import edu.scu.myranch.utils.Emails;
+import edu.scu.myranch.utils.MD5Utils;
 import edu.scu.myranch.utils.encryption.Sha256;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import javax.mail.MessagingException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -72,12 +76,15 @@ class User {
     }
 }
 
+@MultipartConfig
 @WebServlet({"/user/passwdlogin", "/user/sendemail", "/user/emaillogin",
         "/user/sendemail2", "/user/register", "/user/getUserInfo",
-        "/user/getSession", "/user/showUserInfo", "/user/changeInfo"
+        "/user/getSession", "/user/showUserInfo", "/user/changeInfo",
+        "/user/getPayCode", "/user/setPayCode"
 })
 public class UserServlet extends HttpServlet {
-    private static String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
+    public static String userDataDir = Thread.currentThread().getContextClassLoader().getResource("UserData").getPath();
+    public static String payCodeRepo = Thread.currentThread().getContextClassLoader().getResource("Data/UserInfo/PayCode").getPath();
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,6 +119,76 @@ public class UserServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        } else if ("/user/getPayCode".equals(servletPath)) {
+            try {
+                doGetPayCode(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if ("/user/setPayCode".equals(servletPath)) {
+            try {
+                doSetPayCode(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void doSetPayCode(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Part part = request.getPart("payCode");
+            String md5 = MD5Utils.byteArrayToMD5(part.getInputStream().readAllBytes());
+            part.write(payCodeRepo + "/" + md5);
+
+            String id = (String) session.getAttribute("id");
+            Connection conn = DBUtils.getConnection();
+            String sql = "update UserInfo set payCode = '" + md5 + "' where id = '" + id + "'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int ret = ps.executeUpdate();
+            if (ret != 1) {
+                out.print("1");
+                DBUtils.close(conn, ps, null);
+                return;
+            }
+
+            DBUtils.close(conn, ps, null);
+            out.print("0");
+        }
+    }
+
+    private void doGetPayCode(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String id = request.getParameter("id");
+            if (id == null) {
+                id = (String) session.getAttribute("id");
+            }
+
+            Connection conn = DBUtils.getConnection();
+            String sql = "select payCode from UserInfo where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String payCode = rs.getString("payCode");
+                if ("none".equals(payCode)) {
+                    out.print("");
+                } else {
+                    FileInputStream fis = new FileInputStream(payCodeRepo + "/" + payCode);
+                    out.print(Base64.getEncoder().encodeToString(fis.readAllBytes()));
+                    fis.close();
+                }
+            }
+
+            DBUtils.close(conn, ps, rs);
         }
     }
 
@@ -306,7 +383,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    protected  void doRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
 
@@ -324,9 +401,10 @@ public class UserServlet extends HttpServlet {
                 try {
                     userId = Acounts.register(username,password,email,0);
                     if (userId == null) {
-                        out.print("注册失败，该邮箱已被注册");
+                        out.print("");
                     } else {
-                        out.print("注册成功，您的用户id为：" + userId);
+                        out.print(userId);
+                        session.invalidate();       // 使注册时使用的临时session失效
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -337,7 +415,7 @@ public class UserServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
         } else {
-            out.print("邮箱或验证码错误");
+            out.print("");
         }
     }
 
@@ -350,7 +428,7 @@ public class UserServlet extends HttpServlet {
             String userId = (String) session.getAttribute("id");
 //            System.out.println(userId);
             Connection conn = DBUtils.getConnection();
-            String sql = "select * from userinfo where id = ?";
+            String sql = "select * from UserInfo where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,userId);
             ResultSet rs = ps.executeQuery();
@@ -385,27 +463,27 @@ public class UserServlet extends HttpServlet {
             PreparedStatement ps = null;
             int i = 0;
             if (type.equals("0")) {
-                sql = "UPDATE userInfo SET `userName` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+                sql = "UPDATE UserInfo SET `userName` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
 //                ps.setString(1,userId);
                 ps = conn.prepareStatement(sql);
                 i = ps.executeUpdate();
             } else if (type.equals("1")) {
-                sql = "UPDATE userInfo SET `phone` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+                sql = "UPDATE UserInfo SET `phone` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
 //                ps.setString(1,userId);
                 ps = conn.prepareStatement(sql);
                 i = ps.executeUpdate();
             } else if (type.equals("2")) {
-                sql = "UPDATE userInfo SET `gender` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
+                sql = "UPDATE UserInfo SET `gender` = " + "'" + newMessage + "'" + " WHERE `id` = " + userId;
 //                ps.setString(1,userId);
                 ps = conn.prepareStatement(sql);
                 i = ps.executeUpdate();
             } else if (type.equals("3")) {
-                sql = "UPDATE userInfo SET `region` = " + "'" + newMessage + "'" + " WHERE `id` = "+ userId;
+                sql = "UPDATE UserInfo SET `region` = " + "'" + newMessage + "'" + " WHERE `id` = "+ userId;
 //                ps.setString(1,userId);
                 ps = conn.prepareStatement(sql);
                 i = ps.executeUpdate();
             } else if (type.equals("4")) {
-                sql = "UPDATE userInfo SET `passWd` = " + "'" + Sha256.getSHA256(newMessage) + "'" + " WHERE `id` = "+ userId;
+                sql = "UPDATE UserInfo SET `passWd` = " + "'" + Sha256.getSHA256(newMessage) + "'" + " WHERE `id` = "+ userId;
 //                ps.setString(1,userId);
                 ps = conn.prepareStatement(sql);
                 i = ps.executeUpdate();
